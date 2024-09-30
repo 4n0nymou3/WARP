@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Advanced WARP Generator</title>
+	<link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+body
+{
+	font-family: 'Vazirmatn', sans-serif;
+	background-color: #0d1117;
+	color: #c9d1d9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
+
+.container
+{
+	background-color: #161b22;
+	padding: 24px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	width: 100%;
+	max-width: 400px;
+}
+
+h2
+{
+	text-align: center;
+	color: #58a6ff;
+}
+
+.input-field
+{
+	margin-bottom: 24px;
+}
+
+.input-field label
+{
+	color: #8b949e;
+	font-size: 14px;
+	display: block;
+	margin-bottom: 8px;
+}
+
+.form-control
+{
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #30363d;
+	border-radius: 6px;
+	font-size: 16px;
+	outline: none;
+	background-color: #0d1117;
+	color: #c9d1d9;
+	box-sizing: border-box;
+}
+
+.form-control:focus
+{
+	border-color: #58a6ff;
+	box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+}
+
+.btn
+{
+	background-color: #238636;
+	color: #ffffff;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	transition: background-color 0.2s;
+}
+
+.btn:hover
+{
+	background-color: #2ea043;
+}
+
+.btn i
+{
+	margin-right: 8px;
+}
+
+.card-panel
+{
+	margin-top: 24px;
+	padding: 16px;
+	border-radius: 6px;
+	background-color: #21262d;
+	display: none;
+}
+
+.card-panel h5
+{
+	color: #58a6ff;
+	margin-bottom: 16px;
+}
+
+.random-btn
+{
+	background-color: #6e40c9;
+	color: #ffffff;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 14px;
+	margin-top: 8px;
+	display: inline-block;
+	transition: background-color 0.2s;
+}
+
+.random-btn:hover
+{
+	background-color: #8957e5;
+}
+
+.qr-code-container
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 24px;
+	height: 200px;
+}
+
+.footer
+{
+	text-align: center;
+	margin-top: 24px;
+	font-size: 14px;
+	color: #8b949e;
+}
+
+#autoFillContainer
+{
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+}
+
+#autoFillContainer input[type="checkbox"]
+{
+	margin-left: 8px;
+}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h2>Advanced WARP Generator</h2>
+		<form id="warpinatorForm">
+			<div class="input-field">
+				<label for="license">کد لایسنس (اختیاری)</label>
+				<input id="license" type="text" name="license" class="form-control">
+			</div>
+			<div class="input-field">
+				<label for="type">نوع پیکربندی</label>
+				<select id="type" name="type" class="form-control">
+					<option value="singbox" selected>Singbox</option>
+					<option value="streisand">Streisand</option>
+					<option value="wireguard">Wireguard</option>
+					<option value="v2rayng">V2RayNG</option>
+					<option value="shadowrocket">Shadowrocket</option>
+				</select>
+			</div>
+			<div class="input-field">
+				<label for="ip">آدرس IP (اختیاری)</label>
+				<input id="ip" type="text" name="ip" value="162.159.192.76" class="form-control">
+				<div id="autoFillContainer">
+					<label for="autoFillCheckbox">پر کردن خودکار</label>
+					<input type="checkbox" id="autoFillCheckbox" onchange="toggleAutoFill()">
+				</div>
+			</div>
+			<div class="input-field">
+				<label for="port">پورت (اختیاری)</label>
+				<input id="port" type="number" name="port" value="2408" class="form-control">
+			</div>
+			<button class="btn" type="submit">
+				<i class="material-icons">send</i> تولید URL </button>
+		</form>
+		<div class="card-panel" id="result">
+			<div class="qr-code-container" id="qrCodeContainer"></div>
+			<h5>URL تولید شده:</h5>
+			<div class="input-field">
+				<input id="generatedUrl" type="text" readonly class="form-control">
+			</div>
+			<button class="btn" onclick="copyToClipboard()">
+				<i class="material-icons">content_copy</i> کپی URL </button>
+		</div>
+		<div class="footer"> Designed by: Anonymous </div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+	<script>
+document.addEventListener('DOMContentLoaded', function()
+{
+	document.getElementById('warpinatorForm')
+		.addEventListener('submit', function(event)
+		{
+			event.preventDefault();
+			var license = document.getElementById('license')
+				.value || '';
+			var type = document.getElementById('type')
+				.value || 'singbox';
+			var ip = document.getElementById('ip')
+				.value || '162.159.192.76';
+			var port = document.getElementById('port')
+				.value || '2408';
+			var auto = document.getElementById('autoFillCheckbox')
+				.checked ? 'true' : 'false';
+			var url = `https://itshin.serv00.net/api/warpinator?license=${encodeURIComponent(license)}&type=${encodeURIComponent(type)}&auto=${encodeURIComponent(auto)}`;
+			if (!document.getElementById('autoFillCheckbox')
+				.checked)
+			{
+				url += `&ip=${encodeURIComponent(ip)}&port=${encodeURIComponent(port)}`;
+			}
+			document.getElementById('generatedUrl')
+				.value = url;
+			document.getElementById('result')
+				.style.display = 'block';
+			generateQRCode(url);
+		});
+});
+
+function copyToClipboard()
+{
+	var copyText = document.getElementById('generatedUrl');
+	copyText.select();
+	copyText.setSelectionRange(0, 99999);
+	document.execCommand('copy');
+	alert('URL کپی شد');
+}
+
+function fetchRandomIP()
+{
+	fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json')
+		.then(response => response.json())
+		.then(data =>
+		{
+			var ipv4List = data.ipv4;
+			var randomIndex = Math.floor(Math.random() * ipv4List.length);
+			var randomIP = ipv4List[randomIndex];
+			var [ip, port] = randomIP.split(':');
+			document.getElementById('ip')
+				.value = ip;
+			document.getElementById('port')
+				.value = port;
+		})
+		.catch(error => console.error('خطا در دریافت داده:', error));
+}
+
+function generateQRCode(data)
+{
+	var qrCodeContainer = document.getElementById('qrCodeContainer');
+	qrCodeContainer.innerHTML = '';
+	new QRCode(qrCodeContainer
+	, {
+		text: data
+		, width: 200
+		, height: 200
+		, colorDark: "#c9d1d9"
+		, colorLight: "#0d1117"
+		, correctLevel: QRCode.CorrectLevel.L
+	});
+}
+
+function toggleAutoFill()
+{
+	var autoFillCheckbox = document.getElementById('autoFillCheckbox');
+	var ipField = document.getElementById('ip');
+	var portField = document.getElementById('port');
+	if (autoFillCheckbox.checked)
+	{
+		ipField.disabled = true;
+		portField.disabled = true;
+		ipField.value = '';
+		portField.value = '';
+		fetchRandomIP();
+	}
+	else
+	{
+		ipField.disabled = false;
+		portField.disabled = false;
+	}
+}
+	</script>
+</body>
+
+</html>
