@@ -8,42 +8,62 @@
 	<link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<style>
+:root
+{
+	--bg-color: #0d1117;
+	--container-bg: #161b22;
+	--text-color: #c9d1d9;
+	--input-bg: #21262d;
+	--input-border: #30363d;
+	--input-focus: #58a6ff;
+	--btn-bg: #238636;
+	--btn-hover: #2ea043;
+	--secondary-btn-bg: #6e40c9;
+	--secondary-btn-hover: #8957e5;
+	--header-color: #58a6ff;
+}
+
 body
 {
 	font-family: 'Vazirmatn', sans-serif;
-	background-color: #0d1117;
-	color: #c9d1d9;
+	background-color: var(--bg-color);
+	color: var(--text-color);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	margin: 0;
+	transition: background-color 0.3s ease;
 }
 
 .container
 {
-	background-color: #161b22;
+	background-color: var(--container-bg);
 	padding: 24px;
 	border-radius: 12px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 	width: 100%;
 	max-width: 400px;
+	transition: all 0.3s ease;
 }
 
 h2
 {
 	text-align: center;
-	color: #58a6ff;
+	color: var(--header-color);
+	font-size: 28px;
+	margin-bottom: 24px;
 }
 
 .input-field
 {
 	margin-bottom: 24px;
+	position: relative;
 }
 
 .input-field label
 {
-	color: #8b949e;
+	color: var(--text-color);
 	font-size: 14px;
 	display: block;
 	margin-bottom: 8px;
@@ -53,24 +73,25 @@ h2
 {
 	width: 100%;
 	padding: 12px;
-	border: 1px solid #30363d;
+	border: 1px solid var(--input-border);
 	border-radius: 6px;
 	font-size: 16px;
 	outline: none;
-	background-color: #0d1117;
-	color: #c9d1d9;
+	background-color: var(--input-bg);
+	color: var(--text-color);
 	box-sizing: border-box;
+	transition: all 0.3s ease;
 }
 
 .form-control:focus
 {
-	border-color: #58a6ff;
+	border-color: var(--input-focus);
 	box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
 }
 
 .btn
 {
-	background-color: #238636;
+	background-color: var(--btn-bg);
 	color: #ffffff;
 	padding: 12px 24px;
 	border: none;
@@ -81,17 +102,19 @@ h2
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	transition: background-color 0.2s;
+	transition: all 0.3s ease;
 }
 
 .btn:hover
 {
-	background-color: #2ea043;
+	background-color: var(--btn-hover);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn i
 {
-	margin-right: 8px;
+	margin-left: 8px;
 }
 
 .card-panel
@@ -99,19 +122,20 @@ h2
 	margin-top: 24px;
 	padding: 16px;
 	border-radius: 6px;
-	background-color: #21262d;
+	background-color: var(--input-bg);
 	display: none;
+	animation: fadeIn 0.5s ease;
 }
 
 .card-panel h5
 {
-	color: #58a6ff;
+	color: var(--header-color);
 	margin-bottom: 16px;
 }
 
 .random-btn
 {
-	background-color: #6e40c9;
+	background-color: var(--secondary-btn-bg);
 	color: #ffffff;
 	padding: 8px 16px;
 	border: none;
@@ -120,12 +144,14 @@ h2
 	font-size: 14px;
 	margin-top: 8px;
 	display: inline-block;
-	transition: background-color 0.2s;
+	transition: all 0.3s ease;
 }
 
 .random-btn:hover
 {
-	background-color: #8957e5;
+	background-color: var(--secondary-btn-hover);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .qr-code-container
@@ -152,20 +178,116 @@ h2
 	margin-top: 8px;
 }
 
-#autoFillContainer input[type="checkbox"]
+#autoFillCheckbox
 {
 	margin-left: 8px;
+}
+
+.toggle-theme
+{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background: none;
+	border: none;
+	color: var(--text-color);
+	cursor: pointer;
+	font-size: 24px;
+}
+
+.loading
+{
+	display: none;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.loading-spinner
+{
+	border: 4px solid var(--input-border);
+	border-top: 4px solid var(--header-color);
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	animation: spin 1s linear infinite;
+	margin: 0 auto;
+}
+
+@keyframes spin
+{
+	0%
+	{
+		transform: rotate(0deg);
+	}
+	
+	100%
+	{
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes fadeIn
+{
+	from
+	{
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	
+	to
+	{
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.tooltip
+{
+	position: relative;
+	display: inline-block;
+	cursor: help;
+}
+
+.tooltip .tooltiptext
+{
+	visibility: hidden;
+	width: 200px;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -100px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext
+{
+	visibility: visible;
+	opacity: 1;
 }
 	</style>
 </head>
 
 <body>
+	<button class="toggle-theme" onclick="toggleTheme()">
+		<i class="material-icons">brightness_medium</i>
+	</button>
 	<div class="container">
 		<h2>Advanced WARP Generator</h2>
 		<form id="warpinatorForm">
 			<div class="input-field">
 				<label for="license">کد لایسنس (اختیاری)</label>
 				<input id="license" type="text" name="license" class="form-control">
+				<div class="tooltip">
+					<i class="material-icons">info</i>
+					<span class="tooltiptext">کد لایسنس اختیاری برای دسترسی به ویژگی‌های خاص است</span>
+				</div>
 			</div>
 			<div class="input-field">
 				<label for="type">نوع پیکربندی</label>
@@ -192,6 +314,10 @@ h2
 			<button class="btn" type="submit">
 				<i class="material-icons">send</i> تولید URL </button>
 		</form>
+		<div class="loading">
+			<div class="loading-spinner"></div>
+			<p>در حال تولید URL...</p>
+		</div>
 		<div class="card-panel" id="result">
 			<div class="qr-code-container" id="qrCodeContainer"></div>
 			<h5>URL تولید شده:</h5>
@@ -205,33 +331,64 @@ h2
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 	<script>
+let isDarkTheme = true;
+
+function toggleTheme()
+{
+	isDarkTheme = !isDarkTheme;
+	if (isDarkTheme)
+	{
+		document.documentElement.style.setProperty('--bg-color', '#0d1117');
+		document.documentElement.style.setProperty('--container-bg', '#161b22');
+		document.documentElement.style.setProperty('--text-color', '#c9d1d9');
+		document.documentElement.style.setProperty('--input-bg', '#21262d');
+		document.documentElement.style.setProperty('--input-border', '#30363d');
+	}
+	else
+	{
+		document.documentElement.style.setProperty('--bg-color', '#f0f2f5');
+		document.documentElement.style.setProperty('--container-bg', '#ffffff');
+		document.documentElement.style.setProperty('--text-color', '#1f2937');
+		document.documentElement.style.setProperty('--input-bg', '#f9fafb');
+		document.documentElement.style.setProperty('--input-border', '#d1d5db');
+	}
+}
 document.addEventListener('DOMContentLoaded', function()
 {
 	document.getElementById('warpinatorForm')
 		.addEventListener('submit', function(event)
 		{
 			event.preventDefault();
-			var license = document.getElementById('license')
-				.value || '';
-			var type = document.getElementById('type')
-				.value || 'singbox';
-			var ip = document.getElementById('ip')
-				.value || '162.159.192.76';
-			var port = document.getElementById('port')
-				.value || '2408';
-			var auto = document.getElementById('autoFillCheckbox')
-				.checked ? 'true' : 'false';
-			var url = `https://itshin.serv00.net/api/warpinator?license=${encodeURIComponent(license)}&type=${encodeURIComponent(type)}&auto=${encodeURIComponent(auto)}`;
-			if (!document.getElementById('autoFillCheckbox')
-				.checked)
-			{
-				url += `&ip=${encodeURIComponent(ip)}&port=${encodeURIComponent(port)}`;
-			}
-			document.getElementById('generatedUrl')
-				.value = url;
-			document.getElementById('result')
+			document.querySelector('.loading')
 				.style.display = 'block';
-			generateQRCode(url);
+			document.getElementById('result')
+				.style.display = 'none';
+			setTimeout(function()
+			{
+				var license = document.getElementById('license')
+					.value || '';
+				var type = document.getElementById('type')
+					.value || 'singbox';
+				var ip = document.getElementById('ip')
+					.value || '162.159.192.76';
+				var port = document.getElementById('port')
+					.value || '2408';
+				var auto = document.getElementById('autoFillCheckbox')
+					.checked ? 'true' : 'false';
+				var url = `https://itshin.serv00.net/api/warpinator?license=${encodeURIComponent(license)}&type=${encodeURIComponent(type)}&auto=${encodeURIComponent(auto)}`;
+				if (!document.getElementById('autoFillCheckbox')
+					.checked)
+				{
+					url += `&ip=${encodeURIComponent(ip)}&port=${encodeURIComponent(port)}`;
+				}
+				document.getElementById('generatedUrl')
+					.value = url;
+				document.querySelector('.loading')
+					.style.display = 'none';
+				document.getElementById('result')
+					.style.display = 'block';
+				generateQRCode(url);
+			}, 1500);
 		});
 });
 
@@ -241,7 +398,12 @@ function copyToClipboard()
 	copyText.select();
 	copyText.setSelectionRange(0, 99999);
 	document.execCommand('copy');
-	alert('URL کپی شد');
+	var btn = document.querySelector('.btn[onclick="copyToClipboard()"]');
+	btn.innerHTML = '<i class="material-icons">check</i>کپی شد';
+	setTimeout(() =>
+	{
+		btn.innerHTML = '<i class="material-icons">content_copy</i>کپی URL';
+	}, 2000);
 }
 
 function fetchRandomIP()
@@ -271,8 +433,8 @@ function generateQRCode(data)
 		text: data
 		, width: 200
 		, height: 200
-		, colorDark: "#c9d1d9"
-		, colorLight: "#0d1117"
+		, colorDark: isDarkTheme ? "#c9d1d9" : "#000000"
+		, colorLight: isDarkTheme ? "#0d1117" : "#ffffff"
 		, correctLevel: QRCode.CorrectLevel.L
 	});
 }
@@ -296,6 +458,18 @@ function toggleAutoFill()
 		portField.disabled = false;
 	}
 }
+window.addEventListener('load', function()
+{
+	const elements = document.querySelectorAll('.container, .btn, .form-control');
+	elements.forEach((el, index) =>
+	{
+		setTimeout(() =>
+		{
+			el.style.opacity = '1';
+			el.style.transform = 'translateY(0)';
+		}, index * 100);
+	});
+});
 	</script>
 </body>
 
