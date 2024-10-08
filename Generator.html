@@ -299,6 +299,67 @@ h2
 	width: 48%;
 	margin-bottom: 12px;
 }
+
+.contact-section
+{
+	margin-top: 24px;
+	padding: 16px;
+	border-radius: 6px;
+	background-color: var(--input-bg);
+	transition: all 0.3s ease;
+}
+
+.contact-title
+{
+	color: var(--header-color);
+	font-size: 18px;
+	margin-bottom: 12px;
+	display: flex;
+	align-items: center;
+}
+
+.contact-title i
+{
+	margin-left: 8px;
+}
+
+.contact-btn
+{
+	background-color: var(--header-color);
+	color: #ffffff;
+	padding: 10px 16px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	width: calc(100% - 32px);
+	margin: 0 auto;
+}
+
+.contact-btn:hover
+{
+	opacity: 0.9;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contact-btn i
+{
+	margin-left: 8px;
+}
+
+.footer-info
+{
+	margin-top: 16px;
+	font-size: 12px;
+	color: var(--text-color);
+	text-align: center;
+}
 	</style>
 </head>
 
@@ -443,12 +504,19 @@ h2
 			<button class="btn" onclick="copyToClipboard()">
 				<i class="material-icons">content_copy</i> کپی URL </button>
 		</div>
-		<div class="footer"> Designed by: Anonymous <br>
-			<span style="font-size: 10px;">With thanks to Yebekhe and IRCF</span>
+		<div class="contact-section">
+			<h3 class="contact-title">
+				<i class="material-icons">contact_mail</i> ارتباط با من
+			</h3>
+			<a href="https://t.me/BXAMbot" target="_blank" class="contact-btn">
+				<i class="material-icons">telegram</i> پیام در ربات تلگرام </a>
+			<div class="footer-info">
+				<p>طراحی شده توسط: Anonymous</p>
+				<p>با تشکر از Yebekhe و IRCF</p>
+			</div>
 		</div>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-	<script>
+		<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+		<script>
 let isDarkTheme = true;
 
 function toggleTheme()
@@ -681,7 +749,7 @@ window.addEventListener('load', function()
 	});
 	toggleHiddifyOptions();
 });
-	</script>
+		</script>
 </body>
 
 </html>
