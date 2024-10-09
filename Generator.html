@@ -751,7 +751,7 @@ document.addEventListener('DOMContentLoaded', function()
 					url = licenseValue;
 					if (warpInWarp)
 					{
-						url += `&&detour=warp://auto#${username === 'Anonymous' ? (ipVersion === 'ipv6' ? 'Anon-WoW-IPv6' : 'Anon-WoW-IPv4') : username}`;
+						url += `&&detour=warp://${license}@auto#${username === 'Anonymous' ? (ipVersion === 'ipv6' ? 'Anon-WoW-IPv6' : 'Anon-WoW-IPv4') : username}`;
 					}
 				}
 				else
