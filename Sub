@@ -5,6 +5,6 @@
 
 warp://162.159.192.71:2506/?ifp=10-20&ifps=10-20&ifpd=1-2&ifpm=m4#Anonymous-1&&detour=warp://auto#Anon-WoW-IPv4-1
 
-warp://162.159.192.131:5279/?ifp=90-100&ifps=90-100&ifpd=9-10&ifpm=m4#Anonymous-3&&detour=warp://auto#Anon-WoW-IPv4-2
+warp://162.159.192.131:5279/?ifp=90-100&ifps=90-100&ifpd=9-10&ifpm=m4#Anonymous-2&&detour=warp://auto#Anon-WoW-IPv4-2
 
-warp://[2606:4700:d0::4c7a:bad1:d16e:4dda]:3854/?ifp=90-100&ifps=90-100&ifpd=9-10&ifpm=m4#Anonymous-3&&detour=warp://auto#Anon-WoW-IPv6-4
+warp://[2606:4700:d0::4c7a:bad1:d16e:4dda]:3854/?ifp=90-100&ifps=90-100&ifpd=9-10&ifpm=m4#Anonymous-3&&detour=warp://auto#Anon-WoW-IPv6-3
