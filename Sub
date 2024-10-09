@@ -3,6 +3,5 @@
 //subscription-userinfo: upload=0; download=0; total=10737418240000000; expire=2546249531
 //support-url: https://t.me/BourseXtreme
 
-warp://162.159.192.135:8742/?ifp=10-20&ifps=10-20&ifpd=9-10&ifpm=m4&&detour=warp://auto#AnonWoW1
-
-warp://[2606:4700:d0::58e6:ca02:df6b:8081]:955/?ifp=10-20&ifps=10-20&ifpd=9-10&ifpm=m4&&detour=warp://auto#AnonWoW2
+warp://162.159.192.135:8742/?ifp=10-20&ifps=10-20&ifpd=9-10&ifpm=m4&&detour=warp://auto#Anon-WoW-IPv4
+warp://[2606:4700:d0::58e6:ca02:df6b:8081]:955/?ifp=10-20&ifps=10-20&ifpd=9-10&ifpm=m4&&detour=warp://auto#Anon-WoW-IPv6
