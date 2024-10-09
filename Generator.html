@@ -72,6 +72,56 @@ h2
 	padding: 0;
 }
 
+.info-box
+{
+	background-color: var(--input-bg);
+	border: 1px solid var(--input-border);
+	border-radius: 8px;
+	padding: 16px;
+	margin-bottom: 24px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.info-box p
+{
+	color: var(--text-color);
+	margin: 0 0 8px 0;
+	text-align: center;
+}
+
+.copy-link-container
+{
+	display: flex;
+	align-items: center;
+}
+
+.copy-link-container a
+{
+	color: var(--header-color);
+	text-decoration: none;
+	margin-right: 8px;
+	word-break: break-all;
+}
+
+.copy-btn
+{
+	background-color: var(--secondary-btn-bg);
+	color: #ffffff;
+	padding: 6px 12px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 12px;
+	transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover
+{
+	background-color: var(--secondary-btn-hover);
+}
+
 .input-field
 {
 	margin-bottom: 24px;
@@ -360,6 +410,30 @@ h2
 	color: var(--text-color);
 	text-align: center;
 }
+
+.warp-in-warp-container
+{
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+	justify-content: space-between;
+}
+
+.warp-in-warp-container .label
+{
+	color: var(--text-color);
+	font-size: 14px;
+}
+
+.warp-in-warp-toggle
+{
+	background: none;
+	border: none;
+	color: var(--text-color);
+	cursor: pointer;
+	font-size: 24px;
+	padding: 0;
+}
 	</style>
 </head>
 
@@ -370,6 +444,13 @@ h2
 				<i class="material-icons">brightness_medium</i>
 			</button>
 			<h2>WARP Generator</h2>
+		</div>
+		<div class="info-box">
+			<p>اگر با نوع ساخت و تولید URL آشنایی ندارید، می‌توانید از این لینک اشتراک در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
+			<div class="copy-link-container">
+				<a href="https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub" target="_blank">https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub</a>
+				<button class="copy-btn" onclick="copySubscriptionLink()">کپی</button>
+			</div>
 		</div>
 		<form id="warpinatorForm">
 			<div class="input-field" id="usernameField" style="display: none;">
@@ -386,7 +467,7 @@ h2
 			</div>
 			<div class="input-field">
 				<label for="type">نوع هسته پیکربندی</label>
-				<select id="type" name="type" class="form-control" onchange="toggleHiddifyOptions()">
+				<select id="type" name="type" class="form-control" onchange="toggleHiddifyOptions(); uncheckAutoFill();">
 					<option value="hiddify">Hiddify & Karing</option>
 					<option value="v2rayng">v2rayNG</option>
 					<option value="singbox">Singbox</option>
@@ -398,7 +479,7 @@ h2
 			<div id="hiddifyOptions" style="display: block;">
 				<div class="input-field">
 					<label for="ipVersion">نسخه IP</label>
-					<select id="ipVersion" name="ipVersion" class="form-control" onchange="toggleIPOptions()">
+					<select id="ipVersion" name="ipVersion" class="form-control" onchange="toggleIPOptions(); uncheckAutoFill();">
 						<option value="ipv4">IPv4</option>
 						<option value="ipv6">IPv6</option>
 					</select>
@@ -474,18 +555,22 @@ h2
 						</select>
 					</div>
 				</div>
-			</div>
-			<div class="input-field">
-				<label for="ip">آدرس IP (اختیاری)</label>
-				<input id="ip" type="text" name="ip" value="162.159.192.76" class="form-control">
-			</div>
-			<div class="input-field" id="portField">
-				<label for="port">آدرس PORT (اختیاری)</label>
-				<input id="port" type="number" name="port" value="2408" class="form-control">
-			</div>
-			<div id="autoFillContainer">
-				<label for="autoFillCheckbox">پر کردن خودکار</label>
-				<input type="checkbox" id="autoFillCheckbox" onchange="toggleAutoFill()">
+				<div class="input-field">
+					<label for="ip">آدرس IP (اختیاری)</label>
+					<input id="ip" type="text" name="ip" value="162.159.192.76" class="form-control">
+				</div>
+				<div class="input-field" id="portField">
+					<label for="port">آدرس PORT (اختیاری)</label>
+					<input id="port" type="number" name="port" value="2408" class="form-control">
+				</div>
+				<div id="autoFillContainer">
+					<label for="autoFillCheckbox">پر کردن خودکار</label>
+					<input type="checkbox" id="autoFillCheckbox" onchange="toggleAutoFill()">
+				</div>
+				<div class="warp-in-warp-container" id="warpInWarpContainer" style="display: none;">
+					<span class="label">قابلیت وارپ در وارپ:</span>
+					<button type="button" class="warp-in-warp-toggle" onclick="toggleWarpInWarp()">🔴</button>
+				</div>
 			</div>
 			<div class="line"><br></div>
 			<button class="btn" type="submit">
@@ -518,6 +603,7 @@ h2
 		<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 		<script>
 let isDarkTheme = true;
+let warpInWarpEnabled = false;
 
 function toggleTheme()
 {
@@ -547,11 +633,13 @@ function toggleHiddifyOptions()
 	var hiddifyOptions = document.getElementById('hiddifyOptions');
 	var usernameField = document.getElementById('usernameField');
 	var ipVersionField = document.getElementById('ipVersion');
+	var warpInWarpContainer = document.getElementById('warpInWarpContainer');
 	if (type === 'hiddify')
 	{
 		hiddifyOptions.style.display = 'block';
 		usernameField.style.display = 'block';
 		ipVersionField.disabled = false;
+		warpInWarpContainer.style.display = 'flex';
 	}
 	else
 	{
@@ -559,6 +647,10 @@ function toggleHiddifyOptions()
 		usernameField.style.display = 'none';
 		ipVersionField.value = 'ipv4';
 		ipVersionField.disabled = true;
+		warpInWarpContainer.style.display = 'none';
+		warpInWarpEnabled = false;
+		document.querySelector('.warp-in-warp-toggle')
+			.innerHTML = '🔴';
 	}
 	toggleIPOptions();
 }
@@ -580,6 +672,16 @@ function toggleIPOptions()
 	{
 		ipField.value = '162.159.192.76';
 		portField.style.display = 'block';
+	}
+}
+
+function uncheckAutoFill()
+{
+	var autoFillCheckbox = document.getElementById('autoFillCheckbox');
+	if (autoFillCheckbox.checked)
+	{
+		autoFillCheckbox.checked = false;
+		toggleAutoFill();
 	}
 }
 document.addEventListener('DOMContentLoaded', function()
@@ -619,13 +721,18 @@ document.addEventListener('DOMContentLoaded', function()
 						.value;
 					var auto = document.getElementById('autoFillCheckbox')
 						.checked ? 'true' : 'false';
+					var detour = '';
+					if (warpInWarpEnabled)
+					{
+						detour = `&&detour=warp://auto`;
+					}
 					if (ipVersion === 'ipv6')
 					{
-						var licenseValue = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifps=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+						var licenseValue = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}${detour}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}${detour}#${username}`;
 					}
 					else
 					{
-						var licenseValue = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifps=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+						var licenseValue = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}${detour}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}${detour}#${username}`;
 					}
 					url = licenseValue;
 				}
@@ -669,6 +776,19 @@ function copyToClipboard()
 	{
 		btn.innerHTML = '<i class="material-icons">content_copy</i>کپی URL';
 	}, 2000);
+}
+
+function copySubscriptionLink()
+{
+	var link = 'https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub';
+	navigator.clipboard.writeText(link)
+		.then(function()
+		{
+			alert('لینک اشتراک کپی شد!');
+		}, function(err)
+		{
+			console.error('خطا در کپی لینک: ', err);
+		});
 }
 
 function fetchRandomIP()
@@ -736,9 +856,16 @@ function toggleAutoFill()
 		portField.disabled = false;
 	}
 }
+
+function toggleWarpInWarp()
+{
+	warpInWarpEnabled = !warpInWarpEnabled;
+	var toggleBtn = document.querySelector('.warp-in-warp-toggle');
+	toggleBtn.innerHTML = warpInWarpEnabled ? '🟢' : '🔴';
+}
 window.addEventListener('load', function()
 {
-	const elements = document.querySelectorAll('.container, .btn, .form-control');
+	const elements = document.querySelectorAll('.container, .btn, .form-control, .info-box, .contact-section');
 	elements.forEach((el, index) =>
 	{
 		setTimeout(() =>
