@@ -5,4 +5,3 @@
 
 warp://162.159.192.135:8742/?ifp=10-20&ifps=10-20&ifpd=9-10&ifpm=m4&&detour=warp://auto#Anon-WoW-IPv4
 warp://[2606:4700:d0::58e6:ca02:df6b:8081]:955/?ifp=10-20&ifps=10-20&ifpd=9-10&ifpm=m4&&detour=warp://auto#Anon-WoW-IPv6
-warp://188.114.98.249:987/?ifp=40-80&ifps=50-100&ifpd=2-4&ifpm=m4&&detour=warp://auto#Anon-WoW-IPv4
