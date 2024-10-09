@@ -3,14 +3,14 @@
 //subscription-userinfo: upload=0; download=0; total=10737418240000000; expire=2546249531
 //support-url: https://t.me/BourseXtreme
 
-warp://162.159.192.88:1018/?ifp=40-80&ifps=50-100&ifpd=2-4&ifpm=m4#Anonymous&&detour=warp://auto#Anon-WoW-IPv4
+warp://162.159.192.88:1018/?ifp=40-80&ifps=50-100&ifpd=2-4&ifpm=m4#Anonymous-1&&detour=warp://auto#Anon-WoW-IPv4-1
 
-warp://162.159.192.113:880/?ifp=10-20&ifps=10-20&ifpd=1-2&ifpm=m4#Anonymous&&detour=warp://auto#Anon-WoW-IPv4
+warp://162.159.192.113:880/?ifp=10-20&ifps=10-20&ifpd=1-2&ifpm=m4#Anonymous-2&&detour=warp://auto#Anon-WoW-IPv4-2
 
-warp://162.159.192.45:8319/?ifp=90-100&ifps=90-100&ifpd=9-10&ifpm=m4#Anonymous&&detour=warp://auto#Anon-WoW-IPv4
+warp://162.159.192.45:8319/?ifp=90-100&ifps=90-100&ifpd=9-10&ifpm=m4#Anonymous-3&&detour=warp://auto#Anon-WoW-IPv4-3
 
-warp://[2606:4700:d1::9f49:c7d6:78ae:b6ab]:1018/?ifp=40-80&ifps=50-100&ifpd=2-4&ifpm=m4#Anonymous&&detour=warp://auto#Anon-WoW-IPv6
+warp://[2606:4700:d1::9f49:c7d6:78ae:b6ab]:1018/?ifp=40-80&ifps=50-100&ifpd=2-4&ifpm=m4#Anonymous-4&&detour=warp://auto#Anon-WoW-IPv6-4
 
-warp://[2606:4700:d1::9d2e:e1f2:3aa9:a108]:1018/?ifp=10-20&ifps=10-20&ifpd=1-2&ifpm=m4#Anonymous&&detour=warp://auto#Anon-WoW-IPv6
+warp://[2606:4700:d1::9d2e:e1f2:3aa9:a108]:1018/?ifp=10-20&ifps=10-20&ifpd=1-2&ifpm=m4#Anonymous-5&&detour=warp://auto#Anon-WoW-IPv6-5
 
-warp://[2606:4700:d0::4c7a:bad1:d16e:4dda]:3854/?ifp=90-100&ifps=90-100&ifpd=9-10&ifpm=m4#Anonymous&&detour=warp://auto#Anon-WoW-IPv6
+warp://[2606:4700:d0::4c7a:bad1:d16e:4dda]:3854/?ifp=90-100&ifps=90-100&ifpd=9-10&ifpm=m4#Anonymous-6&&detour=warp://auto#Anon-WoW-IPv6-6
