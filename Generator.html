@@ -8,432 +8,401 @@
 	<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<style>
-:root
-{
-	--bg-color: #0d1117;
-	--container-bg: #161b22;
-	--text-color: #c9d1d9;
-	--input-bg: #21262d;
-	--input-border: #30363d;
-	--input-focus: #58a6ff;
-	--btn-bg: #238636;
-	--btn-hover: #2ea043;
-	--secondary-btn-bg: #6e40c9;
-	--secondary-btn-hover: #8957e5;
-	--header-color: #58a6ff;
-}
+		:root {
+			--bg-color: #0d1117;
+			--container-bg: #161b22;
+			--text-color: #c9d1d9;
+			--input-bg: #21262d;
+			--input-border: #30363d;
+			--input-focus: #58a6ff;
+			--btn-bg: #238636;
+			--btn-hover: #2ea043;
+			--secondary-btn-bg: #6e40c9;
+			--secondary-btn-hover: #8957e5;
+			--header-color: #58a6ff;
+		}
 
-body
-{
-	font-family: 'Vazir', sans-serif;
-	background-color: var(--bg-color);
-	color: var(--text-color);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	margin: 0;
-	transition: background-color 0.3s ease;
-}
+		body {
+			font-family: 'Vazir', sans-serif;
+			background-color: var(--bg-color);
+			color: var(--text-color);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			margin: 0;
+			transition: background-color 0.3s ease;
+		}
 
-.container
-{
-	background-color: var(--container-bg);
-	padding: 24px;
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-	width: 100%;
-	max-width: 400px;
-	transition: all 0.3s ease;
-}
+		.container {
+			background-color: var(--container-bg);
+			padding: 24px;
+			border-radius: 12px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			width: 100%;
+			max-width: 400px;
+			transition: all 0.3s ease;
+		}
 
-.header
-{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 24px;
-}
+		.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 24px;
+		}
 
-h2
-{
-	color: var(--header-color);
-	font-size: 28px;
-	margin: 0;
-}
+		h2 {
+			color: var(--header-color);
+			font-size: 28px;
+			margin: 0;
+		}
 
-.toggle-theme
-{
-	background: none;
-	border: none;
-	color: var(--text-color);
-	cursor: pointer;
-	font-size: 24px;
-	padding: 0;
-}
+		.toggle-theme {
+			background: none;
+			border: none;
+			color: var(--text-color);
+			cursor: pointer;
+			font-size: 24px;
+			padding: 0;
+		}
 
-.info-box
-{
-	background-color: var(--input-bg);
-	border: 1px solid var(--input-border);
-	border-radius: 8px;
-	padding: 16px;
-	margin-bottom: 24px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
+		.input-field {
+			margin-bottom: 24px;
+			position: relative;
+		}
 
-.info-box p
-{
-	color: var(--text-color);
-	margin: 0 0 8px 0;
-	text-align: center;
-}
+		.input-field label {
+			color: var(--text-color);
+			font-size: 14px;
+			display: block;
+			margin-bottom: 8px;
+		}
 
-.copy-link-container
-{
-	display: flex;
-	align-items: center;
-}
+		.form-control {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid var(--input-border);
+			border-radius: 6px;
+			font-size: 16px;
+			outline: none;
+			background-color: var(--input-bg);
+			color: var(--text-color);
+			box-sizing: border-box;
+			transition: all 0.3s ease;
+			font-family: 'Vazir', sans-serif;
+		}
 
-.copy-link-container a
-{
-	color: var(--header-color);
-	text-decoration: none;
-	margin-right: 8px;
-	word-break: break-all;
-}
+		.form-control:focus {
+			border-color: var(--input-focus);
+			box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+		}
 
-.copy-btn
-{
-	background-color: var(--secondary-btn-bg);
-	color: #ffffff;
-	padding: 6px 12px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 12px;
-	transition: background-color 0.3s ease;
-}
+		.btn {
+			background-color: var(--btn-bg);
+			color: #ffffff;
+			padding: 12px 24px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+			font-size: 16px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			transition: all 0.3s ease;
+			font-family: 'Vazir', sans-serif;
+		}
 
-.copy-btn:hover
-{
-	background-color: var(--secondary-btn-hover);
-}
+		.btn:hover {
+			background-color: var(--btn-hover);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
 
-.input-field
-{
-	margin-bottom: 24px;
-	position: relative;
-}
+		.btn i {
+			margin-left: 8px;
+		}
 
-.input-field label
-{
-	color: var(--text-color);
-	font-size: 14px;
-	display: block;
-	margin-bottom: 8px;
-}
+		.card-panel {
+			margin-top: 24px;
+			padding: 16px;
+			border-radius: 6px;
+			background-color: var(--input-bg);
+			display: none;
+			animation: fadeIn 0.5s ease;
+		}
 
-.form-control
-{
-	width: 100%;
-	padding: 12px;
-	border: 1px solid var(--input-border);
-	border-radius: 6px;
-	font-size: 16px;
-	outline: none;
-	background-color: var(--input-bg);
-	color: var(--text-color);
-	box-sizing: border-box;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
+		.card-panel h5 {
+			color: var(--header-color);
+			margin-bottom: 16px;
+		}
 
-.form-control:focus
-{
-	border-color: var(--input-focus);
-	box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
-}
+		.random-btn {
+			background-color: var(--secondary-btn-bg);
+			color: #ffffff;
+			padding: 8px 16px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+			font-size: 14px;
+			margin-top: 8px;
+			display: inline-block;
+			transition: all 0.3s ease;
+			font-family: 'Vazir', sans-serif;
+		}
 
-.btn
-{
-	background-color: var(--btn-bg);
-	color: #ffffff;
-	padding: 12px 24px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 16px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
+		.random-btn:hover {
+			background-color: var(--secondary-btn-hover);
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
 
-.btn:hover
-{
-	background-color: var(--btn-hover);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+		.qr-code-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 24px;
+			height: 200px;
+		}
 
-.btn i
-{
-	margin-left: 8px;
-}
+		.footer {
+			text-align: center;
+			margin-top: 24px;
+			font-size: 14px;
+			color: #8b949e;
+		}
 
-.card-panel
-{
-	margin-top: 24px;
-	padding: 16px;
-	border-radius: 6px;
-	background-color: var(--input-bg);
-	display: none;
-	animation: fadeIn 0.5s ease;
-}
+		#autoFillContainer {
+			display: flex;
+			align-items: center;
+			margin-top: 8px;
+		}
 
-.card-panel h5
-{
-	color: var(--header-color);
-	margin-bottom: 16px;
-}
+		#autoFillCheckbox {
+			margin-left: 8px;
+		}
 
-.random-btn
-{
-	background-color: var(--secondary-btn-bg);
-	color: #ffffff;
-	padding: 8px 16px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 14px;
-	margin-top: 8px;
-	display: inline-block;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
+		.line {
+			border-top: 1px solid #ccc;
+			margin-top: 10px;
+		}
 
-.random-btn:hover
-{
-	background-color: var(--secondary-btn-hover);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+		.loading {
+			display: none;
+			text-align: center;
+			margin-top: 20px;
+		}
 
-.qr-code-container
-{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 24px;
-	height: 200px;
-}
+		.loading-spinner {
+			border: 4px solid var(--input-border);
+			border-top: 4px solid var(--header-color);
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			animation: spin 1s linear infinite;
+			margin: 0 auto;
+		}
 
-.footer
-{
-	text-align: center;
-	margin-top: 24px;
-	font-size: 14px;
-	color: #8b949e;
-}
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
 
-#autoFillContainer
-{
-	display: flex;
-	align-items: center;
-	margin-top: 8px;
-}
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(-10px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
 
-#autoFillCheckbox
-{
-	margin-left: 8px;
-}
+		.tooltip {
+			position: relative;
+			display: inline-block;
+			cursor: help;
+		}
 
-.line
-{
-	border-top: 1px solid #ccc;
-	margin-top: 10px;
-}
+		.tooltip .tooltiptext {
+			visibility: hidden;
+			width: 200px;
+			background-color: #555;
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px;
+			position: absolute;
+			z-index: 1;
+			bottom: 125%;
+			left: 50%;
+			margin-left: -100px;
+			opacity: 0;
+			transition: opacity 0.3s;
+			font-family: 'Vazir', sans-serif;
+		}
 
-.loading
-{
-	display: none;
-	text-align: center;
-	margin-top: 20px;
-}
+		.tooltip:hover .tooltiptext {
+			visibility: visible;
+			opacity: 1;
+		}
 
-.loading-spinner
-{
-	border: 4px solid var(--input-border);
-	border-top: 4px solid var(--header-color);
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	animation: spin 1s linear infinite;
-	margin: 0 auto;
-}
+		.hiddify-options {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
 
-@keyframes spin
-{
-	0%
-	{
-		transform: rotate(0deg);
-	}
-	
-	100%
-	{
-		transform: rotate(360deg);
-	}
-}
+		.hiddify-options .select-item {
+			width: 48%;
+			margin-bottom: 12px;
+		}
 
-@keyframes fadeIn
-{
-	from
-	{
-		opacity: 0;
-		transform: translateY(-10px);
-	}
-	
-	to
-	{
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
+		.contact-section {
+			margin-top: 24px;
+			padding: 16px;
+			border-radius: 6px;
+			background-color: var(--input-bg);
+			transition: all 0.3s ease;
+		}
 
-.tooltip
-{
-	position: relative;
-	display: inline-block;
-	cursor: help;
-}
+		.contact-title {
+			color: var(--header-color);
+			font-size: 18px;
+			margin-bottom: 12px;
+			display: flex;
+			align-items: center;
+		}
 
-.tooltip .tooltiptext
-{
-	visibility: hidden;
-	width: 200px;
-	background-color: #555;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px;
-	position: absolute;
-	z-index: 1;
-	bottom: 125%;
-	left: 50%;
-	margin-left: -100px;
-	opacity: 0;
-	transition: opacity 0.3s;
-	font-family: 'Vazir', sans-serif;
-}
+		.contact-title i {
+			margin-left: 8px;
+		}
 
-.tooltip:hover .tooltiptext
-{
-	visibility: visible;
-	opacity: 1;
-}
+		.contact-btn {
+			background-color: var(--header-color);
+			color: #ffffff;
+			padding: 10px 16px;
+			border: none;
+			border-radius: 6px;
+			cursor: pointer;
+			font-size: 14px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+			text-decoration: none;
+			width: calc(100% - 32px);
+			margin: 0 auto;
+		}
 
-.hiddify-options
-{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
+		.contact-btn:hover {
+			opacity: 0.9;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
 
-.hiddify-options .select-item
-{
-	width: 48%;
-	margin-bottom: 12px;
-}
+		.contact-btn i {
+			margin-left: 8px;
+		}
 
-.contact-section
-{
-	margin-top: 24px;
-	padding: 16px;
-	border-radius: 6px;
-	background-color: var(--input-bg);
-	transition: all 0.3s ease;
-}
+		.footer-info {
+			margin-top: 16px;
+			font-size: 12px;
+			color: var(--text-color);
+			text-align: center;
+		}
 
-.contact-title
-{
-	color: var(--header-color);
-	font-size: 18px;
-	margin-bottom: 12px;
-	display: flex;
-	align-items: center;
-}
+		.info-box {
+			background-color: var(--input-bg);
+			border-radius: 6px;
+			padding: 16px;
+			margin-bottom: 24px;
+		}
 
-.contact-title i
-{
-	margin-left: 8px;
-}
+		.info-box p {
+			margin: 0;
+			line-height: 1.5;
+		}
 
-.contact-btn
-{
-	background-color: var(--header-color);
-	color: #ffffff;
-	padding: 10px 16px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 14px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: all 0.3s ease;
-	text-decoration: none;
-	width: calc(100% - 32px);
-	margin: 0 auto;
-}
+		.copy-btn {
+			background-color: var(--btn-bg);
+			color: #ffffff;
+			padding: 6px 12px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 14px;
+			margin-top: 8px;
+			transition: all 0.3s ease;
+		}
 
-.contact-btn:hover
-{
-	opacity: 0.9;
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+		.copy-btn:hover {
+			background-color: var(--btn-hover);
+		}
 
-.contact-btn i
-{
-	margin-left: 8px;
-}
+		.switch {
+			position: relative;
+			display: inline-block;
+			width: 60px;
+			height: 34px;
+		}
 
-.footer-info
-{
-	margin-top: 16px;
-	font-size: 12px;
-	color: var(--text-color);
-	text-align: center;
-}
+		.switch input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
 
-.warp-in-warp-container
-{
-	display: flex;
-	align-items: center;
-	margin-top: 8px;
-	justify-content: space-between;
-}
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			transition: .4s;
+			border-radius: 34px;
+		}
 
-.warp-in-warp-container .label
-{
-	color: var(--text-color);
-	font-size: 14px;
-}
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 26px;
+			width: 26px;
+			left: 4px;
+			bottom: 4px;
+			background-color: white;
+			transition: .4s;
+			border-radius: 50%;
+		}
 
-.warp-in-warp-toggle
-{
-	background: none;
-	border: none;
-	color: var(--text-color);
-	cursor: pointer;
-	font-size: 24px;
-	padding: 0;
-}
+		input:checked + .slider {
+			background-color: #2196F3;
+		}
+
+		input:focus + .slider {
+			box-shadow: 0 0 1px #2196F3;
+		}
+
+		input:checked + .slider:before {
+			transform: translateX(26px);
+		}
+
+		#warpInWarpContainer {
+			display: none;
+			align-items: center;
+			margin-top: 8px;
+		}
+
+		#warpInWarpContainer label {
+			margin-right: 8px;
+		}
 	</style>
 </head>
 
@@ -446,11 +415,9 @@ h2
 			<h2>WARP Generator</h2>
 		</div>
 		<div class="info-box">
-			<p>اگر با نوع ساخت و تولید URL آشنایی ندارید، می‌توانید از این لینک اشتراک در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
-			<div class="copy-link-container">
-				<a href="https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub" target="_blank">https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub</a>
-				<button class="copy-btn" onclick="copySubscriptionLink()">کپی</button>
-			</div>
+			<p>اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
+			<input type="text" id="subscriptionLink" value="https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub" readonly class="form-control">
+			<button class="copy-btn" onclick="copySubscriptionLink()">کپی لینک</button>
 		</div>
 		<form id="warpinatorForm">
 			<div class="input-field" id="usernameField" style="display: none;">
@@ -467,7 +434,7 @@ h2
 			</div>
 			<div class="input-field">
 				<label for="type">نوع هسته پیکربندی</label>
-				<select id="type" name="type" class="form-control" onchange="toggleHiddifyOptions(); uncheckAutoFill();">
+				<select id="type" name="type" class="form-control" onchange="toggleHiddifyOptions()">
 					<option value="hiddify">Hiddify & Karing</option>
 					<option value="v2rayng">v2rayNG</option>
 					<option value="singbox">Singbox</option>
@@ -479,7 +446,7 @@ h2
 			<div id="hiddifyOptions" style="display: block;">
 				<div class="input-field">
 					<label for="ipVersion">نسخه IP</label>
-					<select id="ipVersion" name="ipVersion" class="form-control" onchange="toggleIPOptions(); uncheckAutoFill();">
+					<select id="ipVersion" name="ipVersion" class="form-control" onchange="toggleIPOptions()">
 						<option value="ipv4">IPv4</option>
 						<option value="ipv6">IPv6</option>
 					</select>
@@ -555,22 +522,25 @@ h2
 						</select>
 					</div>
 				</div>
-				<div class="input-field">
-					<label for="ip">آدرس IP (اختیاری)</label>
-					<input id="ip" type="text" name="ip" value="162.159.192.76" class="form-control">
-				</div>
-				<div class="input-field" id="portField">
-					<label for="port">آدرس PORT (اختیاری)</label>
-					<input id="port" type="number" name="port" value="2408" class="form-control">
-				</div>
-				<div id="autoFillContainer">
-					<label for="autoFillCheckbox">پر کردن خودکار</label>
-					<input type="checkbox" id="autoFillCheckbox" onchange="toggleAutoFill()">
-				</div>
-				<div class="warp-in-warp-container" id="warpInWarpContainer" style="display: none;">
-					<span class="label">قابلیت وارپ در وارپ:</span>
-					<button type="button" class="warp-in-warp-toggle" onclick="toggleWarpInWarp()">🔴</button>
-				</div>
+			</div>
+			<div class="input-field">
+				<label for="ip">آدرس IP (اختیاری)</label>
+				<input id="ip" type="text" name="ip" value="162.159.192.76" class="form-control">
+			</div>
+			<div class="input-field" id="portField">
+				<label for="port">آدرس PORT (اختیاری)</label>
+				<input id="port" type="number" name="port" value="2408" class="form-control">
+			</div>
+			<div id="autoFillContainer">
+				<label for="autoFillCheckbox">پر کردن خودکار</label>
+				<input type="checkbox" id="autoFillCheckbox" onchange="toggleAutoFill()">
+			</div>
+			<div id="warpInWarpContainer">
+				<label for="warpInWarpToggle">قابلیت وارپ در وارپ</label>
+				<label class="switch">
+					<input type="checkbox" id="warpInWarpToggle">
+					<span class="slider"></span>
+				</label>
 			</div>
 			<div class="line"><br></div>
 			<button class="btn" type="submit">
@@ -602,242 +572,159 @@ h2
 		</div>
 		<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 		<script>
-let isDarkTheme = true;
-let warpInWarpEnabled = false;
+			let isDarkTheme = true;
 
-function toggleTheme()
-{
-	isDarkTheme = !isDarkTheme;
-	if (isDarkTheme)
-	{
-		document.documentElement.style.setProperty('--bg-color', '#0d1117');
-		document.documentElement.style.setProperty('--container-bg', '#161b22');
-		document.documentElement.style.setProperty('--text-color', '#c9d1d9');
-		document.documentElement.style.setProperty('--input-bg', '#21262d');
-		document.documentElement.style.setProperty('--input-border', '#30363d');
-	}
-	else
-	{
-		document.documentElement.style.setProperty('--bg-color', '#f0f2f5');
-		document.documentElement.style.setProperty('--container-bg', '#ffffff');
-		document.documentElement.style.setProperty('--text-color', '#1f2937');
-		document.documentElement.style.setProperty('--input-bg', '#f9fafb');
-		document.documentElement.style.setProperty('--input-border', '#d1d5db');
-	}
-}
-
-function toggleHiddifyOptions()
-{
-	var type = document.getElementById('type')
-		.value;
-	var hiddifyOptions = document.getElementById('hiddifyOptions');
-	var usernameField = document.getElementById('usernameField');
-	var ipVersionField = document.getElementById('ipVersion');
-	var warpInWarpContainer = document.getElementById('warpInWarpContainer');
-	if (type === 'hiddify')
-	{
-		hiddifyOptions.style.display = 'block';
-		usernameField.style.display = 'block';
-		ipVersionField.disabled = false;
-		warpInWarpContainer.style.display = 'flex';
-	}
-	else
-	{
-		hiddifyOptions.style.display = 'none';
-		usernameField.style.display = 'none';
-		ipVersionField.value = 'ipv4';
-		ipVersionField.disabled = true;
-		warpInWarpContainer.style.display = 'none';
-		warpInWarpEnabled = false;
-		document.querySelector('.warp-in-warp-toggle')
-			.innerHTML = '🔴';
-	}
-	toggleIPOptions();
-}
-
-function toggleIPOptions()
-{
-	var type = document.getElementById('type')
-		.value;
-	var ipVersion = document.getElementById('ipVersion')
-		.value;
-	var ipField = document.getElementById('ip');
-	var portField = document.getElementById('portField');
-	if (type === 'hiddify' && ipVersion === 'ipv6')
-	{
-		ipField.value = '';
-		portField.style.display = 'none';
-	}
-	else
-	{
-		ipField.value = '162.159.192.76';
-		portField.style.display = 'block';
-	}
-}
-
-function uncheckAutoFill()
-{
-	var autoFillCheckbox = document.getElementById('autoFillCheckbox');
-	if (autoFillCheckbox.checked)
-	{
-		autoFillCheckbox.checked = false;
-		toggleAutoFill();
-	}
-}
-document.addEventListener('DOMContentLoaded', function()
-{
-	document.getElementById('warpinatorForm')
-		.addEventListener('submit', function(event)
-		{
-			event.preventDefault();
-			document.querySelector('.loading')
-				.style.display = 'block';
-			document.getElementById('result')
-				.style.display = 'none';
-			setTimeout(function()
-			{
-				var type = document.getElementById('type')
-					.value;
-				var url;
-				if (type === 'hiddify')
-				{
-					var username = document.getElementById('username')
-						.value || 'Anonymous';
-					var license = document.getElementById('license')
-						.value || '';
-					var type1 = document.getElementById('type1')
-						.value || '40-80';
-					var type2 = document.getElementById('type2')
-						.value || '40-10';
-					var type3 = document.getElementById('type3')
-						.value || '2-4';
-					var type4 = document.getElementById('type4')
-						.value || 'm4';
-					var ip = document.getElementById('ip')
-						.value || '162.159.192.76';
-					var port = document.getElementById('port')
-						.value || '2408';
-					var ipVersion = document.getElementById('ipVersion')
-						.value;
-					var auto = document.getElementById('autoFillCheckbox')
-						.checked ? 'true' : 'false';
-					var detour = '';
-					if (warpInWarpEnabled)
-					{
-						detour = `&&detour=warp://auto`;
-					}
-					if (ipVersion === 'ipv6')
-					{
-						var licenseValue = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}${detour}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}${detour}#${username}`;
-					}
-					else
-					{
-						var licenseValue = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}${detour}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}${detour}#${username}`;
-					}
-					url = licenseValue;
+			function toggleTheme() {
+				isDarkTheme = !isDarkTheme;
+				if (isDarkTheme) {
+					document.documentElement.style.setProperty('--bg-color', '#0d1117');
+					document.documentElement.style.setProperty('--container-bg', '#161b22');
+					document.documentElement.style.setProperty('--text-color', '#c9d1d9');
+					document.documentElement.style.setProperty('--input-bg', '#21262d');
+					document.documentElement.style.setProperty('--input-border', '#30363d');
+				} else {
+					document.documentElement.style.setProperty('--bg-color', '#f0f2f5');
+					document.documentElement.style.setProperty('--container-bg', '#ffffff');
+					document.documentElement.style.setProperty('--text-color', '#1f2937');
+					document.documentElement.style.setProperty('--input-bg', '#f9fafb');
+					document.documentElement.style.setProperty('--input-border', '#d1d5db');
 				}
-				else
-				{
-					var license = document.getElementById('license')
-						.value || '';
-					var ip = document.getElementById('ip')
-						.value || '162.159.192.76';
-					var port = document.getElementById('port')
-						.value || '2408';
-					var auto = document.getElementById('autoFillCheckbox')
-						.checked ? 'true' : 'false';
-					url = `https://itshin.serv00.net/api/warpinator?license=${encodeURIComponent(license)}&type=${encodeURIComponent(type)}&auto=${encodeURIComponent(auto)}`;
-					if (!document.getElementById('autoFillCheckbox')
-						.checked)
-					{
-						url += `&ip=${encodeURIComponent(ip)}&port=${encodeURIComponent(port)}`;
-					}
+			}
+
+			function toggleHiddifyOptions() {
+				var type = document.getElementById('type').value;
+				var hiddifyOptions = document.getElementById('hiddifyOptions');
+				var usernameField = document.getElementById('usernameField');
+				var ipVersionField = document.getElementById('ipVersion');
+				var warpInWarpContainer = document.getElementById('warpInWarpContainer');
+				if (type === 'hiddify') {
+					hiddifyOptions.style.display = 'block';
+					usernameField.style.display = 'block';
+					ipVersionField.disabled = false;
+					warpInWarpContainer.style.display = 'flex';
+				} else {
+					hiddifyOptions.style.display = 'none';
+					usernameField.style.display = 'none';
+					ipVersionField.value = 'ipv4';
+					ipVersionField.disabled = true;
+					warpInWarpContainer.style.display = 'none';
 				}
-				document.getElementById('generatedUrl')
-					.value = url;
-				document.querySelector('.loading')
-					.style.display = 'none';
-				document.getElementById('result')
-					.style.display = 'block';
-				generateQRCode(url);
-			}, 1500);
-		});
-});
-
-function copyToClipboard()
-{
-	var copyText = document.getElementById('generatedUrl');
-	copyText.select();
-	copyText.setSelectionRange(0, 99999);
-	document.execCommand('copy');
-	var btn = document.querySelector('.btn[onclick="copyToClipboard()"]');
-	btn.innerHTML = '<i class="material-icons">check</i>کپی شد';
-	setTimeout(() =>
-	{
-		btn.innerHTML = '<i class="material-icons">content_copy</i>کپی URL';
-	}, 2000);
-}
-
-function copySubscriptionLink()
-{
-	var link = 'https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub';
-	navigator.clipboard.writeText(link)
-		.then(function()
-		{
-			alert('لینک اشتراک کپی شد!');
-		}, function(err)
-		{
-			console.error('خطا در کپی لینک: ', err);
-		});
-}
-
-function fetchRandomIP()
-{
-	var ipVersion = document.getElementById('ipVersion')
-		.value;
-	fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json')
-		.then(response => response.json())
-		.then(data =>
-		{
-			var ipList = ipVersion === 'ipv6' ? data.ipv6 : data.ipv4;
-			var randomIndex = Math.floor(Math.random() * ipList.length);
-			var randomIP = ipList[randomIndex];
-			if (ipVersion === 'ipv6')
-			{
-				var [ip] = randomIP.split('[]:');
-				document.getElementById('ip')
-					.value = ip;
-				document.getElementById('port')
-					.value = '';
+				toggleIPOptions();
+				document.getElementById('autoFillCheckbox').checked = false;
 			}
-			else
-			{
-				var [ip, port] = randomIP.split(':');
-				document.getElementById('ip')
-					.value = ip;
-				document.getElementById('port')
-					.value = port;
+
+			function toggleIPOptions() {
+				var type = document.getElementById('type').value;
+				var ipVersion = document.getElementById('ipVersion').value;
+				var ipField = document.getElementById('ip');
+				var portField = document.getElementById('portField');
+				if (type === 'hiddify' && ipVersion === 'ipv6') {
+					ipField.value = '';
+					portField.style.display = 'none';
+				} else {
+					ipField.value = '162.159.192.76';
+					portField.style.display = 'block';
+				}
+				document.getElementById('autoFillCheckbox').checked = false;
 			}
-		})
-		.catch(error => console.error('خطا در دریافت داده:', error));
-}
 
-function generateQRCode(data)
-{
-	var qrCodeContainer = document.getElementById('qrCodeContainer');
-	qrCodeContainer.innerHTML = '';
-	new QRCode(qrCodeContainer
-	, {
-		text: data
-		, width: 200
-		, height: 200
-		, colorDark: isDarkTheme ? "#c9d1d9" : "#000000"
-		, colorLight: isDarkTheme ? "#0d1117" : "#ffffff"
-		, correctLevel: QRCode.CorrectLevel.L
-	});
-}
+			document.addEventListener('DOMContentLoaded', function() {
+				document.getElementById('warpinatorForm').addEventListener('submit', function(event) {
+					event.preventDefault();
+					document.querySelector('.loading').style.display = 'block';
+					document.getElementById('result').style.display = 'none';
+					setTimeout(function() {
+						var type = document.getElementById('type').value;
+						var url;
+						if (type === 'hiddify') {
+							var username = document.getElementById('username').value || 'Anonymous';
+							var license = document.getElementById('license').value || '';
+							var type1 = document.getElementById('type1').value || '40-80';
+							var type2 = document.getElementById('type2').value || '40-10';
+							var type3 = document.getElementById('type3').value || '2-4';
+							var type4 = document.getElementById('type4').value || 'm4';
+							var ip = document.getElementById('ip').value || '162.159.192.76';
+							var port = document.getElementById('port').value || '2408';
+							var ipVersion = document.getElementById('ipVersion').value;
+							var warpInWarp = document.getElementById('warpInWarpToggle').checked;
+							var auto = document.getElementById('autoFillCheckbox').checked ? 'true' : 'false';
+							
+							if (ipVersion === 'ipv6') {
+								var licenseValue = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifps=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+							} else {
+								var licenseValue = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifps=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+							}
+							
+							url = licenseValue;
+							
+							if (warpInWarp) {
+								url += `&&detour=warp://auto#${username === 'Anonymous' ? (ipVersion === 'ipv6' ? 'Anon-WoW-IPv6' : 'Anon-WoW-IPv4') : username}`;
+							}
+						} else {
+							var license = document.getElementById('license').value || '';
+							var ip = document.getElementById('ip').value || '162.159.192.76';
+							var port = document.getElementById('port').value || '2408';
+							var auto = document.getElementById('autoFillCheckbox').checked ? 'true' : 'false';
+							url = `https://itshin.serv00.net/api/warpinator?license=${encodeURIComponent(license)}&type=${encodeURIComponent(type)}&auto=${encodeURIComponent(auto)}`;
+							if (!document.getElementById('autoFillCheckbox').checked) {
+								url += `&ip=${encodeURIComponent(ip)}&port=${encodeURIComponent(port)}`;
+							}
+						}
+						document.getElementById('generatedUrl').value = url;
+						document.querySelector('.loading').style.display = 'none';
+						document.getElementById('result').style.display = 'block';
+						generateQRCode(url);
+					}, 1500);
+				});
+			});
 
-function toggleAutoFill()
+			function copyToClipboard() {
+				var copyText = document.getElementById('generatedUrl');
+				copyText.select();
+				copyText.setSelectionRange(0, 99999);
+				document.execCommand('copy');
+				var btn = document.querySelector('.btn[onclick="copyToClipboard()"]');
+				btn.innerHTML = '<i class="material-icons">check</i>کپی شد';
+				setTimeout(() => {
+					btn.innerHTML = '<i class="material-icons">content_copy</i>کپی URL';
+				}, 2000);
+			}
+
+			function fetchRandomIP() {
+				var ipVersion = document.getElementById('ipVersion').value;
+				fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json')
+					.then(response => response.json())
+					.then(data => {
+						var ipList = ipVersion === 'ipv6' ? data.ipv6 : data.ipv4;
+						var randomIndex = Math.floor(Math.random() * ipList.length);
+						var randomIP = ipList[randomIndex];
+						if (ipVersion === 'ipv6') {
+							var [ip] = randomIP.split('[]:');
+							document.getElementById('ip').value = ip;
+							document.getElementById('port').value = '';
+						} else {
+							var [ip, port] = randomIP.split(':');
+							document.getElementById('ip').value = ip;
+							document.getElementById('port').value = port;
+						}
+					})
+					.catch(error => console.error('خطا در دریافت داده:', error));
+			}
+
+			function generateQRCode(data) {
+				var qrCodeContainer = document.getElementById('qrCodeContainer');
+				qrCodeContainer.innerHTML = '';
+				new QRCode(qrCodeContainer, {
+					text: data,
+					width: 200,
+					height: 200,
+					colorDark: isDarkTheme ? "#c9d1d9" : "#000000",
+					colorLight: isDarkTheme ? "#0d1117" : "#ffffff",
+					correctLevel: QRCode.CorrectLevel.L
+				});
+			}
+
+			function toggleAutoFill()
 {
 	var autoFillCheckbox = document.getElementById('autoFillCheckbox');
 	var ipField = document.getElementById('ip');
@@ -856,16 +743,9 @@ function toggleAutoFill()
 		portField.disabled = false;
 	}
 }
-
-function toggleWarpInWarp()
-{
-	warpInWarpEnabled = !warpInWarpEnabled;
-	var toggleBtn = document.querySelector('.warp-in-warp-toggle');
-	toggleBtn.innerHTML = warpInWarpEnabled ? '🟢' : '🔴';
-}
 window.addEventListener('load', function()
 {
-	const elements = document.querySelectorAll('.container, .btn, .form-control, .info-box, .contact-section');
+	const elements = document.querySelectorAll('.container, .btn, .form-control');
 	elements.forEach((el, index) =>
 	{
 		setTimeout(() =>
