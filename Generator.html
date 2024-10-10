@@ -393,12 +393,25 @@ h2
 	background-color: var(--btn-hover);
 }
 
+#warpInWarpContainer
+{
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+	padding-left: 0; /* حذف پدینگ اضافی از سمت چپ */
+}
+
+#warpInWarpContainer label
+{
+	margin-right: 8px;
+}
+
 .switch
 {
 	position: relative;
 	display: inline-block;
-	width: 60px;
-	height: 34px;
+	width: 50px; /* کاهش عرض */
+	height: 24px; /* کاهش ارتفاع */
 }
 
 .switch input
@@ -418,17 +431,17 @@ h2
 	bottom: 0;
 	background-color: #ccc;
 	transition: .4s;
-	border-radius: 34px;
+	border-radius: 24px;
 }
 
 .slider:before
 {
 	position: absolute;
 	content: "";
-	height: 26px;
-	width: 26px;
-	left: 4px;
-	bottom: 4px;
+	height: 18px; /* کاهش اندازه دایره داخلی */
+	width: 18px; /* کاهش اندازه دایره داخلی */
+	left: 3px;
+	bottom: 3px;
 	background-color: white;
 	transition: .4s;
 	border-radius: 50%;
@@ -448,18 +461,6 @@ input:checked+.slider:before
 {
 	transform: translateX(26px);
 }
-
-#warpInWarpContainer
-{
-	display: none;
-	align-items: center;
-	margin-top: 8px;
-}
-
-#warpInWarpContainer label
-{
-	margin-right: 8px;
-}
 	</style>
 </head>
 
@@ -469,7 +470,7 @@ input:checked+.slider:before
 			<button class="toggle-theme" onclick="toggleTheme()">
 				<i class="material-icons">brightness_medium</i>
 			</button>
-			<h2>WARP Generator</h2>
+			<h2>WARP Generator v1.4</h2>
 		</div>
 		<div class="info-box">
 			<p>اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
