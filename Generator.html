@@ -740,18 +740,30 @@ document.addEventListener('DOMContentLoaded', function()
 						.checked;
 					var auto = document.getElementById('autoFillCheckbox')
 						.checked ? 'true' : 'false';
+					var defaultUsername = 'Anonymous';
+					var customUsername = username !== defaultUsername;
 					if (ipVersion === 'ipv6')
 					{
-						var licenseValue = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifps=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+						var baseUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
 					}
 					else
 					{
-						var licenseValue = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifps=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+						var baseUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
 					}
-					url = licenseValue;
+					url = baseUrl;
 					if (warpInWarp)
 					{
-						url += `&&detour=warp://auto#${username === 'Anonymous' ? (ipVersion === 'ipv6' ? 'Anon-WoW-IPv6' : 'Anon-WoW-IPv4') : username}`;
+						var wowUsername;
+						if (customUsername)
+						{
+							wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6' : 'IPv4'}`;
+						}
+						else
+						{
+							wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6' : 'Anon-WoW-IPv4';
+						}
+						var wowUrl = license ? `warp://${license}@auto` : 'warp://auto';
+						url += `&&detour=${wowUrl}#${wowUsername}`;
 					}
 				}
 				else
