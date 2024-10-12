@@ -1,907 +1,716 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>WARP Generator</title>
-	<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<style>
-:root
+< !DOCTYPE html > < html lang = "fa"
+dir = "rtl" > < head > < meta charset = "UTF-8" > < meta name = "viewport"
+content = "width=device-width, initial-scale=1.0" > < title > WARP Generator < /title> < link href = "https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"
+rel = "stylesheet"
+type = "text/css" / > < link href = "https://fonts.googleapis.com/icon?family=Material+Icons"
+rel = "stylesheet" > < style > : root
 {
-	--bg-color: #0d1117;
-	--container-bg: #161b22;
-	--text-color: #c9d1d9;
-	--input-bg: #21262d;
-	--input-border: #30363d;
-	--input-focus: #58a6ff;
-	--btn-bg: #238636;
-	--btn-hover: #2ea043;
-	--secondary-btn-bg: #6e40c9;
-	--secondary-btn-hover: #8957e5;
-	--header-color: #58a6ff;
+	--bg - color: #0d1117;
+	--container-bg: # 161 b22;
+	--text - color: #c9d1d9;
+	--input - bg: #21262d;
+	--input-border: # 30363 d;
+	--input - focus: #58a6ff;
+	--btn-bg: # 238636;
+	--btn - hover: #2ea043;
+	--secondary-btn-bg: # 6e40 c9;
+	--secondary - btn - hover: #8957e5;
+	--header-color: # 58 a6ff;
 }
-
 body
 {
-	font-family: 'Vazir', sans-serif;
-	background-color: var(--bg-color);
-	color: var(--text-color);
+	font - family: 'Vazir', sans - serif;
+	background - color: var (--bg - color);
+	color: var (--text - color);
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
+	justify - content: center;
+	align - items: center;
+	min - height: 100 vh;
 	margin: 0;
-	transition: background-color 0.3s ease;
-}
-
-.container
+	transition: background - color 0.3 s ease;
+}.container
 {
-	background-color: var(--container-bg);
-	padding: 24px;
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-	width: 100%;
-	max-width: 400px;
-	transition: all 0.3s ease;
-}
-
-.header
+	background - color: var (--container - bg);
+	padding: 24 px;
+	border - radius: 12 px;
+	box - shadow: 0 4 px 12 px rgba(0, 0, 0, 0.15);
+	width: 100 % ;
+	max - width: 400 px;
+	transition: all 0.3 s ease;
+}.header
 {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 24px;
+	justify - content: space - between;
+	align - items: center;
+	margin - bottom: 24 px;
 }
-
 h2
 {
-	color: var(--header-color);
-	font-size: 28px;
+	color: var (--header - color);
+	font - size: 28 px;
 	margin: 0;
-}
-
-.toggle-theme
-{
-	background: none;
-	border: none;
-	color: var(--text-color);
-	cursor: pointer;
-	font-size: 24px;
-	padding: 0;
-}
-
-.input-field
-{
-	margin-bottom: 24px;
-	position: relative;
-}
-
-.input-field label
-{
-	color: var(--text-color);
-	font-size: 14px;
-	display: block;
-	margin-bottom: 8px;
-}
-
-.form-control
-{
-	width: 100%;
-	padding: 12px;
-	border: 1px solid var(--input-border);
-	border-radius: 6px;
-	font-size: 16px;
-	outline: none;
-	background-color: var(--input-bg);
-	color: var(--text-color);
-	box-sizing: border-box;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
-
-.form-control:focus
-{
-	border-color: var(--input-focus);
-	box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
-}
-
-.btn
-{
-	background-color: var(--btn-bg);
-	color: #ffffff;
-	padding: 12px 24px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 16px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
-
-.btn:hover
-{
-	background-color: var(--btn-hover);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.btn i
-{
-	margin-left: 8px;
-}
-
-.card-panel
-{
-	margin-top: 24px;
-	padding: 16px;
-	border-radius: 6px;
-	background-color: var(--input-bg);
-	display: none;
-	animation: fadeIn 0.5s ease;
-}
-
-.card-panel h5
-{
-	color: var(--header-color);
-	margin-bottom: 16px;
-}
-
-.random-btn
-{
-	background-color: var(--secondary-btn-bg);
-	color: #ffffff;
-	padding: 8px 16px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 14px;
-	margin-top: 8px;
-	display: inline-block;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
-
-.random-btn:hover
-{
-	background-color: var(--secondary-btn-hover);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.qr-code-container
-{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 24px;
-	height: 200px;
-}
-
-.footer
-{
-	text-align: center;
-	margin-top: 24px;
-	font-size: 14px;
-	color: #8b949e;
-}
-
-#autoFillContainer
-{
-	display: flex;
-	align-items: center;
-	margin-top: 8px;
-}
-
-#autoFillCheckbox
-{
-	margin-left: 8px;
-}
-
-.line
-{
-	border-top: 1px solid #ccc;
-	margin-top: 10px;
-}
-
-.loading
-{
-	display: none;
-	text-align: center;
-	margin-top: 20px;
-}
-
-.loading-spinner
-{
-	border: 4px solid var(--input-border);
-	border-top: 4px solid var(--header-color);
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	animation: spin 1s linear infinite;
-	margin: 0 auto;
-}
-
-@keyframes spin
-{
-	0%
+}.toggle - theme
 	{
-		transform: rotate(0deg);
-	}
-	
-	100%
+		background: none;
+		border: none;
+		color: var (--text - color);
+		cursor: pointer;
+		font - size: 24 px;
+		padding: 0;
+	}.input - field
 	{
-		transform: rotate(360deg);
-	}
-}
-
-@keyframes fadeIn
-{
-	from
+		margin - bottom: 24 px;
+		position: relative;
+	}.input - field label
 	{
-		opacity: 0;
-		transform: translateY(-10px);
-	}
-	
-	to
+		color: var (--text - color);
+		font - size: 14 px;
+		display: block;
+		margin - bottom: 8 px;
+	}.form - control
 	{
-		opacity: 1;
-		transform: translateY(0);
-	}
+		width: 100 % ;
+		padding: 12 px;
+		border: 1 px solid
+		var (--input - border);
+		border - radius: 6 px;
+		font - size: 16 px;
+		outline: none;
+		background - color: var (--input - bg);
+		color: var (--text - color);
+		box - sizing: border - box;
+		transition: all 0.3 s ease;
+		font - family: 'Vazir'
+		, sans - serif;
+	}.form - control: focus
+	{
+		border - color: var (--input - focus);
+		box - shadow: 0 0 0 3 px rgba(88, 166, 255, 0.3);
+	}.btn
+	{
+		background - color: var (--btn - bg);
+		color: #ffffff;
+		padding: 12 px 24 px;
+		border: none;
+		border - radius: 6 px;
+		cursor: pointer;
+		font - size: 16 px;
+		display: flex;
+		align - items: center;
+		justify - content: center;
+		width: 100 % ;
+		transition: all 0.3 s ease;
+		font - family: 'Vazir', sans - serif;
+	}.btn: hover
+	{
+		background - color: var (--btn - hover);
+		transform: translateY(-2 px);
+		box - shadow: 0 4 px 8 px rgba(0, 0, 0, 0.2);
+	}.btn i
+	{
+		margin - left: 8 px;
+	}.card - panel
+	{
+		margin - top: 24 px;
+		padding: 16 px;
+		border - radius: 6 px;
+		background - color: var (--input - bg);
+		display: none;
+		animation: fadeIn 0.5 s ease;
+	}.card - panel h5
+	{
+		color: var (--header - color);
+		margin - bottom: 16 px;
+	}.random - btn
+	{
+		background - color: var (--secondary - btn - bg);
+		color: #ffffff;
+		padding: 8 px 16 px;
+		border: none;
+		border - radius: 6 px;
+		cursor: pointer;
+		font - size: 14 px;
+		margin - top: 8 px;
+		display: inline - block;
+		transition: all 0.3 s ease;
+		font - family: 'Vazir', sans - serif;
+	}.random - btn: hover
+	{
+		background - color: var (--secondary - btn - hover);
+		transform: translateY(-2 px);
+		box - shadow: 0 4 px 8 px rgba(0, 0, 0, 0.2);
+	}.qr - code - container
+	{
+		display: flex;
+		justify - content: center;
+		align - items: center;
+		margin - bottom: 24 px;
+		height: 200 px;
+	}.footer
+	{
+		text - align: center;
+		margin - top: 24 px;
+		font - size: 14 px;
+		color: #8b949e;
 }
 
-.tooltip
-{
-	position: relative;
-	display: inline-block;
-	cursor: help;
-}
-
-.tooltip .tooltiptext
-{
-	visibility: hidden;
-	width: 200px;
-	background-color: #555;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px;
-	position: absolute;
-	z-index: 1;
-	bottom: 125%;
-	left: 50%;
-	margin-left: -100px;
-	opacity: 0;
-	transition: opacity 0.3s;
-	font-family: 'Vazir', sans-serif;
-}
-
-.tooltip:hover .tooltiptext
-{
-	visibility: visible;
-	opacity: 1;
-}
-
-.hiddify-options
-{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
-
-.hiddify-options .select-item
-{
-	width: 48%;
-	margin-bottom: 12px;
-}
-
-.contact-section
-{
-	margin-top: 24px;
-	padding: 16px;
-	border-radius: 6px;
-	background-color: var(--input-bg);
-	transition: all 0.3s ease;
-}
-
-.contact-title
-{
-	color: var(--header-color);
-	font-size: 18px;
-	margin-bottom: 12px;
-	display: flex;
-	align-items: center;
-}
-
-.contact-title i
-{
-	margin-left: 8px;
-}
-
-.contact-btn
-{
-	background-color: var(--header-color);
-	color: #ffffff;
-	padding: 10px 16px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 14px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: all 0.3s ease;
-	text-decoration: none;
-	width: calc(100% - 32px);
-	margin: 0 auto;
-}
-
-.contact-btn:hover
-{
-	opacity: 0.9;
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.contact-btn i
-{
-	margin-left: 8px;
-}
-
-.footer-info
-{
-	margin-top: 16px;
-	font-size: 12px;
-	color: var(--text-color);
-	text-align: center;
-}
-
-.info-box
-{
-	background-color: var(--input-bg);
-	border-radius: 6px;
-	padding: 16px;
-	margin-bottom: 24px;
-}
-
-.info-box p
-{
-	margin: 0;
-	line-height: 1.5;
-}
-
-.copy-btn
-{
-	background-color: var(--btn-bg);
-	color: #ffffff;
-	padding: 6px 12px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 14px;
-	margin-top: 8px;
-	transition: all 0.3s ease;
-}
-
-.copy-btn:hover
-{
-	background-color: var(--btn-hover);
-}
-
-#warpInWarpContainer
-{
-	display: flex;
-	align-items: center;
-	margin-top: 8px;
-	padding-left: 0; /* حذف پدینگ اضافی از سمت چپ */
-}
-
-#warpInWarpContainer label
-{
-	margin-right: 8px;
-}
-
-.switch
-{
-	position: relative;
-	display: inline-block;
-	width: 50px; /* کاهش عرض */
-	height: 24px; /* کاهش ارتفاع */
-}
-
-.switch input
-{
-	opacity: 0;
-	width: 0;
-	height: 0;
-}
-
-.slider
-{
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: #ccc;
-	transition: .4s;
-	border-radius: 24px;
-}
-
-.slider:before
-{
-	position: absolute;
-	content: "";
-	height: 18px; /* کاهش اندازه دایره داخلی */
-	width: 18px; /* کاهش اندازه دایره داخلی */
-	left: 3px;
-	bottom: 3px;
-	background-color: white;
-	transition: .4s;
-	border-radius: 50%;
-}
-
-input:checked+.slider
-{
-	background-color: #30D158;
+# autoFillContainer
+		{
+			display: flex;
+			align - items: center;
+			margin - top: 8 px;
+		}
+		#autoFillCheckbox
+		{
+			margin - left: 8 px;
+		}.line
+		{
+			border - top: 1 px solid #ccc;
+			margin - top: 10 px;
+		}.loading
+		{
+			display: none;
+			text - align: center;
+			margin - top: 20 px;
+		}.loading - spinner
+		{
+			border: 4 px solid
+			var (--input - border);
+			border - top: 4 px solid
+			var (--header - color);
+			border - radius: 50 % ;
+			width: 40 px;
+			height: 40 px;
+			animation: spin 1 s linear infinite;
+			margin: 0 auto;
+		}
+		@keyframes spin
+		{
+			0 %
+			{
+				transform: rotate(0 deg);
+			}
+			100 %
+			{
+				transform: rotate(360 deg);
+			}
+		}
+		@keyframes fadeIn
+		{
+			from
+			{
+				opacity: 0;
+				transform: translateY(-10 px);
+			}
+			to
+			{
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}.tooltip
+		{
+			position: relative;
+			display: inline - block;
+			cursor: help;
+		}.tooltip.tooltiptext
+		{
+			visibility: hidden;
+			width: 200 px;
+			background - color: #555;
+	color: # fff;
+			text - align: center;
+			border - radius: 6 px;
+			padding: 5 px;
+			position: absolute;
+			z - index: 1;
+			bottom: 125 % ;
+			left: 50 % ;
+			margin - left: -100 px;
+			opacity: 0;
+			transition: opacity 0.3 s;
+			font - family: 'Vazir'
+			, sans - serif;
+		}.tooltip: hover.tooltiptext
+		{
+			visibility: visible;
+			opacity: 1;
+		}.hiddify - options
+		{
+			display: flex;
+			flex - wrap: wrap;
+			justify - content: space - between;
+		}.hiddify - options.select - item
+		{
+			width: 48 % ;
+			margin - bottom: 12 px;
+		}.contact - section
+		{
+			margin - top: 24 px;
+			padding: 16 px;
+			border - radius: 6 px;
+			background - color: var (--input - bg);
+			transition: all 0.3 s ease;
+		}.contact - title
+		{
+			color: var (--header - color);
+			font - size: 18 px;
+			margin - bottom: 12 px;
+			display: flex;
+			align - items: center;
+		}.contact - title i
+		{
+			margin - left: 8 px;
+		}.contact - btn
+		{
+			background - color: var (--header - color);
+			color: #ffffff;
+			padding: 10 px 16 px;
+			border: none;
+			border - radius: 6 px;
+			cursor: pointer;
+			font - size: 14 px;
+			display: flex;
+			align - items: center;
+			justify - content: center;
+			transition: all 0.3 s ease;
+			text - decoration: none;
+			width: calc(100 % -32 px);
+			margin: 0 auto;
+		}.contact - btn: hover
+		{
+			opacity: 0.9;
+			transform: translateY(-2 px);
+			box - shadow: 0 4 px 8 px rgba(0, 0, 0, 0.2);
+		}.contact - btn i
+		{
+			margin - left: 8 px;
+		}.footer - info
+		{
+			margin - top: 16 px;
+			font - size: 12 px;
+			color: var (--text - color);
+			text - align: center;
+		}.info - box
+		{
+			background - color: var (--input - bg);
+			border - radius: 6 px;
+			padding: 16 px;
+			margin - bottom: 24 px;
+		}.info - box p
+		{
+			margin: 0;
+			line - height: 1.5;
+		}.copy - btn
+		{
+			background - color: var (--btn - bg);
+			color: #ffffff;
+			padding: 6 px 12 px;
+			border: none;
+			border - radius: 4 px;
+			cursor: pointer;
+			font - size: 14 px;
+			margin - top: 8 px;
+			transition: all 0.3 s ease;
+		}.copy - btn: hover
+		{
+			background - color: var (--btn - hover);
+		}
+		#warpInWarpContainer
+		{
+			display: flex;
+			align - items: center;
+			margin - top: 8 px;
+			padding - left: 0; /* حذف پدینگ اضافی از سمت چپ */
+		}
+		#warpInWarpContainer label
+		{
+			margin - right: 8 px;
+		}.switch
+		{
+			position: relative;
+			display: inline - block;
+			width: 50 px; /* کاهش عرض */
+			height: 24 px; /* کاهش ارتفاع */
+		}.switch input
+		{
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}.slider
+		{
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background - color: #ccc;
+			transition: .4 s;
+			border - radius: 24 px;
+		}.slider: before
+		{
+			position: absolute;
+			content: "";
+			height: 18 px; /* کاهش اندازه دایره داخلی */
+			width: 18 px; /* کاهش اندازه دایره داخلی */
+			left: 3 px;
+			bottom: 3 px;
+			background - color: white;
+			transition: .4 s;
+			border - radius: 50 % ;
+		}
+		input: checked + .slider
+		{
+			background - color: #30D158;
 }
 
 input:focus+.slider
 {
-	box-shadow: 0 0 1px #30D158;
-}
-
-input:checked+.slider:before
-{
-	transform: translateX(26px);
-}
-	</style>
-</head>
-
-<body>
-	<div class="container">
-		<div class="header">
-			<button class="toggle-theme" onclick="toggleTheme()">
-				<i class="material-icons">brightness_medium</i>
-			</button>
-			<h2>WARP Generator v1.4</h2>
-		</div>
-		<div class="info-box">
-			<p>اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
-			<input type="text" id="subscriptionLink" value="https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub" readonly class="form-control">
-			<button class="copy-btn" onclick="copySubscriptionLink()">کپی لینک</button>
-		</div>
-		<form id="warpinatorForm">
-			<div class="input-field" id="usernameField" style="display: none;">
-				<label for="username">نام دلخواه (اختیاری) فقط حروف لاتین و عدد</label>
-				<input id="username" type="text" name="Name Config" class="form-control">
-			</div>
-			<div class="input-field">
-				<label for="license">کد لایسنس WARP (اختیاری)</label>
-				<input id="license" type="text" name="license" class="form-control">
-				<div class="tooltip">
-					<i class="material-icons">info</i>
-					<span class="tooltiptext">در صورت تمایل، می‌توانید با وارد کردن کلید مجوز، به ویژگی‌های خاص و پیشرفته دسترسی پیدا کنید</span>
-				</div>
-			</div>
-			<div class="input-field">
-				<label for="type">نوع هسته پیکربندی</label>
-				<select id="type" name="type" class="form-control" onchange="toggleHiddifyOptions()">
-					<option value="hiddify">Hiddify & Karing</option>
-					<option value="v2rayng">v2rayNG</option>
-					<option value="singbox">Singbox</option>
-					<option value="shadowrocket">Shadowrocket</option>
-					<option value="streisand">Streisand</option>
-					<option value="wireguard">Wireguard</option>
-				</select>
-			</div>
-			<div id="hiddifyOptions" style="display: block;">
-				<div class="input-field">
-					<label for="ipVersion">نسخه IP</label>
-					<select id="ipVersion" name="ipVersion" class="form-control" onchange="toggleIPOptions()">
-						<option value="ipv4">IPv4</option>
-						<option value="ipv6">IPv6</option>
-					</select>
-				</div>
-				<div class="hiddify-options">
-					<div class="select-item">
-						<label for="type1">تعداد بسته‌های نویز</label>
-						<select id="type1" name="ifp" class="form-control">
-							<option value="40-80" selected>40-80</option>
-							<option value="10-20">10-20</option>
-							<option value="20-30">20-30</option>
-							<option value="30-40">30-30</option>
-							<option value="40-50">40-50</option>
-							<option value="50-60">50-60</option>
-							<option value="60-70">60-70</option>
-							<option value="70-80">70-80</option>
-							<option value="80-90">80-90</option>
-							<option value="90-100">90-100</option>
-							<option value="20-40">20-40</option>
-							<option value="30-60">30-60</option>
-							<option value="40-80">40-80</option>
-							<option value="50-100">50-100</option>
-						</select>
-					</div>
-					<div class="select-item">
-						<label for="type2">اندازه بسته‌های نویز</label>
-						<select id="type2" name="ifps" class="form-control">
-							<option value="50-100" selected>50-100</option>
-							<option value="10-20">10-20</option>
-							<option value="20-30">20-30</option>
-							<option value="30-40">30-30</option>
-							<option value="40-50">40-50</option>
-							<option value="50-60">50-60</option>
-							<option value="60-70">60-70</option>
-							<option value="70-80">70-80</option>
-							<option value="80-90">80-90</option>
-							<option value="90-100">90-100</option>
-							<option value="20-40">20-40</option>
-							<option value="30-60">30-60</option>
-							<option value="40-80">40-80</option>
-							<option value="50-100">50-100</option>
-						</select>
-					</div>
-					<div class="select-item">
-						<label for="type3">تأخیر ارسال بسته‌های نویز</label>
-						<select id="type3" name="ifpd" class="form-control">
-							<option value="2-4" selected>2-4</option>
-							<option value="1-2">1-2</option>
-							<option value="2-3">2-3</option>
-							<option value="3-4">3-4</option>
-							<option value="4-5">4-5</option>
-							<option value="5-6">5-6</option>
-							<option value="6-7">6-7</option>
-							<option value="7-8">7-8</option>
-							<option value="8-9">8-9</option>
-							<option value="9-10">9-10</option>
-							<option value="2-4">2-4</option>
-							<option value="3-6">3-6</option>
-							<option value="4-8">4-8</option>
-							<option value="5-10">5-10</option>
-						</select>
-					</div>
-					<div class="select-item">
-						<label for="type4">حالت تولید نویز</label>
-						<select id="type4" name="ifpm" class="form-control">
-							<option value="m4" selected>m4</option>
-							<option value="m1">m1</option>
-							<option value="m2">m2</option>
-							<option value="m3">m3</option>
-							<option value="m4">m4</option>
-							<option value="m5">m5</option>
-							<option value="m6">m6</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="input-field">
-				<label for="ip">آدرس IP (اختیاری)</label>
-				<input id="ip" type="text" name="ip" value="162.159.192.76" class="form-control">
-			</div>
-			<div class="input-field" id="portField">
-				<label for="port">آدرس PORT (اختیاری)</label>
-				<input id="port" type="number" name="port" value="2408" class="form-control">
-			</div>
-			<div id="autoFillContainer">
-				<label for="autoFillCheckbox">⁮⁮ ⁮⁮ پر کردن خودکار ⁮⁮ </label>
-				<input type="checkbox" id="autoFillCheckbox" onchange="toggleAutoFill()">
-			</div>
-			<div id="warpInWarpContainer">
-				<label for="warpInWarpToggle">قابلیت وارپ در وارپ</label>
-				<label class="switch">
-					<input type="checkbox" id="warpInWarpToggle">
-					<span class="slider"></span>
-				</label>
-			</div>
-			<div class="line"><br></div>
-			<button class="btn" type="submit">
-				<i class="material-icons">send</i> تولید URL </button>
-		</form>
-		<div class="loading">
-			<div class="loading-spinner"></div>
-			<p>در حال تولید URL...</p>
-		</div>
-		<div class="card-panel" id="result">
-			<div class="qr-code-container" id="qrCodeContainer"></div>
-			<h5>URL تولید شده:</h5>
-			<div class="input-field">
-				<input id="generatedUrl" type="text" readonly class="form-control">
-			</div>
-			<button class="btn" onclick="copyToClipboard()">
-				<i class="material-icons">content_copy</i> کپی URL </button>
-		</div>
-		<div class="contact-section">
-			<h3 class="contact-title">
-				<i class="material-icons">contact_mail</i> ارتباط با من
-			</h3>
-			<a href="https://t.me/BXAMbot" target="_blank" class="contact-btn">
-				<i class="material-icons">telegram</i> پیام در ربات تلگرام </a>
-			<div class="footer-info">
-				<p>طراحی شده توسط: Anonymous</p>
-				<p>با تشکر از Yebekhe و IRCF</p>
-			</div>
-		</div>
-		<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-		<script>
-let isDarkTheme = true;
-
-function toggleTheme()
-{
-	isDarkTheme = !isDarkTheme;
-	if (isDarkTheme)
-	{
-		document.documentElement.style.setProperty('--bg-color', '#0d1117');
-		document.documentElement.style.setProperty('--container-bg', '#161b22');
-		document.documentElement.style.setProperty('--text-color', '#c9d1d9');
-		document.documentElement.style.setProperty('--input-bg', '#21262d');
-		document.documentElement.style.setProperty('--input-border', '#30363d');
-	}
-	else
-	{
-		document.documentElement.style.setProperty('--bg-color', '#f0f2f5');
-		document.documentElement.style.setProperty('--container-bg', '#ffffff');
-		document.documentElement.style.setProperty('--text-color', '#1f2937');
-		document.documentElement.style.setProperty('--input-bg', '#f9fafb');
-		document.documentElement.style.setProperty('--input-border', '#d1d5db');
-	}
-}
-
-function toggleHiddifyOptions()
-{
-	var type = document.getElementById('type')
-		.value;
-	var hiddifyOptions = document.getElementById('hiddifyOptions');
-	var usernameField = document.getElementById('usernameField');
-	var ipVersionField = document.getElementById('ipVersion');
-	var warpInWarpContainer = document.getElementById('warpInWarpContainer');
-	if (type === 'hiddify')
-	{
-		hiddifyOptions.style.display = 'block';
-		usernameField.style.display = 'block';
-		ipVersionField.disabled = false;
-		warpInWarpContainer.style.display = 'flex';
-	}
-	else
-	{
-		hiddifyOptions.style.display = 'none';
-		usernameField.style.display = 'none';
-		ipVersionField.value = 'ipv4';
-		ipVersionField.disabled = true;
-		warpInWarpContainer.style.display = 'none';
-	}
-	toggleIPOptions();
-	document.getElementById('autoFillCheckbox')
-		.checked = false;
-}
-
-function toggleIPOptions()
-{
-	var type = document.getElementById('type')
-		.value;
-	var ipVersion = document.getElementById('ipVersion')
-		.value;
-	var ipField = document.getElementById('ip');
-	var portField = document.getElementById('portField');
-	if (type === 'hiddify' && ipVersion === 'ipv6')
-	{
-		ipField.value = '';
-		portField.style.display = 'none';
-	}
-	else
-	{
-		ipField.value = '162.159.192.76';
-		portField.style.display = 'block';
-	}
-	document.getElementById('autoFillCheckbox')
-		.checked = false;
-}
-document.addEventListener('DOMContentLoaded', function()
-{
-	document.getElementById('warpinatorForm')
-		.addEventListener('submit', function(event)
+	box-shadow: 0 0 1px # 30 D158;
+		}
+		input: checked + .slider: before
 		{
-			event.preventDefault();
-			document.querySelector('.loading')
-				.style.display = 'block';
-			document.getElementById('result')
-				.style.display = 'none';
-			setTimeout(function()
-			{
-				var type = document.getElementById('type')
-					.value;
-				var url;
-				if (type === 'hiddify')
-				{
-					var username = document.getElementById('username')
-						.value || 'Anonymous';
-					var license = document.getElementById('license')
-						.value || '';
-					var type1 = document.getElementById('type1')
-						.value || '40-80';
-					var type2 = document.getElementById('type2')
-						.value || '40-10';
-					var type3 = document.getElementById('type3')
-						.value || '2-4';
-					var type4 = document.getElementById('type4')
-						.value || 'm4';
-					var ip = document.getElementById('ip')
-						.value || '162.159.192.76';
-					var port = document.getElementById('port')
-						.value || '2408';
-					var ipVersion = document.getElementById('ipVersion')
-						.value;
-					var warpInWarp = document.getElementById('warpInWarpToggle')
-						.checked;
-					var auto = document.getElementById('autoFillCheckbox')
-						.checked ? 'true' : 'false';
-					var defaultUsername = 'Anonymous';
-					var customUsername = username !== defaultUsername;
-					if (ipVersion === 'ipv6')
-					{
-						var baseUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
-					}
-					else
-					{
-						var baseUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
-					}
-					url = baseUrl;
-					if (warpInWarp)
-					{
-						var wowUsername;
-						if (customUsername)
-						{
-							wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6' : 'IPv4'}`;
-						}
-						else
-						{
-							wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6' : 'Anon-WoW-IPv4';
-						}
-						var wowUrl = license ? `warp://${license}@auto` : 'warp://auto';
-						url += `&&detour=${wowUrl}#${wowUsername}`;
-					}
-				}
-				else
-				{
-					var license = document.getElementById('license')
-						.value || '';
-					var ip = document.getElementById('ip')
-						.value || '162.159.192.76';
-					var port = document.getElementById('port')
-						.value || '2408';
-					var auto = document.getElementById('autoFillCheckbox')
-						.checked ? 'true' : 'false';
-					url = `https://itshin.serv00.net/api/warpinator?license=${encodeURIComponent(license)}&type=${encodeURIComponent(type)}&auto=${encodeURIComponent(auto)}`;
-					if (!document.getElementById('autoFillCheckbox')
-						.checked)
-					{
-						url += `&ip=${encodeURIComponent(ip)}&port=${encodeURIComponent(port)}`;
-					}
-				}
-				document.getElementById('generatedUrl')
-					.value = url;
-				document.querySelector('.loading')
-					.style.display = 'none';
-				document.getElementById('result')
-					.style.display = 'block';
-				generateQRCode(url);
-			}, 1500);
-		});
-});
-
-function copyToClipboard()
-{
-	var copyText = document.getElementById('generatedUrl');
-	copyText.select();
-	copyText.setSelectionRange(0, 99999);
-	document.execCommand('copy');
-	var btn = document.querySelector('.btn[onclick="copyToClipboard()"]');
-	btn.innerHTML = '<i class="material-icons">check</i>کپی شد';
-	setTimeout(() =>
-	{
-		btn.innerHTML = '<i class="material-icons">content_copy</i>کپی URL';
-	}, 2000);
-}
-
-function fetchRandomIP()
-{
-	var ipVersion = document.getElementById('ipVersion')
-		.value;
-	fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json')
-		.then(response => response.json())
-		.then(data =>
+			transform: translateX(26 px);
+		} < /style> < /head> < body > < div class = "container" > < div class = "header" > < button class = "toggle-theme"
+		onclick = "toggleTheme()" > < i class = "material-icons" > brightness_medium < /i> < /button> < h2 > WARP Generator v1 .5 < /h2> < /div> < div class = "info-box" > < p > اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید: < /p> < input type = "text"
+		id = "subscriptionLink"
+		value = "https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub"
+		readonly class = "form-control" > < button class = "copy-btn"
+		onclick = "copySubscriptionLink()" > کپی لینک < /button> < /div> < form id = "warpinatorForm" > < div class = "input-field"
+		id = "usernameField"
+		style = "display: none;" > < label
+		for = "username" > نام دلخواه(اختیاری) فقط حروف لاتین و عدد < /label> < input id = "username"
+		type = "text"
+		name = "Name Config"
+		class = "form-control" > < /div> < div class = "input-field" > < label
+		for = "license" > کد لایسنس WARP(اختیاری) < /label> < input id = "license"
+		type = "text"
+		name = "license"
+		class = "form-control" > < div class = "tooltip" > < i class = "material-icons" > info < /i> < span class = "tooltiptext" > در صورت تمایل، می‌توانید با وارد کردن کلید مجوز، به ویژگی‌های خاص و پیشرفته دسترسی پیدا کنید < /span> < /div> < /div> < div class = "input-field" > < label
+		for = "type" > نوع هسته پیکربندی < /label> < select id = "type"
+		name = "type"
+		class = "form-control"
+		onchange = "toggleHiddifyOptions()" > < option value = "hiddify" > Hiddify & Karing < /option> < option value = "v2rayng" > v2rayNG < /option> < option value = "singbox" > Singbox < /option> < option value = "shadowrocket" > Shadowrocket < /option> < option value = "streisand" > Streisand < /option> < option value = "wireguard" > Wireguard < /option> < /select> < /div> < div id = "hiddifyOptions"
+		style = "display: block;" > < div class = "input-field" > < label
+		for = "ipVersion" > نسخه IP < /label> < select id = "ipVersion"
+		name = "ipVersion"
+		class = "form-control"
+		onchange = "toggleIPOptions()" > < option value = "ipv4" > IPv4 < /option> < option value = "ipv6" > IPv6 < /option> < /select> < /div> < div class = "hiddify-options" > < div class = "select-item" > < label
+		for = "type1" > تعداد بسته‌های نویز < /label> < select id = "type1"
+		name = "ifp"
+		class = "form-control" > < option value = "40-80"
+		selected > 40 - 80 < /option> < option value = "10-20" > 10 - 20 < /option> < option value = "20-30" > 20 - 30 < /option> < option value = "30-40" > 30 - 30 < /option> < option value = "40-50" > 40 - 50 < /option> < option value = "50-60" > 50 - 60 < /option> < option value = "60-70" > 60 - 70 < /option> < option value = "70-80" > 70 - 80 < /option> < option value = "80-90" > 80 - 90 < /option> < option value = "90-100" > 90 - 100 < /option> < option value = "20-40" > 20 - 40 < /option> < option value = "30-60" > 30 - 60 < /option> < option value = "40-80" > 40 - 80 < /option> < option value = "50-100" > 50 - 100 < /option> < /select> < /div> < div class = "select-item" > < label
+		for = "type2" > اندازه بسته‌های نویز < /label> < select id = "type2"
+		name = "ifps"
+		class = "form-control" > < option value = "50-100"
+		selected > 50 - 100 < /option> < option value = "10-20" > 10 - 20 < /option> < option value = "20-30" > 20 - 30 < /option> < option value = "30-40" > 30 - 30 < /option> < option value = "40-50" > 40 - 50 < /option> < option value = "50-60" > 50 - 60 < /option> < option value = "60-70" > 60 - 70 < /option> < option value = "70-80" > 70 - 80 < /option> < option value = "80-90" > 80 - 90 < /option> < option value = "90-100" > 90 - 100 < /option> < option value = "20-40" > 20 - 40 < /option> < option value = "30-60" > 30 - 60 < /option> < option value = "40-80" > 40 - 80 < /option> < option value = "50-100" > 50 - 100 < /option> < /select> < /div> < div class = "select-item" > < label
+		for = "type3" > تأخیر ارسال بسته‌های نویز < /label> < select id = "type3"
+		name = "ifpd"
+		class = "form-control" > < option value = "2-4"
+		selected > 2 - 4 < /option> < option value = "1-2" > 1 - 2 < /option> < option value = "2-3" > 2 - 3 < /option> < option value = "3-4" > 3 - 4 < /option> < option value = "4-5" > 4 - 5 < /option> < option value = "5-6" > 5 - 6 < /option> < option value = "6-7" > 6 - 7 < /option> < option value = "7-8" > 7 - 8 < /option> < option value = "8-9" > 8 - 9 < /option> < option value = "9-10" > 9 - 10 < /option> < option value = "2-4" > 2 - 4 < /option> < option value = "3-6" > 3 - 6 < /option> < option value = "4-8" > 4 - 8 < /option> < option value = "5-10" > 5 - 10 < /option> < /select> < /div> < div class = "select-item" > < label
+		for = "type4" > حالت تولید نویز < /label> < select id = "type4"
+		name = "ifpm"
+		class = "form-control" > < option value = "m4"
+		selected > m4 < /option> < option value = "m1" > m1 < /option> < option value = "m2" > m2 < /option> < option value = "m3" > m3 < /option> < option value = "m4" > m4 < /option> < option value = "m5" > m5 < /option> < option value = "m6" > m6 < /option> < /select> < /div> < /div> < /div> < div class = "input-field" > < label
+		for = "ip" > آدرس IP(اختیاری) < /label> < input id = "ip"
+		type = "text"
+		name = "ip"
+		value = "162.159.192.76"
+		class = "form-control" > < /div> < div class = "input-field"
+		id = "portField" > < label
+		for = "port" > آدرس PORT(اختیاری) < /label> < input id = "port"
+		type = "number"
+		name = "port"
+		value = "2408"
+		class = "form-control" > < /div> < div id = "autoFillContainer" > < label
+		for = "autoFillCheckbox" > ⁮⁮⁮⁮پر کردن خودکار⁮⁮ < /label> < input type = "checkbox"
+		id = "autoFillCheckbox"
+		onchange = "toggleAutoFill()" > < /div> < div id = "warpInWarpContainer" > < label
+		for = "warpInWarpToggle" > قابلیت وارپ در وارپ < /label> < label class = "switch" > < input type = "checkbox"
+		id = "warpInWarpToggle" > < span class = "slider" > < /span> < /label> < /div> < div class = "line" > < br > < /div> < button class = "btn"
+		type = "submit" > < i class = "material-icons" > send < /i> تولید URL </button > < /form> < div class = "loading" > < div class = "loading-spinner" > < /div> < p > در حال تولید URL... < /p> < /div> < div class = "card-panel"
+		id = "result" > < div class = "qr-code-container"
+		id = "qrCodeContainer" > < /div> < h5 > URL تولید شده: < /h5> < div class = "input-field" > < input id = "generatedUrl"
+		type = "text"
+		readonly class = "form-control" > < /div> < button class = "btn"
+		onclick = "copyToClipboard()" > < i class = "material-icons" > content_copy < /i> کپی URL </button > < /div> < div class = "contact-section" > < h3 class = "contact-title" > < i class = "material-icons" > contact_mail < /i> ارتباط با من < /h3> < a href = "https://t.me/BXAMbot"
+		target = "_blank"
+		class = "contact-btn" > < i class = "material-icons" > telegram < /i> پیام در ربات تلگرام </a > < div class = "footer-info" > < p > طراحی شده توسط: Anonymous < /p> < p > با تشکر از Yebekhe و IRCF < /p> < /div> < /div> < script src = "https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js" > < /script> < script >
+			let isDarkTheme = true;
+		
+		function toggleTheme()
 		{
-			var ipList = ipVersion === 'ipv6' ? data.ipv6 : data.ipv4;
-			var randomIndex = Math.floor(Math.random() * ipList.length);
-			var randomIP = ipList[randomIndex];
-			if (ipVersion === 'ipv6')
+			isDarkTheme = !isDarkTheme;
+			if (isDarkTheme)
 			{
-				var [ip] = randomIP.split('[]:');
-				document.getElementById('ip')
-					.value = ip;
-				document.getElementById('port')
-					.value = '';
+				document.documentElement.style.setProperty('--bg-color', '#0d1117');
+				document.documentElement.style.setProperty('--container-bg', '#161b22');
+				document.documentElement.style.setProperty('--text-color', '#c9d1d9');
+				document.documentElement.style.setProperty('--input-bg', '#21262d');
+				document.documentElement.style.setProperty('--input-border', '#30363d');
 			}
 			else
 			{
-				var [ip, port] = randomIP.split(':');
-				document.getElementById('ip')
-					.value = ip;
-				document.getElementById('port')
-					.value = port;
+				document.documentElement.style.setProperty('--bg-color', '#f0f2f5');
+				document.documentElement.style.setProperty('--container-bg', '#ffffff');
+				document.documentElement.style.setProperty('--text-color', '#1f2937');
+				document.documentElement.style.setProperty('--input-bg', '#f9fafb');
+				document.documentElement.style.setProperty('--input-border', '#d1d5db');
 			}
-		})
-		.catch(error => console.error('خطا در دریافت داده:', error));
-}
-
-function generateQRCode(data)
-{
-	var qrCodeContainer = document.getElementById('qrCodeContainer');
-	qrCodeContainer.innerHTML = '';
-	new QRCode(qrCodeContainer
-	, {
-		text: data
-		, width: 200
-		, height: 200
-		, colorDark: isDarkTheme ? "#c9d1d9" : "#000000"
-		, colorLight: isDarkTheme ? "#0d1117" : "#ffffff"
-		, correctLevel: QRCode.CorrectLevel.L
-	});
-}
-
-function toggleAutoFill()
-{
-	var autoFillCheckbox = document.getElementById('autoFillCheckbox');
-	var ipField = document.getElementById('ip');
-	var portField = document.getElementById('port');
-	if (autoFillCheckbox.checked)
-	{
-		ipField.disabled = true;
-		portField.disabled = true;
-		ipField.value = '';
-		portField.value = '';
-		fetchRandomIP();
-	}
-	else
-	{
-		ipField.disabled = false;
-		portField.disabled = false;
-	}
-}
-
-function copySubscriptionLink()
-{
-	var subscriptionLink = document.getElementById('subscriptionLink');
-	subscriptionLink.select();
-	subscriptionLink.setSelectionRange(0, 99999);
-	document.execCommand('copy');
-	var copyBtn = document.querySelector('.copy-btn');
-	copyBtn.textContent = 'کپی شد!';
-	setTimeout(function()
-	{
-		copyBtn.textContent = 'کپی لینک';
-	}, 2000);
-}
-window.addEventListener('load', function()
-{
-	const elements = document.querySelectorAll('.container, .btn, .form-control');
-	elements.forEach((el, index) =>
-	{
-		setTimeout(() =>
+		}
+		
+		function toggleHiddifyOptions()
 		{
-			el.style.opacity = '1';
-			el.style.transform = 'translateY(0)';
-		}, index * 100);
-	});
-	toggleHiddifyOptions();
-});
-		</script>
-</body>
-
-</html>
+			var type = document.getElementById('type')
+				.value;
+			var hiddifyOptions = document.getElementById('hiddifyOptions');
+			var usernameField = document.getElementById('usernameField');
+			var ipVersionField = document.getElementById('ipVersion');
+			var warpInWarpContainer = document.getElementById('warpInWarpContainer');
+			if (type === 'hiddify')
+			{
+				hiddifyOptions.style.display = 'block';
+				usernameField.style.display = 'block';
+				ipVersionField.disabled = false;
+				warpInWarpContainer.style.display = 'flex';
+			}
+			else
+			{
+				hiddifyOptions.style.display = 'none';
+				usernameField.style.display = 'none';
+				ipVersionField.value = 'ipv4';
+				ipVersionField.disabled = true;
+				warpInWarpContainer.style.display = 'none';
+			}
+			toggleIPOptions();
+			document.getElementById('autoFillCheckbox')
+				.checked = false;
+		}
+		
+		function toggleIPOptions()
+		{
+			var type = document.getElementById('type')
+				.value;
+			var ipVersion = document.getElementById('ipVersion')
+				.value;
+			var ipField = document.getElementById('ip');
+			var portField = document.getElementById('portField');
+			if (type === 'hiddify' && ipVersion === 'ipv6')
+			{
+				ipField.value = '';
+				portField.style.display = 'none';
+			}
+			else
+			{
+				ipField.value = '162.159.192.76';
+				portField.style.display = 'block';
+			}
+			document.getElementById('autoFillCheckbox')
+				.checked = false;
+		}
+		document.addEventListener('DOMContentLoaded', function()
+		{
+			document.getElementById('warpinatorForm')
+				.addEventListener('submit', function(event)
+				{
+					event.preventDefault();
+					document.querySelector('.loading')
+						.style.display = 'block';
+					document.getElementById('result')
+						.style.display = 'none';
+					setTimeout(function()
+					{
+						var type = document.getElementById('type')
+							.value;
+						var url;
+						if (type === 'hiddify')
+						{
+							var username = document.getElementById('username')
+								.value || 'Anonymous';
+							var license = document.getElementById('license')
+								.value || '';
+							var type1 = document.getElementById('type1')
+								.value || '40-80';
+							var type2 = document.getElementById('type2')
+								.value || '40-10';
+							var type3 = document.getElementById('type3')
+								.value || '2-4';
+							var type4 = document.getElementById('type4')
+								.value || 'm4';
+							var ip = document.getElementById('ip')
+								.value || '162.159.192.76';
+							var port = document.getElementById('port')
+								.value || '2408';
+							var ipVersion = document.getElementById('ipVersion')
+								.value;
+							var warpInWarp = document.getElementById('warpInWarpToggle')
+								.checked;
+							var auto = document.getElementById('autoFillCheckbox')
+								.checked ? 'true' : 'false';
+							var defaultUsername = 'Anonymous';
+							var customUsername = username !== defaultUsername;
+							if (ipVersion === 'ipv6')
+							{
+								var baseUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+							}
+							else
+							{
+								var baseUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+							}
+							url = baseUrl;
+							if (warpInWarp)
+							{
+								var wowUsername;
+								if (customUsername)
+								{
+									wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6' : 'IPv4'}`;
+								}
+								else
+								{
+									wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6' : 'Anon-WoW-IPv4';
+								}
+								if (ipVersion === 'ipv6')
+								{
+									var wowUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
+								}
+								else
+								{
+									var wowUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
+								}
+								url = wowUrl + `&&detour=${wowUrl}#${wowUsername}`;
+							}
+						}
+						else
+						{
+							var license = document.getElementById('license')
+								.value || '';
+							var ip = document.getElementById('ip')
+								.value || '162.159.192.76';
+							var port = document.getElementById('port')
+								.value || '2408';
+							var auto = document.getElementById('autoFillCheckbox')
+								.checked ? 'true' : 'false';
+							url = `https://itshin.serv00.net/api/warpinator?license=${encodeURIComponent(license)}&type=${encodeURIComponent(type)}&auto=${encodeURIComponent(auto)}`;
+							if (!document.getElementById('autoFillCheckbox')
+								.checked)
+							{
+								url += `&ip=${encodeURIComponent(ip)}&port=${encodeURIComponent(port)}`;
+							}
+						}
+						document.getElementById('generatedUrl')
+							.value = url;
+						document.querySelector('.loading')
+							.style.display = 'none';
+						document.getElementById('result')
+							.style.display = 'block';
+						generateQRCode(url);
+					}, 1500);
+				});
+		});
+		
+		function copyToClipboard()
+		{
+			var copyText = document.getElementById('generatedUrl');
+			copyText.select();
+			copyText.setSelectionRange(0, 99999);
+			document.execCommand('copy');
+			var btn = document.querySelector('.btn[onclick="copyToClipboard()"]');
+			btn.innerHTML = '<i class="material-icons">check</i>کپی شد';
+			setTimeout(() =>
+			{
+				btn.innerHTML = '<i class="material-icons">content_copy</i>کپی URL';
+			}, 2000);
+		}
+		
+		function fetchRandomIP()
+		{
+			var ipVersion = document.getElementById('ipVersion')
+				.value;
+			fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json')
+				.then(response => response.json())
+				.then(data =>
+				{
+					var ipList = ipVersion === 'ipv6' ? data.ipv6 : data.ipv4;
+					var randomIndex = Math.floor(Math.random() * ipList.length);
+					var randomIP = ipList[randomIndex];
+					if (ipVersion === 'ipv6')
+					{
+						var [ip] = randomIP.split('[]:');
+						document.getElementById('ip')
+							.value = ip;
+						document.getElementById('port')
+							.value = '';
+					}
+					else
+					{
+						var [ip, port] = randomIP.split(':');
+						document.getElementById('ip')
+							.value = ip;
+						document.getElementById('port')
+							.value = port;
+					}
+				})
+				.catch(error => console.error('خطا در دریافت داده:', error));
+		}
+		
+		function generateQRCode(data)
+		{
+			var qrCodeContainer = document.getElementById('qrCodeContainer');
+			qrCodeContainer.innerHTML = '';
+			new QRCode(qrCodeContainer
+			, {
+				text: data
+				, width: 200
+				, height: 200
+				, colorDark: isDarkTheme ? "#c9d1d9" : "#000000"
+				, colorLight: isDarkTheme ? "#0d1117" : "#ffffff"
+				, correctLevel: QRCode.CorrectLevel.L
+			});
+		}
+		
+		function toggleAutoFill()
+		{
+			var autoFillCheckbox = document.getElementById('autoFillCheckbox');
+			var ipField = document.getElementById('ip');
+			var portField = document.getElementById('port');
+			if (autoFillCheckbox.checked)
+			{
+				ipField.disabled = true;
+				portField.disabled = true;
+				ipField.value = '';
+				portField.value = '';
+				fetchRandomIP();
+			}
+			else
+			{
+				ipField.disabled = false;
+				portField.disabled = false;
+			}
+		}
+		
+		function copySubscriptionLink()
+		{
+			var subscriptionLink = document.getElementById('subscriptionLink');
+			subscriptionLink.select();
+			subscriptionLink.setSelectionRange(0, 99999);
+			document.execCommand('copy');
+			var copyBtn = document.querySelector('.copy-btn');
+			copyBtn.textContent = 'کپی شد!';
+			setTimeout(function()
+			{
+				copyBtn.textContent = 'کپی لینک';
+			}, 2000);
+		}
+		window.addEventListener('load', function()
+		{
+			const elements = document.querySelectorAll('.container, .btn, .form-control');
+			elements.forEach((el, index) =>
+			{
+				setTimeout(() =>
+				{
+					el.style.opacity = '1';
+					el.style.transform = 'translateY(0)';
+				}, index * 100);
+			});
+			toggleHiddifyOptions();
+		}); < /script> < /body> < /html>
