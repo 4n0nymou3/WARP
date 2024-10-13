@@ -757,11 +757,11 @@ document.addEventListener('DOMContentLoaded', function()
 						var wowUsername;
 						if (customUsername)
 						{
-							wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6' : 'IPv4'}`;
+							wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6\u{1F1E9}\u{1F1EA}' : 'IPv4\u{1F1E9}\u{1F1EA}'}`;
 						}
 						else
 						{
-							wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6' : 'Anon-WoW-IPv4';
+							wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6\u{1F1E9}\u{1F1EA}' : 'Anon-WoW-IPv4\u{1F1E9}\u{1F1EA}';
 						}
 						if (ipVersion === 'ipv6')
 						{
