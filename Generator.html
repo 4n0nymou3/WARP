@@ -398,7 +398,7 @@ h2
 	display: flex;
 	align-items: center;
 	margin-top: 8px;
-	padding-left: 0; /* حذف پدینگ اضافی از سمت چپ */
+	padding-left: 0;
 }
 
 #warpInWarpContainer label
@@ -410,8 +410,8 @@ h2
 {
 	position: relative;
 	display: inline-block;
-	width: 50px; /* کاهش عرض */
-	height: 24px; /* کاهش ارتفاع */
+	width: 50px;
+	height: 24px;
 }
 
 .switch input
@@ -438,8 +438,8 @@ h2
 {
 	position: absolute;
 	content: "";
-	height: 18px; /* کاهش اندازه دایره داخلی */
-	width: 18px; /* کاهش اندازه دایره داخلی */
+	height: 18px;
+	width: 18px;
 	left: 3px;
 	bottom: 3px;
 	background-color: white;
@@ -461,16 +461,64 @@ input:checked+.slider:before
 {
 	transform: translateX(26px);
 }
+
+.language-switch
+{
+	background: none;
+	border: none;
+	color: var(--text-color);
+	cursor: pointer;
+	font-size: 16px;
+	padding: 0;
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+.ltr
+{
+	direction: ltr;
+	text-align: left;
+}
+
+.ltr .header
+{
+	flex-direction: row-reverse;
+}
+
+.ltr .toggle-theme
+{
+	margin-left: 0;
+	margin-right: 10px;
+}
+
+.ltr .language-switch
+{
+	margin-right: 0;
+	margin-left: 10px;
+}
+
+.ltr .btn i
+{
+	margin-left: 0;
+	margin-right: 8px;
+}
+
+.ltr .contact-btn i
+{
+	margin-left: 0;
+	margin-right: 8px;
+}
 	</style>
 </head>
 
 <body>
 	<div class="container">
 		<div class="header">
+			<button class="language-switch" onclick="toggleLanguage()">EN</button>
 			<button class="toggle-theme" onclick="toggleTheme()">
 				<i class="material-icons">brightness_medium</i>
 			</button>
-			<h2>WARP Generator v1.5</h2>
+			<h2>WARP Generator v1.6</h2>
 		</div>
 		<div class="info-box">
 			<p>اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
@@ -631,6 +679,7 @@ input:checked+.slider:before
 		<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 		<script>
 let isDarkTheme = true;
+let isEnglish = false;
 
 function toggleTheme()
 {
@@ -651,6 +700,139 @@ function toggleTheme()
 		document.documentElement.style.setProperty('--input-bg', '#f9fafb');
 		document.documentElement.style.setProperty('--input-border', '#d1d5db');
 	}
+	if (document.getElementById('qrCodeContainer')
+		.firstChild)
+	{
+		generateQRCode(document.getElementById('generatedUrl')
+			.value);
+	}
+}
+
+function toggleLanguage()
+{
+	isEnglish = !isEnglish;
+	const languageButton = document.querySelector('.language-switch');
+	const htmlElement = document.documentElement;
+	if (isEnglish)
+	{
+		languageButton.textContent = 'FA';
+		htmlElement.lang = 'en';
+		htmlElement.dir = 'ltr';
+		document.body.classList.add('ltr');
+	}
+	else
+	{
+		languageButton.textContent = 'EN';
+		htmlElement.lang = 'fa';
+		htmlElement.dir = 'rtl';
+		document.body.classList.remove('ltr');
+	}
+	updateTexts();
+}
+
+function updateTexts()
+{
+	const texts = {
+		'fa':
+		{
+			'title': 'WARP Generator v1.5'
+			, 'infoBoxText': 'اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:'
+			, 'copyLinkButton': 'کپی لینک'
+			, 'usernameLabel': 'نام دلخواه (اختیاری) فقط حروف لاتین و عدد'
+			, 'licenseLabel': 'کد لایسنس WARP (اختیاری)'
+			, 'typeLabel': 'نوع هسته پیکربندی'
+			, 'ipVersionLabel': 'نسخه IP'
+			, 'ipLabel': 'آدرس IP (اختیاری)'
+			, 'portLabel': 'آدرس PORT (اختیاری)'
+			, 'autoFillLabel': ' ⁮⁮ پر کردن خودکار ⁮⁮ '
+			, 'warpInWarpLabel': 'قابلیت وارپ در وارپ'
+			, 'generateButton': 'تولید URL'
+			, 'loadingText': 'در حال تولید URL...'
+			, 'generatedUrlTitle': 'URL تولید شده:'
+			, 'copyUrlButton': 'کپی URL'
+			, 'contactTitle': 'ارتباط با من'
+			, 'telegramButton': 'پیام در ربات تلگرام'
+			, 'footerDesigner': 'طراحی شده توسط: Anonymous'
+			, 'footerThanks': 'با تشکر از Yebekhe و IRCF'
+			, 'noisePacketsLabel': 'تعداد بسته‌های نویز'
+			, 'noisePacketSizeLabel': 'اندازه بسته‌های نویز'
+			, 'noisePacketDelayLabel': 'تأخیر ارسال بسته‌های نویز'
+			, 'noiseModeLabel': 'حالت تولید نویز'
+		}
+		, 'en':
+		{
+			'title': 'WARP Generator v1.5'
+			, 'infoBoxText': 'If you are not familiar with how to create and generate a URL, you can use the following subscription link in Hiddify and Karing applications:'
+			, 'copyLinkButton': 'Copy Link'
+			, 'usernameLabel': 'Custom name (optional) only Latin letters and numbers'
+			, 'licenseLabel': 'WARP license code (optional)'
+			, 'typeLabel': 'Configuration core type'
+			, 'ipVersionLabel': 'IP Version'
+			, 'ipLabel': 'IP Address (optional)'
+			, 'portLabel': 'PORT Address (optional)'
+			, 'autoFillLabel': 'Auto Fill'
+			, 'warpInWarpLabel': 'WARP in WARP capability'
+			, 'generateButton': 'Generate URL'
+			, 'loadingText': 'Generating URL...'
+			, 'generatedUrlTitle': 'Generated URL:'
+			, 'copyUrlButton': 'Copy URL'
+			, 'contactTitle': 'Contact Me'
+			, 'telegramButton': 'Message on Telegram Bot'
+			, 'footerDesigner': 'Designed by: Anonymous'
+			, 'footerThanks': 'Thanks to Yebekhe and IRCF'
+			, 'noisePacketsLabel': 'IFP'
+			, 'noisePacketSizeLabel': 'IFPS'
+			, 'noisePacketDelayLabel': 'IFPD'
+			, 'noiseModeLabel': 'IFPM'
+		}
+	};
+	const currentLang = isEnglish ? 'en' : 'fa';
+	document.querySelector('h2')
+		.textContent = texts[currentLang]['title'];
+	document.querySelector('.info-box p')
+		.textContent = texts[currentLang]['infoBoxText'];
+	document.querySelector('.copy-btn')
+		.textContent = texts[currentLang]['copyLinkButton'];
+	document.querySelector('label[for="username"]')
+		.textContent = texts[currentLang]['usernameLabel'];
+	document.querySelector('label[for="license"]')
+		.textContent = texts[currentLang]['licenseLabel'];
+	document.querySelector('label[for="type"]')
+		.textContent = texts[currentLang]['typeLabel'];
+	document.querySelector('label[for="ipVersion"]')
+		.textContent = texts[currentLang]['ipVersionLabel'];
+	document.querySelector('label[for="ip"]')
+		.textContent = texts[currentLang]['ipLabel'];
+	document.querySelector('label[for="port"]')
+		.textContent = texts[currentLang]['portLabel'];
+	document.querySelector('label[for="autoFillCheckbox"]')
+		.textContent = texts[currentLang]['autoFillLabel'];
+	document.querySelector('label[for="warpInWarpToggle"]')
+		.textContent = texts[currentLang]['warpInWarpLabel'];
+	document.querySelector('.btn[type="submit"]')
+		.innerHTML = `<i class="material-icons">send</i> ${texts[currentLang]['generateButton']}`;
+	document.querySelector('.loading p')
+		.textContent = texts[currentLang]['loadingText'];
+	document.querySelector('#result h5')
+		.textContent = texts[currentLang]['generatedUrlTitle'];
+	document.querySelector('.btn[onclick="copyToClipboard()"]')
+		.innerHTML = `<i class="material-icons">content_copy</i> ${texts[currentLang]['copyUrlButton']}`;
+	document.querySelector('.contact-title')
+		.innerHTML = `<i class="material-icons">contact_mail</i> ${texts[currentLang]['contactTitle']}`;
+	document.querySelector('.contact-btn')
+		.innerHTML = `<i class="material-icons">telegram</i> ${texts[currentLang]['telegramButton']}`;
+	document.querySelector('.footer-info p:first-child')
+		.textContent = texts[currentLang]['footerDesigner'];
+	document.querySelector('.footer-info p:last-child')
+		.textContent = texts[currentLang]['footerThanks'];
+	document.querySelector('label[for="type1"]')
+		.textContent = texts[currentLang]['noisePacketsLabel'];
+	document.querySelector('label[for="type2"]')
+		.textContent = texts[currentLang]['noisePacketSizeLabel'];
+	document.querySelector('label[for="type3"]')
+		.textContent = texts[currentLang]['noisePacketDelayLabel'];
+	document.querySelector('label[for="type4"]')
+		.textContent = texts[currentLang]['noiseModeLabel'];
 }
 
 function toggleHiddifyOptions()
@@ -809,10 +991,11 @@ function copyToClipboard()
 	copyText.setSelectionRange(0, 99999);
 	document.execCommand('copy');
 	var btn = document.querySelector('.btn[onclick="copyToClipboard()"]');
-	btn.innerHTML = '<i class="material-icons">check</i>کپی شد';
+	const copiedMessage = isEnglish ? 'Copied!' : 'کپی شد!';
+	btn.innerHTML = `<i class="material-icons">check</i>${copiedMessage}`;
 	setTimeout(() =>
 	{
-		btn.innerHTML = '<i class="material-icons">content_copy</i>کپی URL';
+		updateTexts();
 	}, 2000);
 }
 
@@ -889,10 +1072,11 @@ function copySubscriptionLink()
 	subscriptionLink.setSelectionRange(0, 99999);
 	document.execCommand('copy');
 	var copyBtn = document.querySelector('.copy-btn');
-	copyBtn.textContent = 'کپی شد!';
+	const copiedMessage = isEnglish ? 'Copied!' : 'کپی شد!';
+	copyBtn.textContent = copiedMessage;
 	setTimeout(function()
 	{
-		copyBtn.textContent = 'کپی لینک';
+		updateTexts();
 	}, 2000);
 }
 window.addEventListener('load', function()
