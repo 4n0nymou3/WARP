@@ -758,6 +758,7 @@ function updateTexts()
 			, 'noisePacketSizeLabel': 'اندازه بسته‌های نویز'
 			, 'noisePacketDelayLabel': 'تأخیر ارسال بسته‌های نویز'
 			, 'noiseModeLabel': 'حالت تولید نویز'
+			, 'licenseTooltip': 'در صورت تمایل، می‌توانید با وارد کردن کلید مجوز، به ویژگی‌های خاص و پیشرفته دسترسی پیدا کنید'
 		}
 		, 'en':
 		{
@@ -776,7 +777,7 @@ function updateTexts()
 			, 'loadingText': 'Generating URL...'
 			, 'generatedUrlTitle': 'Generated URL:'
 			, 'copyUrlButton': 'Copy URL'
-			, 'contactTitle': 'Contact Me'
+			, 'contactTitle': '⁮⁮ ⁮⁮Contact Me'
 			, 'telegramButton': 'Message on Telegram Bot'
 			, 'footerDesigner': 'Designed by: Anonymous'
 			, 'footerThanks': 'Thanks to Yebekhe and IRCF'
@@ -784,6 +785,7 @@ function updateTexts()
 			, 'noisePacketSizeLabel': 'IFPS'
 			, 'noisePacketDelayLabel': 'IFPD'
 			, 'noiseModeLabel': 'IFPM'
+			, 'licenseTooltip': 'If desired, you can access special and advanced features by entering the license key'
 		}
 	};
 	const currentLang = isEnglish ? 'en' : 'fa';
@@ -833,6 +835,8 @@ function updateTexts()
 		.textContent = texts[currentLang]['noisePacketDelayLabel'];
 	document.querySelector('label[for="type4"]')
 		.textContent = texts[currentLang]['noiseModeLabel'];
+	document.querySelector('.tooltip .tooltiptext')
+		.textContent = texts[currentLang]['licenseTooltip'];
 }
 
 function toggleHiddifyOptions()
