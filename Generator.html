@@ -518,7 +518,7 @@ input:checked+.slider:before
 			<button class="toggle-theme" onclick="toggleTheme()">
 				<i class="material-icons">brightness_medium</i>
 			</button>
-			<h2>WARP Generator v1.6</h2>
+			<h2>WARP Generator v1.7</h2>
 		</div>
 		<div class="info-box">
 			<p>اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
@@ -735,7 +735,7 @@ function updateTexts()
 	const texts = {
 		'fa':
 		{
-			'title': 'WARP Generator v1.6'
+			'title': 'WARP Generator v1.7'
 			, 'infoBoxText': 'اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:'
 			, 'copyLinkButton': 'کپی لینک'
 			, 'usernameLabel': 'نام دلخواه (اختیاری) فقط حروف لاتین و عدد'
@@ -762,7 +762,7 @@ function updateTexts()
 		}
 		, 'en':
 		{
-			'title': 'WARP Generator v1.6'
+			'title': 'WARP Generator v1.7'
 			, 'infoBoxText': 'If you are not familiar with how to create and generate a URL, you can use the following subscription link in Hiddify and Karing applications:'
 			, 'copyLinkButton': 'Copy Link'
 			, 'usernameLabel': 'Custom name (optional) only Latin letters and numbers'
@@ -1002,36 +1002,38 @@ function copyToClipboard()
 		updateTexts();
 	}, 2000);
 }
-
-function fetchRandomIP()
+async function fetchRandomIP()
 {
 	var ipVersion = document.getElementById('ipVersion')
 		.value;
-	fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json')
-		.then(response => response.json())
-		.then(data =>
+	try
+	{
+		const response = await fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json');
+		const data = await response.json();
+		var ipList = ipVersion === 'ipv6' ? data.ipv6 : data.ipv4;
+		var randomIndex = Math.floor(Math.random() * ipList.length);
+		var randomIP = ipList[randomIndex];
+		if (ipVersion === 'ipv6')
 		{
-			var ipList = ipVersion === 'ipv6' ? data.ipv6 : data.ipv4;
-			var randomIndex = Math.floor(Math.random() * ipList.length);
-			var randomIP = ipList[randomIndex];
-			if (ipVersion === 'ipv6')
-			{
-				var [ip] = randomIP.split('[]:');
-				document.getElementById('ip')
-					.value = ip;
-				document.getElementById('port')
-					.value = '';
-			}
-			else
-			{
-				var [ip, port] = randomIP.split(':');
-				document.getElementById('ip')
-					.value = ip;
-				document.getElementById('port')
-					.value = port;
-			}
-		})
-		.catch(error => console.error('خطا در دریافت داده:', error));
+			var [ip] = randomIP.split('[]:');
+			document.getElementById('ip')
+				.value = ip;
+			document.getElementById('port')
+				.value = '';
+		}
+		else
+		{
+			var [ip, port] = randomIP.split(':');
+			document.getElementById('ip')
+				.value = ip;
+			document.getElementById('port')
+				.value = port;
+		}
+	}
+	catch (error)
+	{
+		console.error('خطا در دریافت داده IP:', error);
+	}
 }
 
 function generateQRCode(data)
@@ -1048,24 +1050,53 @@ function generateQRCode(data)
 		, correctLevel: QRCode.CorrectLevel.L
 	});
 }
-
-function toggleAutoFill()
+async function fetchRandomLicense()
+{
+	try
+	{
+		const response = await fetch('https://raw.githubusercontent.com/ircfspace/warpkey/main/plus/lite');
+		const text = await response.text();
+		const licenses = text.trim()
+			.split('\n');
+		if (licenses.length > 0)
+		{
+			const randomIndex = Math.floor(Math.random() * licenses.length);
+			return licenses[randomIndex].trim();
+		}
+		else
+		{
+			return '';
+		}
+	}
+	catch (error)
+	{
+		console.error('خطا در دریافت کد لایسنس:', error);
+		return '';
+	}
+}
+async function toggleAutoFill()
 {
 	var autoFillCheckbox = document.getElementById('autoFillCheckbox');
 	var ipField = document.getElementById('ip');
 	var portField = document.getElementById('port');
+	var licenseField = document.getElementById('license');
 	if (autoFillCheckbox.checked)
 	{
 		ipField.disabled = true;
 		portField.disabled = true;
-		ipField.value = '';
-		portField.value = '';
-		fetchRandomIP();
+		licenseField.disabled = true;
+		ipField.value = '•••';
+		portField.value = '•••';
+		licenseField.value = '•••';
+		await fetchRandomIP();
+		const license = await fetchRandomLicense();
+		licenseField.value = license;
 	}
 	else
 	{
 		ipField.disabled = false;
 		portField.disabled = false;
+		licenseField.disabled = false;
 	}
 }
 
