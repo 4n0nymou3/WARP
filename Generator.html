@@ -1054,7 +1054,7 @@ async function fetchRandomLicense()
 {
 	try
 	{
-		const response = await fetch('https://raw.githubusercontent.com/4n0nymou3/warpkey/refs/heads/main/plus/full');
+		const response = await fetch('https://raw.githubusercontent.com/ircfspace/warpkey/main/plus/full');
 		const text = await response.text();
 		const licenses = text.trim()
 			.split('\n');
