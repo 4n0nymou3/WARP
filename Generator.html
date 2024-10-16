@@ -508,6 +508,33 @@ input:checked+.slider:before
 	margin-left: 0;
 	margin-right: 8px;
 }
+
+.cdn-cgi-trace-container
+{
+	display: flex;
+	justify-content: center;
+	margin: 20px 0;
+}
+
+.cdn-cgi-trace-button
+{
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: var(--btn-bg);
+	color: #ffffff;
+	text-decoration: none;
+	border-radius: 5px;
+	font-weight: bold;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.cdn-cgi-trace-button:hover
+{
+	background-color: var(--btn-hover);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 	</style>
 </head>
 
@@ -525,6 +552,10 @@ input:checked+.slider:before
 			<input type="text" id="subscriptionLink" value="https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub" readonly class="form-control">
 			<button class="copy-btn" onclick="copySubscriptionLink()">کپی لینک</button>
 		</div>
+		<div class="cdn-cgi-trace-container">
+			<a href="https://cloudflare.com/cdn-cgi/trace" class="cdn-cgi-trace-button" target="_blank">CDN-CGI Trace</a>
+		</div>
+		<div class="line"><br></div>
 		<form id="warpinatorForm">
 			<div class="input-field" id="usernameField" style="display: none;">
 				<label for="username">نام دلخواه (اختیاری) فقط حروف لاتین و عدد</label>
