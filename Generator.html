@@ -545,7 +545,7 @@ input:checked+.slider:before
 			<button class="toggle-theme" onclick="toggleTheme()">
 				<i class="material-icons">brightness_medium</i>
 			</button>
-			<h2>WARP Generator v1.7</h2>
+			<h2>WARP Generator v1.8</h2>
 		</div>
 		<div class="info-box">
 			<p>اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
@@ -572,7 +572,8 @@ input:checked+.slider:before
 			<div class="input-field">
 				<label for="type">نوع هسته پیکربندی</label>
 				<select id="type" name="type" class="form-control" onchange="toggleHiddifyOptions()">
-					<option value="hiddify">Hiddify & Karing</option>
+					<option value="hiddify">Hiddify</option>
+					<option value="karing">Karing</option>
 					<option value="v2rayng">v2rayNG</option>
 					<option value="singbox">Singbox</option>
 					<option value="shadowrocket">Shadowrocket</option>
@@ -766,7 +767,7 @@ function updateTexts()
 	const texts = {
 		'fa':
 		{
-			'title': 'WARP Generator v1.7'
+			'title': 'WARP Generator v1.8'
 			, 'infoBoxText': 'اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:'
 			, 'copyLinkButton': 'کپی لینک'
 			, 'usernameLabel': 'نام دلخواه (اختیاری) فقط حروف لاتین و عدد'
@@ -793,7 +794,7 @@ function updateTexts()
 		}
 		, 'en':
 		{
-			'title': 'WARP Generator v1.7'
+			'title': 'WARP Generator v1.8'
 			, 'infoBoxText': 'If you are not familiar with how to create and generate a URL, you can use the following subscription link in Hiddify and Karing applications:'
 			, 'copyLinkButton': 'Copy Link'
 			, 'usernameLabel': 'Custom name (optional) only Latin letters and numbers'
@@ -878,7 +879,7 @@ function toggleHiddifyOptions()
 	var usernameField = document.getElementById('usernameField');
 	var ipVersionField = document.getElementById('ipVersion');
 	var warpInWarpContainer = document.getElementById('warpInWarpContainer');
-	if (type === 'hiddify')
+	if (type === 'hiddify' || type === 'karing')
 	{
 		hiddifyOptions.style.display = 'block';
 		usernameField.style.display = 'block';
@@ -934,7 +935,7 @@ document.addEventListener('DOMContentLoaded', function()
 				var type = document.getElementById('type')
 					.value;
 				var url;
-				if (type === 'hiddify')
+				if (type === 'hiddify' || type === 'karing')
 				{
 					var username = document.getElementById('username')
 						.value || 'Anonymous';
@@ -960,35 +961,74 @@ document.addEventListener('DOMContentLoaded', function()
 						.checked ? 'true' : 'false';
 					var defaultUsername = 'Anonymous';
 					var customUsername = username !== defaultUsername;
-					if (ipVersion === 'ipv6')
+					if (type === 'karing')
 					{
-						var baseUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
-					}
-					else
-					{
-						var baseUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
-					}
-					url = baseUrl;
-					if (warpInWarp)
-					{
-						var wowUsername;
-						if (customUsername)
-						{
-							wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6\u{1F1E9}\u{1F1EA}' : 'IPv4\u{1F1E9}\u{1F1EA}'}`;
-						}
-						else
-						{
-							wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6\u{1F1E9}\u{1F1EA}' : 'Anon-WoW-IPv4\u{1F1E9}\u{1F1EA}';
-						}
 						if (ipVersion === 'ipv6')
 						{
-							var wowUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
+							var baseUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
 						}
 						else
 						{
-							var wowUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
+							var baseUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
 						}
-						url = wowUrl + `&&detour=${wowUrl}#${wowUsername}`;
+						url = baseUrl;
+					}
+					else if (type === 'hiddify')
+					{
+						if (ipVersion === 'ipv6')
+						{
+							var baseUrl = license ? `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+						}
+						else
+						{
+							var baseUrl = license ? `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
+						}
+						url = baseUrl;
+					}
+					if (warpInWarp)
+					{
+						if (type === 'karing')
+						{
+							var wowUsername;
+							if (customUsername)
+							{
+								wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6\u{1F1E9}\u{1F1EA}' : 'IPv4\u{1F1E9}\u{1F1EA}'}`;
+							}
+							else
+							{
+								wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6\u{1F1E9}\u{1F1EA}' : 'Anon-WoW-IPv4\u{1F1E9}\u{1F1EA}';
+							}
+							if (ipVersion === 'ipv6')
+							{
+								var wowUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
+							}
+							else
+							{
+								var wowUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
+							}
+							url = wowUrl + `&&detour=${wowUrl}#${wowUsername}`;
+						}
+						else if (type === 'hiddify')
+						{
+							var wowUsername;
+							if (customUsername)
+							{
+								wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6\u{1F1E9}\u{1F1EA}' : 'IPv4\u{1F1E9}\u{1F1EA}'}`;
+							}
+							else
+							{
+								wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6\u{1F1E9}\u{1F1EA}' : 'Anon-WoW-IPv4\u{1F1E9}\u{1F1EA}';
+							}
+							if (ipVersion === 'ipv6')
+							{
+								var wowUrl = license ? `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
+							}
+							else
+							{
+								var wowUrl = license ? `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
+							}
+							url = wowUrl + `&&detour=${wowUrl}#${wowUsername}`;
+						}
 					}
 				}
 				else
