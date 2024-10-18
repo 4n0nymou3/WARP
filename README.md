@@ -1,4 +1,4 @@
-# WARP Generator v1.7
+# WARP Generator v1.8
 
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.7-blue.svg?cacheSeconds=2592000" />
