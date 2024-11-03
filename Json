@@ -104,11 +104,11 @@
 			, "tag": "select"
 			, "outbounds": [
         "auto"
-        , "Anonymous-WARP-1"
+        , "Anon-WARP-IR-1"
         , "Anon-WoW-IPv4🇩🇪-1"
-        , "Anonymous-WARP-2"
+        , "Anon-WARP-IR-2"
         , "Anon-WoW-IPv4🇩🇪-2"
-        , "Anonymous-WARP-3"
+        , "Anon-WARP-IR-3"
         , "Anon-WoW-IPv4🇩🇪-3"
       ]
 			, "default": "auto"
@@ -118,11 +118,11 @@
 			"type": "urltest"
 			, "tag": "auto"
 			, "outbounds": [
-        "Anonymous-WARP-1"
+        "Anon-WARP-IR-1"
         , "Anon-WoW-IPv4🇩🇪-1"
-        , "Anonymous-WARP-2"
+        , "Anon-WARP-IR-2"
         , "Anon-WoW-IPv4🇩🇪-2"
-        , "Anonymous-WARP-3"
+        , "Anon-WARP-IR-3"
         , "Anon-WoW-IPv4🇩🇪-3"
       ]
 			, "url": "http://cp.cloudflare.com"
@@ -133,7 +133,7 @@
     }
 		, {
 			"type": "wireguard"
-			, "tag": "Anonymous-WARP-1"
+			, "tag": "Anon-WARP-IR-1"
 			, "local_address": [
         "172.16.0.2/24"
         , "2606:4700:110:8a50:a447:2531:2bc0:4a90/128"
@@ -152,7 +152,7 @@
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WoW-IPv4🇩🇪-1"
-			, "detour": "Anonymous-WARP-1"
+			, "detour": "Anon-WARP-IR-1"
 			, "local_address": [
         "172.16.0.2/24"
         , "2606:4700:110:8fb0:6ec4:1463:869c:e5e3/128"
@@ -167,7 +167,7 @@
     }
 		, {
 			"type": "wireguard"
-			, "tag": "Anonymous-WARP-2"
+			, "tag": "Anon-WARP-IR-2"
 			, "local_address": [
         "172.16.0.2/24"
         , "2606:4700:110:8177:247b:1bf4:efdd:a950/128"
@@ -186,7 +186,7 @@
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WoW-IPv4🇩🇪-2"
-			, "detour": "Anonymous-WARP-2"
+			, "detour": "Anon-WARP-IR-2"
 			, "local_address": [
         "172.16.0.2/24"
         , "2606:4700:110:86c9:25f5:fc52:4690:dcc1/128"
@@ -201,7 +201,7 @@
     }
 		, {
 			"type": "wireguard"
-			, "tag": "Anonymous-WARP-3"
+			, "tag": "Anon-WARP-IR-3"
 			, "local_address": [
         "172.16.0.2/24"
         , "2606:4700:110:8b30:add2:56f0:336:8893/128"
@@ -220,7 +220,7 @@
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WoW-IPv4🇩🇪-3"
-			, "detour": "Anonymous-WARP-3"
+			, "detour": "Anon-WARP-IR-3"
 			, "local_address": [
         "172.16.0.2/24"
         , "2606:4700:110:87a9:129e:6da9:6f6f:a521/128"
