@@ -15,8 +15,13 @@
 		"servers": [
 			{
 				"tag": "dns-remote"
-				, "address": "udp://1.1.1.1"
-				, "address_resolver": "dns-direct"
+				, "address": "https://dns.google/dns-query"
+				, "detour": "direct-fragment"
+            }
+			, {
+				"tag": "dns-remote-backup"
+				, "address": "https://cloudflare-dns.com/dns-query"
+				, "detour": "direct-fragment"
             }
 			, {
 				"tag": "dns-trick-direct"
@@ -70,25 +75,31 @@
             ]
 		}
 		, "independent_cache": true
+		, "cache_strategy": "optimistic"
+		, "cache_size": 4096
+		, "cache_ttl": "24h"
 	}
 	, "inbounds": [
 		{
 			"type": "tun"
 			, "tag": "tun-in"
-			, "mtu": 9000
+			, "mtu": 1280
 			, "inet4_address": "172.19.0.1/28"
 			, "auto_route": true
 			, "strict_route": true
 			, "endpoint_independent_nat": true
 			, "stack": "gvisor"
 			, "sniff": true
+			, "sniff_timeout": "300ms"
+			, "domain_strategy": "prefer_ipv4"
 			, "compression":
 			{
 				"enabled": true
-				, "methods": ["br", "gzip"]
+				, "methods": ["br", "gzip", "zstd"]
 				, "min_length": 1024
 				, "br_level": 4
-				, "gzip_level": 6
+				, "gzip_level": 9
+				, "zstd_level": 3
 			}
         }
 		, {
@@ -97,14 +108,17 @@
 			, "listen": "127.0.0.1"
 			, "listen_port": 12334
 			, "sniff": true
+			, "sniff_timeout": "300ms"
 			, "sniff_override_destination": true
+			, "domain_strategy": "prefer_ipv4"
 			, "compression":
 			{
 				"enabled": true
-				, "methods": ["br", "gzip"]
+				, "methods": ["br", "gzip", "zstd"]
 				, "min_length": 1024
 				, "br_level": 4
-				, "gzip_level": 6
+				, "gzip_level": 9
+				, "zstd_level": 3
 			}
         }
 		, {
@@ -112,13 +126,16 @@
 			, "tag": "dns-in"
 			, "listen": "127.0.0.1"
 			, "listen_port": 16450
+			, "sniff": true
+			, "sniff_timeout": "300ms"
 			, "compression":
 			{
 				"enabled": true
-				, "methods": ["br", "gzip"]
+				, "methods": ["br", "gzip", "zstd"]
 				, "min_length": 1024
 				, "br_level": 4
-				, "gzip_level": 6
+				, "gzip_level": 9
+				, "zstd_level": 3
 			}
         }
     ]
@@ -150,9 +167,9 @@
                 , "Anon-WoW-IPv4🇩🇪-3"
             ]
 			, "url": "http://cp.cloudflare.com"
-			, "interval": "10m0s"
+			, "interval": "5m0s"
 			, "tolerance": 1
-			, "idle_timeout": "30m0s"
+			, "idle_timeout": "15m0s"
 			, "interrupt_exist_connections": true
         }
 		, {
@@ -167,10 +184,10 @@
 			, "server_port": 880
 			, "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
 			, "reserved": "LL2M"
-			, "mtu": 1330
-			, "fake_packets": "150-200"
-			, "fake_packets_size": "100-300"
-			, "fake_packets_delay": "3-10"
+			, "mtu": 1280
+			, "fake_packets": "100-150"
+			, "fake_packets_size": "50-200"
+			, "fake_packets_delay": "5-15"
 			, "fake_packets_mode": "m4"
         }
 		, {
@@ -186,7 +203,7 @@
 			, "server_port": 500
 			, "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
 			, "reserved": "urx8"
-			, "mtu": 1330
+			, "mtu": 1280
 			, "fake_packets_mode": "m4"
         }
 		, {
@@ -201,10 +218,10 @@
 			, "server_port": 2506
 			, "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
 			, "reserved": "4jtu"
-			, "mtu": 1330
-			, "fake_packets": "150-200"
-			, "fake_packets_size": "100-300"
-			, "fake_packets_delay": "3-10"
+			, "mtu": 1280
+			, "fake_packets": "100-150"
+			, "fake_packets_size": "50-200"
+			, "fake_packets_delay": "5-15"
 			, "fake_packets_mode": "m4"
         }
 		, {
@@ -220,7 +237,7 @@
 			, "server_port": 939
 			, "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
 			, "reserved": "u/f/"
-			, "mtu": 1330
+			, "mtu": 1280
 			, "fake_packets_mode": "m4"
         }
 		, {
@@ -235,10 +252,10 @@
 			, "server_port": 8319
 			, "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
 			, "reserved": "ECjQ"
-			, "mtu": 1330
-			, "fake_packets": "150-200"
-			, "fake_packets_size": "100-300"
-			, "fake_packets_delay": "3-10"
+			, "mtu": 1280
+			, "fake_packets": "100-150"
+			, "fake_packets_size": "50-200"
+			, "fake_packets_delay": "5-15"
 			, "fake_packets_mode": "m4"
         }
 		, {
@@ -254,7 +271,7 @@
 			, "server_port": 1074
 			, "peer_public_key": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
 			, "reserved": "6JHN"
-			, "mtu": 1330
+			, "mtu": 1280
 			, "fake_packets_mode": "m4"
         }
 		, {
@@ -271,8 +288,8 @@
 			, "tls_fragment":
 			{
 				"enabled": true
-				, "size": "20-30"
-				, "sleep": "3-5"
+				, "size": "10-20"
+				, "sleep": "2-4"
 			}
         }
 		, {
@@ -297,6 +314,14 @@
             }
 			, {
 				"domain_suffix": ".ir"
+				, "outbound": "direct"
+            }
+			, {
+				"ip_cidr": [
+                    "10.0.0.0/8"
+                    , "172.16.0.0/12"
+                    , "192.168.0.0/16"
+                ]
 				, "outbound": "direct"
             }
 			, {
