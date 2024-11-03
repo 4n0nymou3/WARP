@@ -82,8 +82,14 @@
 			, "endpoint_independent_nat": true
 			, "stack": "gvisor"
 			, "sniff": true
-			, "gzip": true
-			, "gzip_min_length": 1024
+			, "compression":
+			{
+				"enabled": true
+				, "methods": ["br", "gzip"]
+				, "min_length": 1024
+				, "br_level": 4
+				, "gzip_level": 6
+			}
         }
 		, {
 			"type": "mixed"
@@ -92,16 +98,28 @@
 			, "listen_port": 12334
 			, "sniff": true
 			, "sniff_override_destination": true
-			, "gzip": true
-			, "gzip_min_length": 1024
+			, "compression":
+			{
+				"enabled": true
+				, "methods": ["br", "gzip"]
+				, "min_length": 1024
+				, "br_level": 4
+				, "gzip_level": 6
+			}
         }
 		, {
 			"type": "direct"
 			, "tag": "dns-in"
 			, "listen": "127.0.0.1"
 			, "listen_port": 16450
-			, "gzip": true
-			, "gzip_min_length": 1024
+			, "compression":
+			{
+				"enabled": true
+				, "methods": ["br", "gzip"]
+				, "min_length": 1024
+				, "br_level": 4
+				, "gzip_level": 6
+			}
         }
     ]
 	, "outbounds": [
