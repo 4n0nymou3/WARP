@@ -17,57 +17,57 @@
 				"tag": "dns-remote"
 				, "address": "udp://1.1.1.1"
 				, "address_resolver": "dns-direct"
-      }
+            }
 			, {
 				"tag": "dns-trick-direct"
 				, "address": "https://sky.rethinkdns.com/"
 				, "detour": "direct-fragment"
-      }
+            }
 			, {
 				"tag": "dns-direct"
 				, "address": "1.1.1.1"
 				, "address_resolver": "dns-local"
 				, "detour": "direct"
-      }
+            }
 			, {
 				"tag": "dns-local"
 				, "address": "local"
 				, "detour": "direct"
-      }
+            }
 			, {
 				"tag": "dns-block"
 				, "address": "rcode://success"
-      }
-    ]
+            }
+        ]
 		, "rules": [
 			{
 				"domain": "cp.cloudflare.com"
 				, "server": "dns-remote"
 				, "rewrite_ttl": 600
-      }
+            }
 			, {
 				"domain_suffix": ".ir"
 				, "server": "dns-direct"
-      }
+            }
 			, {
 				"rule_set": [
-          "geoip-ir"
-          , "geosite-ir"
-        ]
+                    "geoip-ir"
+                    , "geosite-ir"
+                ]
 				, "server": "dns-direct"
-      }
-    ]
+            }
+        ]
 		, "final": "dns-remote"
 		, "static_ips":
 		{
 			"sky.rethinkdns.com": [
-        "104.17.148.22"
-        , "104.17.147.22"
-        , "188.114.96.3"
-        , "188.114.97.3"
-        , "2a06:98c1:3121::3"
-        , "2a06:98c1:3120::3"
-      ]
+                "104.17.148.22"
+                , "104.17.147.22"
+                , "188.114.96.3"
+                , "188.114.97.3"
+                , "2a06:98c1:3121::3"
+                , "2a06:98c1:3120::3"
+            ]
 		}
 		, "independent_cache": true
 	}
@@ -82,7 +82,9 @@
 			, "endpoint_independent_nat": true
 			, "stack": "gvisor"
 			, "sniff": true
-    }
+			, "gzip": true
+			, "gzip_min_length": 1024
+        }
 		, {
 			"type": "mixed"
 			, "tag": "mixed-in"
@@ -90,54 +92,58 @@
 			, "listen_port": 12334
 			, "sniff": true
 			, "sniff_override_destination": true
-    }
+			, "gzip": true
+			, "gzip_min_length": 1024
+        }
 		, {
 			"type": "direct"
 			, "tag": "dns-in"
 			, "listen": "127.0.0.1"
 			, "listen_port": 16450
-    }
-  ]
+			, "gzip": true
+			, "gzip_min_length": 1024
+        }
+    ]
 	, "outbounds": [
 		{
 			"type": "selector"
 			, "tag": "select"
 			, "outbounds": [
-        "auto"
-        , "Anon-WARP-IR-1"
-        , "Anon-WoW-IPv4🇩🇪-1"
-        , "Anon-WARP-IR-2"
-        , "Anon-WoW-IPv4🇩🇪-2"
-        , "Anon-WARP-IR-3"
-        , "Anon-WoW-IPv4🇩🇪-3"
-      ]
+                "auto"
+                , "Anon-WARP-IR-1"
+                , "Anon-WoW-IPv4🇩🇪-1"
+                , "Anon-WARP-IR-2"
+                , "Anon-WoW-IPv4🇩🇪-2"
+                , "Anon-WARP-IR-3"
+                , "Anon-WoW-IPv4🇩🇪-3"
+            ]
 			, "default": "auto"
 			, "interrupt_exist_connections": true
-    }
+        }
 		, {
 			"type": "urltest"
 			, "tag": "auto"
 			, "outbounds": [
-        "Anon-WARP-IR-1"
-        , "Anon-WoW-IPv4🇩🇪-1"
-        , "Anon-WARP-IR-2"
-        , "Anon-WoW-IPv4🇩🇪-2"
-        , "Anon-WARP-IR-3"
-        , "Anon-WoW-IPv4🇩🇪-3"
-      ]
+                "Anon-WARP-IR-1"
+                , "Anon-WoW-IPv4🇩🇪-1"
+                , "Anon-WARP-IR-2"
+                , "Anon-WoW-IPv4🇩🇪-2"
+                , "Anon-WARP-IR-3"
+                , "Anon-WoW-IPv4🇩🇪-3"
+            ]
 			, "url": "http://cp.cloudflare.com"
 			, "interval": "10m0s"
 			, "tolerance": 1
 			, "idle_timeout": "30m0s"
 			, "interrupt_exist_connections": true
-    }
+        }
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WARP-IR-1"
 			, "local_address": [
-        "172.16.0.2/24"
-        , "2606:4700:110:8a50:a447:2531:2bc0:4a90/128"
-      ]
+                "172.16.0.2/24"
+                , "2606:4700:110:8a50:a447:2531:2bc0:4a90/128"
+            ]
 			, "private_key": "4GhbGz7WVfaZuvZ9vuE5OyOL6l2s9ZX9B+xGFu1m9WY="
 			, "server": "162.159.192.169"
 			, "server_port": 880
@@ -148,15 +154,15 @@
 			, "fake_packets_size": "100-300"
 			, "fake_packets_delay": "3-10"
 			, "fake_packets_mode": "m4"
-    }
+        }
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WoW-IPv4🇩🇪-1"
 			, "detour": "Anon-WARP-IR-1"
 			, "local_address": [
-        "172.16.0.2/24"
-        , "2606:4700:110:8fb0:6ec4:1463:869c:e5e3/128"
-      ]
+                "172.16.0.2/24"
+                , "2606:4700:110:8fb0:6ec4:1463:869c:e5e3/128"
+            ]
 			, "private_key": "IM94q3M6ecrM/mvUj0zMlhHcylLw2ppM97oYXfGZUEw="
 			, "server": "162.159.192.169"
 			, "server_port": 500
@@ -164,14 +170,14 @@
 			, "reserved": "urx8"
 			, "mtu": 1330
 			, "fake_packets_mode": "m4"
-    }
+        }
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WARP-IR-2"
 			, "local_address": [
-        "172.16.0.2/24"
-        , "2606:4700:110:8177:247b:1bf4:efdd:a950/128"
-      ]
+                "172.16.0.2/24"
+                , "2606:4700:110:8177:247b:1bf4:efdd:a950/128"
+            ]
 			, "private_key": "0M7JZAEofH0lTs5K6pAfYIni4dreMPtiIsahwbwEMVI="
 			, "server": "188.114.99.88"
 			, "server_port": 2506
@@ -182,15 +188,15 @@
 			, "fake_packets_size": "100-300"
 			, "fake_packets_delay": "3-10"
 			, "fake_packets_mode": "m4"
-    }
+        }
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WoW-IPv4🇩🇪-2"
 			, "detour": "Anon-WARP-IR-2"
 			, "local_address": [
-        "172.16.0.2/24"
-        , "2606:4700:110:86c9:25f5:fc52:4690:dcc1/128"
-      ]
+                "172.16.0.2/24"
+                , "2606:4700:110:86c9:25f5:fc52:4690:dcc1/128"
+            ]
 			, "private_key": "kCYU3yMxE/VTbN2NfZKVmhMFmvHGSPzSame37/oxWEk="
 			, "server": "188.114.99.88"
 			, "server_port": 939
@@ -198,14 +204,14 @@
 			, "reserved": "u/f/"
 			, "mtu": 1330
 			, "fake_packets_mode": "m4"
-    }
+        }
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WARP-IR-3"
 			, "local_address": [
-        "172.16.0.2/24"
-        , "2606:4700:110:8b30:add2:56f0:336:8893/128"
-      ]
+                "172.16.0.2/24"
+                , "2606:4700:110:8b30:add2:56f0:336:8893/128"
+            ]
 			, "private_key": "ECCxLox5Ngclq6CyjPyBmd/DVhl1bQRrku1zBvKul00="
 			, "server": "162.159.192.71"
 			, "server_port": 8319
@@ -216,15 +222,15 @@
 			, "fake_packets_size": "100-300"
 			, "fake_packets_delay": "3-10"
 			, "fake_packets_mode": "m4"
-    }
+        }
 		, {
 			"type": "wireguard"
 			, "tag": "Anon-WoW-IPv4🇩🇪-3"
 			, "detour": "Anon-WARP-IR-3"
 			, "local_address": [
-        "172.16.0.2/24"
-        , "2606:4700:110:87a9:129e:6da9:6f6f:a521/128"
-      ]
+                "172.16.0.2/24"
+                , "2606:4700:110:87a9:129e:6da9:6f6f:a521/128"
+            ]
 			, "private_key": "qFX6xcFyaBui4e8JFEGN7Ty4hJUAiTUqnFXZi6tWb2o="
 			, "server": "162.159.192.71"
 			, "server_port": 1074
@@ -232,15 +238,15 @@
 			, "reserved": "6JHN"
 			, "mtu": 1330
 			, "fake_packets_mode": "m4"
-    }
+        }
 		, {
 			"type": "dns"
 			, "tag": "dns-out"
-    }
+        }
 		, {
 			"type": "direct"
 			, "tag": "direct"
-    }
+        }
 		, {
 			"type": "direct"
 			, "tag": "direct-fragment"
@@ -250,39 +256,39 @@
 				, "size": "20-30"
 				, "sleep": "3-5"
 			}
-    }
+        }
 		, {
 			"type": "direct"
 			, "tag": "bypass"
-    }
+        }
 		, {
 			"type": "block"
 			, "tag": "block"
-    }
-  ]
+        }
+    ]
 	, "route":
 	{
 		"rules": [
 			{
 				"inbound": "dns-in"
 				, "outbound": "dns-out"
-      }
+            }
 			, {
 				"port": 53
 				, "outbound": "dns-out"
-      }
+            }
 			, {
 				"domain_suffix": ".ir"
 				, "outbound": "direct"
-      }
+            }
 			, {
 				"rule_set": [
-          "geoip-ir"
-          , "geosite-ir"
-        ]
+                    "geoip-ir"
+                    , "geosite-ir"
+                ]
 				, "outbound": "direct"
-      }
-    ]
+            }
+        ]
 		, "rule_set": [
 			{
 				"type": "remote"
@@ -290,15 +296,15 @@
 				, "format": "binary"
 				, "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geoip-ir.srs"
 				, "update_interval": "120h0m0s"
-      }
+            }
 			, {
 				"type": "remote"
 				, "tag": "geosite-ir"
 				, "format": "binary"
 				, "url": "https://raw.githubusercontent.com/hiddify/hiddify-geo/rule-set/country/geosite-ir.srs"
 				, "update_interval": "120h0m0s"
-      }
-    ]
+            }
+        ]
 		, "final": "select"
 		, "auto_detect_interface": true
 		, "override_android_vpn": true
