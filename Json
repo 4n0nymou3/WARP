@@ -43,7 +43,7 @@
 			{
 				"domain": "cp.cloudflare.com"
 				, "server": "dns-remote"
-				, "rewrite_ttl": 3000
+				, "rewrite_ttl": 600
       }
 			, {
 				"domain_suffix": ".ir"
@@ -145,8 +145,8 @@
 			, "reserved": "LL2M"
 			, "mtu": 1330
 			, "fake_packets": "150-200"
-			, "fake_packets_size": "150-200"
-			, "fake_packets_delay": "2-6"
+			, "fake_packets_size": "100-300"
+			, "fake_packets_delay": "3-10"
 			, "fake_packets_mode": "m4"
     }
 		, {
@@ -179,8 +179,8 @@
 			, "reserved": "4jtu"
 			, "mtu": 1330
 			, "fake_packets": "150-200"
-			, "fake_packets_size": "150-200"
-			, "fake_packets_delay": "2-6"
+			, "fake_packets_size": "100-300"
+			, "fake_packets_delay": "3-10"
 			, "fake_packets_mode": "m4"
     }
 		, {
@@ -213,8 +213,8 @@
 			, "reserved": "ECjQ"
 			, "mtu": 1330
 			, "fake_packets": "150-200"
-			, "fake_packets_size": "150-200"
-			, "fake_packets_delay": "2-6"
+			, "fake_packets_size": "100-300"
+			, "fake_packets_delay": "3-10"
 			, "fake_packets_mode": "m4"
     }
 		, {
