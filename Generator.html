@@ -1,1221 +1,201 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>WARP Generator</title>
-	<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<style>
-:root
-{
-	--bg-color: #0d1117;
-	--container-bg: #161b22;
-	--text-color: #c9d1d9;
-	--input-bg: #21262d;
-	--input-border: #30363d;
-	--input-focus: #58a6ff;
-	--btn-bg: #238636;
-	--btn-hover: #2ea043;
-	--secondary-btn-bg: #6e40c9;
-	--secondary-btn-hover: #8957e5;
-	--header-color: #58a6ff;
-}
-
-body
-{
-	font-family: 'Vazir', sans-serif;
-	background-color: var(--bg-color);
-	color: var(--text-color);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	margin: 0;
-	transition: background-color 0.3s ease;
-}
-
-.container
-{
-	background-color: var(--container-bg);
-	padding: 24px;
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-	width: 100%;
-	max-width: 400px;
-	transition: all 0.3s ease;
-}
-
-.header
-{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 24px;
-}
-
-h2
-{
-	color: var(--header-color);
-	font-size: 28px;
-	margin: 0;
-}
-
-.toggle-theme
-{
-	background: none;
-	border: none;
-	color: var(--text-color);
-	cursor: pointer;
-	font-size: 24px;
-	padding: 0;
-}
-
-.input-field
-{
-	margin-bottom: 24px;
-	position: relative;
-}
-
-.input-field label
-{
-	color: var(--text-color);
-	font-size: 14px;
-	display: block;
-	margin-bottom: 8px;
-}
-
-.form-control
-{
-	width: 100%;
-	padding: 12px;
-	border: 1px solid var(--input-border);
-	border-radius: 6px;
-	font-size: 16px;
-	outline: none;
-	background-color: var(--input-bg);
-	color: var(--text-color);
-	box-sizing: border-box;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
-
-.form-control:focus
-{
-	border-color: var(--input-focus);
-	box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
-}
-
-.btn
-{
-	background-color: var(--btn-bg);
-	color: #ffffff;
-	padding: 12px 24px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 16px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
-
-.btn:hover
-{
-	background-color: var(--btn-hover);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.btn i
-{
-	margin-left: 8px;
-}
-
-.card-panel
-{
-	margin-top: 24px;
-	padding: 16px;
-	border-radius: 6px;
-	background-color: var(--input-bg);
-	display: none;
-	animation: fadeIn 0.5s ease;
-}
-
-.card-panel h5
-{
-	color: var(--header-color);
-	margin-bottom: 16px;
-}
-
-.random-btn
-{
-	background-color: var(--secondary-btn-bg);
-	color: #ffffff;
-	padding: 8px 16px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 14px;
-	margin-top: 8px;
-	display: inline-block;
-	transition: all 0.3s ease;
-	font-family: 'Vazir', sans-serif;
-}
-
-.random-btn:hover
-{
-	background-color: var(--secondary-btn-hover);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.qr-code-container
-{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 24px;
-	height: 200px;
-}
-
-.footer
-{
-	text-align: center;
-	margin-top: 24px;
-	font-size: 14px;
-	color: #8b949e;
-}
-
-#autoFillContainer
-{
-	display: flex;
-	align-items: center;
-	margin-top: 8px;
-}
-
-#autoFillCheckbox
-{
-	margin-left: 8px;
-}
-
-.line
-{
-	border-top: 1px solid #ccc;
-	margin-top: 10px;
-}
-
-.loading
-{
-	display: none;
-	text-align: center;
-	margin-top: 20px;
-}
-
-.loading-spinner
-{
-	border: 4px solid var(--input-border);
-	border-top: 4px solid var(--header-color);
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	animation: spin 1s linear infinite;
-	margin: 0 auto;
-}
-
-@keyframes spin
-{
-	0%
-	{
-		transform: rotate(0deg);
-	}
-	
-	100%
-	{
-		transform: rotate(360deg);
-	}
-}
-
-@keyframes fadeIn
-{
-	from
-	{
-		opacity: 0;
-		transform: translateY(-10px);
-	}
-	
-	to
-	{
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-.tooltip
-{
-	position: relative;
-	display: inline-block;
-	cursor: help;
-}
-
-.tooltip .tooltiptext
-{
-	visibility: hidden;
-	width: 200px;
-	background-color: #555;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px;
-	position: absolute;
-	z-index: 1;
-	bottom: 125%;
-	left: 50%;
-	margin-left: -100px;
-	opacity: 0;
-	transition: opacity 0.3s;
-	font-family: 'Vazir', sans-serif;
-}
-
-.tooltip:hover .tooltiptext
-{
-	visibility: visible;
-	opacity: 1;
-}
-
-.hiddify-options
-{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
-
-.hiddify-options .select-item
-{
-	width: 48%;
-	margin-bottom: 12px;
-}
-
-.contact-section
-{
-	margin-top: 24px;
-	padding: 16px;
-	border-radius: 6px;
-	background-color: var(--input-bg);
-	transition: all 0.3s ease;
-}
-
-.contact-title
-{
-	color: var(--header-color);
-	font-size: 18px;
-	margin-bottom: 12px;
-	display: flex;
-	align-items: center;
-}
-
-.contact-title i
-{
-	margin-left: 8px;
-}
-
-.contact-btn
-{
-	background-color: var(--header-color);
-	color: #ffffff;
-	padding: 10px 16px;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-size: 14px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: all 0.3s ease;
-	text-decoration: none;
-	width: calc(100% - 32px);
-	margin: 0 auto;
-}
-
-.contact-btn:hover
-{
-	opacity: 0.9;
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.contact-btn i
-{
-	margin-left: 8px;
-}
-
-.footer-info
-{
-	margin-top: 16px;
-	font-size: 12px;
-	color: var(--text-color);
-	text-align: center;
-}
-
-.info-box
-{
-	background-color: var(--input-bg);
-	border-radius: 6px;
-	padding: 16px;
-	margin-bottom: 24px;
-}
-
-.info-box p
-{
-	margin: 0;
-	line-height: 1.5;
-}
-
-.copy-btn
-{
-	background-color: var(--btn-bg);
-	color: #ffffff;
-	padding: 6px 12px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	font-size: 14px;
-	margin-top: 8px;
-	transition: all 0.3s ease;
-}
-
-.copy-btn:hover
-{
-	background-color: var(--btn-hover);
-}
-
-#warpInWarpContainer
-{
-	display: flex;
-	align-items: center;
-	margin-top: 8px;
-	padding-left: 0;
-}
-
-#warpInWarpContainer label
-{
-	margin-right: 8px;
-}
-
-.switch
-{
-	position: relative;
-	display: inline-block;
-	width: 50px;
-	height: 24px;
-}
-
-.switch input
-{
-	opacity: 0;
-	width: 0;
-	height: 0;
-}
-
-.slider
-{
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: #ccc;
-	transition: .4s;
-	border-radius: 24px;
-}
-
-.slider:before
-{
-	position: absolute;
-	content: "";
-	height: 18px;
-	width: 18px;
-	left: 3px;
-	bottom: 3px;
-	background-color: white;
-	transition: .4s;
-	border-radius: 50%;
-}
-
-input:checked+.slider
-{
-	background-color: #30D158;
-}
-
-input:focus+.slider
-{
-	box-shadow: 0 0 1px #30D158;
-}
-
-input:checked+.slider:before
-{
-	transform: translateX(26px);
-}
-
-.language-switch
-{
-	background: none;
-	border: none;
-	color: var(--text-color);
-	cursor: pointer;
-	font-size: 16px;
-	padding: 0;
-	margin-right: 10px;
-	font-weight: bold;
-}
-
-.ltr
-{
-	direction: ltr;
-	text-align: left;
-}
-
-.ltr .header
-{
-	flex-direction: row-reverse;
-}
-
-.ltr .toggle-theme
-{
-	margin-left: 0;
-	margin-right: 10px;
-}
-
-.ltr .language-switch
-{
-	margin-right: 0;
-	margin-left: 10px;
-}
-
-.ltr .btn i
-{
-	margin-left: 0;
-	margin-right: 8px;
-}
-
-.ltr .contact-btn i
-{
-	margin-left: 0;
-	margin-right: 8px;
-}
-
-.cdn-cgi-trace-container
-{
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	margin: 20px 0;
-}
-
-.cdn-cgi-trace-button
-{
-	display: inline-block;
-	padding: 10px 20px;
-	background-color: var(--btn-bg);
-	color: #ffffff;
-	text-decoration: none;
-	border-radius: 5px;
-	font-weight: bold;
-	transition: all 0.3s ease;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.cdn-cgi-trace-button:hover
-{
-	background-color: var(--btn-hover);
-	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-	</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WARP Generator</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-
 <body>
-	<div class="container">
-		<div class="header">
-			<button class="language-switch" onclick="toggleLanguage()">EN</button>
-			<button class="toggle-theme" onclick="toggleTheme()">
-				<i class="material-icons">brightness_medium</i>
-			</button>
-			<h2>WARP Generator v2.0</h2>
-		</div>
-		<div class="info-box">
-			<p>اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
-			<input type="text" id="subscriptionLink" value="https://raw.githubusercontent.com/4n0nymou3/auto-warp-config/refs/heads/main/config.txt#Anonymous" readonly class="form-control">
-			<button class="copy-btn" onclick="copySubscriptionLink()">کپی لینک</button>
-		</div>
-		<div class="cdn-cgi-trace-container">
-			<a href="https://cloudflare.com/cdn-cgi/trace" class="cdn-cgi-trace-button" target="_blank">CDN-CGI Trace</a>
-			<a href="https://4n0nymou3.github.io/Json/Generator" class="cdn-cgi-trace-button" target="_blank">Json Generator</a>
-		</div>
-		<div class="line"><br></div>
-		<form id="warpinatorForm">
-			<div class="input-field" id="usernameField" style="display: none;">
-				<label for="username">نام دلخواه (اختیاری) فقط حروف لاتین و عدد</label>
-				<input id="username" type="text" name="Name Config" class="form-control">
-			</div>
-			<div class="input-field">
-				<label for="license">کد لایسنس WARP (اختیاری)</label>
-				<input id="license" type="text" name="license" class="form-control">
-				<div class="tooltip">
-					<i class="material-icons">info</i>
-					<span class="tooltiptext">در صورت تمایل، می‌توانید با وارد کردن کلید مجوز، به ویژگی‌های خاص و پیشرفته دسترسی پیدا کنید</span>
-				</div>
-			</div>
-			<div class="input-field">
-				<label for="type">نوع هسته پیکربندی</label>
-				<select id="type" name="type" class="form-control" onchange="toggleHiddifyOptions()">
-					<option value="hiddify">Hiddify</option>
-					<option value="karing">Karing</option>
-					<option value="v2rayng">v2rayNG</option>
-					<option value="singbox">Singbox</option>
-					<option value="shadowrocket">Shadowrocket</option>
-					<option value="streisand">Streisand</option>
-					<option value="wireguard">Wireguard</option>
-				</select>
-			</div>
-			<div id="hiddifyOptions" style="display: block;">
-				<div class="input-field">
-					<label for="ipVersion">نسخه IP</label>
-					<select id="ipVersion" name="ipVersion" class="form-control" onchange="toggleIPOptions()">
-						<option value="ipv4">IPv4</option>
-						<option value="ipv6">IPv6</option>
-					</select>
-				</div>
-				<div class="hiddify-options">
-					<div class="select-item">
-						<label for="type1">تعداد بسته‌های نویز</label>
-						<select id="type1" name="ifp" class="form-control">
-							<option value="50-100" selected>50-100</option>
-							<option value="10-20">10-20</option>
-							<option value="20-30">20-30</option>
-							<option value="30-40">30-40</option>
-							<option value="40-50">40-50</option>
-							<option value="50-60">50-60</option>
-							<option value="60-70">60-70</option>
-							<option value="70-80">70-80</option>
-							<option value="80-90">80-90</option>
-							<option value="90-100">90-100</option>
-							<option value="20-40">20-40</option>
-							<option value="30-60">30-60</option>
-							<option value="40-80">40-80</option>
-							<option value="40-100">40-100</option>
-							<option value="50-100">50-100</option>
-							<option value="60-100">60-100</option>
-							<option value="100-150">100-150</option>
-							<option value="120-160">120-160</option>
-							<option value="150-200">150-200</option>
-						</select>
-					</div>
-					<div class="select-item">
-						<label for="type2">اندازه بسته‌های نویز</label>
-						<select id="type2" name="ifps" class="form-control">
-							<option value="50-100" selected>50-100</option>
-							<option value="10-20">10-20</option>
-							<option value="20-30">20-30</option>
-							<option value="30-40">30-40</option>
-							<option value="40-50">40-50</option>
-							<option value="50-60">50-60</option>
-							<option value="60-70">60-70</option>
-							<option value="70-80">70-80</option>
-							<option value="80-90">80-90</option>
-							<option value="90-100">90-100</option>
-							<option value="20-40">20-40</option>
-							<option value="30-60">30-60</option>
-							<option value="40-80">40-80</option>
-							<option value="40-100">40-100</option>
-							<option value="50-100">50-100</option>
-							<option value="60-100">60-100</option>
-							<option value="100-150">100-150</option>
-							<option value="120-160">120-160</option>
-							<option value="150-200">150-200</option>
-						</select>
-					</div>
-					<div class="select-item">
-						<label for="type3">تأخیر ارسال بسته‌های نویز</label>
-						<select id="type3" name="ifpd" class="form-control">
-							<option value="3-6" selected>3-6</option>
-							<option value="1-2">1-2</option>
-							<option value="2-3">2-3</option>
-							<option value="3-4">3-4</option>
-							<option value="4-5">4-5</option>
-							<option value="5-6">5-6</option>
-							<option value="6-7">6-7</option>
-							<option value="7-8">7-8</option>
-							<option value="8-9">8-9</option>
-							<option value="9-10">9-10</option>
-							<option value="2-4">2-4</option>
-							<option value="3-6">3-6</option>
-							<option value="4-8">4-8</option>
-							<option value="4-10">4-10</option>
-							<option value="5-10">5-10</option>
-							<option value="6-10">6-10</option>
-							<option value="1-5">1-5</option>
-							<option value="2-6">2-6</option>
-							<option value="5-7">5-7</option>
-						</select>
-					</div>
-					<div class="select-item">
-						<label for="type4">حالت تولید نویز</label>
-						<select id="type4" name="ifpm" class="form-control">
-							<option value="m4" selected>m4</option>
-							<option value="m1">m1</option>
-							<option value="m2">m2</option>
-							<option value="m3">m3</option>
-							<option value="m4">m4</option>
-							<option value="m5">m5</option>
-							<option value="m6">m6</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<div class="input-field">
-				<label for="ip">آدرس IP (اختیاری)</label>
-				<input id="ip" type="text" name="ip" value="162.159.192.76" class="form-control">
-			</div>
-			<div class="input-field" id="portField">
-				<label for="port">آدرس PORT (اختیاری)</label>
-				<input id="port" type="number" name="port" value="2408" class="form-control">
-			</div>
-			<div id="autoFillContainer">
-				<label for="autoFillCheckbox">⁮⁮ ⁮⁮ پر کردن خودکار ⁮⁮ </label>
-				<input type="checkbox" id="autoFillCheckbox" onchange="toggleAutoFill()">
-			</div>
-			<div id="warpInWarpContainer">
-				<label for="warpInWarpToggle">قابلیت وارپ در وارپ</label>
-				<label class="switch">
-					<input type="checkbox" id="warpInWarpToggle">
-					<span class="slider"></span>
-				</label>
-			</div>
-			<div class="line"><br></div>
-			<button class="btn" type="submit">
-				<i class="material-icons">send</i> تولید URL </button>
-		</form>
-		<div class="loading">
-			<div class="loading-spinner"></div>
-			<p>در حال تولید URL...</p>
-		</div>
-		<div class="card-panel" id="result">
-			<div class="qr-code-container" id="qrCodeContainer"></div>
-			<h5>URL تولید شده:</h5>
-			<div class="input-field">
-				<input id="generatedUrl" type="text" readonly class="form-control">
-			</div>
-			<button class="btn" onclick="copyToClipboard()">
-				<i class="material-icons">content_copy</i> کپی URL </button>
-		</div>
-		<div class="contact-section">
-			<h3 class="contact-title">
-				<i class="material-icons">contact_mail</i> ارتباط با من
-			</h3>
-			<a href="https://t.me/BXAMbot" target="_blank" class="contact-btn">
-				<i class="material-icons">telegram</i> پیام در ربات تلگرام </a>
-			<div class="footer-info">
-				<p>طراحی شده توسط: Anonymous</p>
-				<p>با تشکر از Yebekhe و IRCF</p>
-			</div>
-		</div>
-		<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-		<script>
-let isDarkTheme = true;
-let isEnglish = false;
-
-function toggleTheme()
-{
-	isDarkTheme = !isDarkTheme;
-	if (isDarkTheme)
-	{
-		document.documentElement.style.setProperty('--bg-color', '#0d1117');
-		document.documentElement.style.setProperty('--container-bg', '#161b22');
-		document.documentElement.style.setProperty('--text-color', '#c9d1d9');
-		document.documentElement.style.setProperty('--input-bg', '#21262d');
-		document.documentElement.style.setProperty('--input-border', '#30363d');
-	}
-	else
-	{
-		document.documentElement.style.setProperty('--bg-color', '#f0f2f5');
-		document.documentElement.style.setProperty('--container-bg', '#ffffff');
-		document.documentElement.style.setProperty('--text-color', '#1f2937');
-		document.documentElement.style.setProperty('--input-bg', '#f9fafb');
-		document.documentElement.style.setProperty('--input-border', '#d1d5db');
-	}
-	if (document.getElementById('qrCodeContainer')
-		.firstChild)
-	{
-		generateQRCode(document.getElementById('generatedUrl')
-			.value);
-	}
-}
-
-function toggleLanguage()
-{
-	isEnglish = !isEnglish;
-	const languageButton = document.querySelector('.language-switch');
-	const htmlElement = document.documentElement;
-	if (isEnglish)
-	{
-		languageButton.textContent = 'FA';
-		htmlElement.lang = 'en';
-		htmlElement.dir = 'ltr';
-		document.body.classList.add('ltr');
-	}
-	else
-	{
-		languageButton.textContent = 'EN';
-		htmlElement.lang = 'fa';
-		htmlElement.dir = 'rtl';
-		document.body.classList.remove('ltr');
-	}
-	updateTexts();
-}
-
-function updateTexts()
-{
-	const texts = {
-		'fa':
-		{
-			'title': 'WARP Generator v2.0'
-			, 'infoBoxText': 'اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:'
-			, 'copyLinkButton': 'کپی لینک'
-			, 'usernameLabel': 'نام دلخواه (اختیاری) فقط حروف لاتین و عدد'
-			, 'licenseLabel': 'کد لایسنس WARP (اختیاری)'
-			, 'typeLabel': 'نوع هسته پیکربندی'
-			, 'ipVersionLabel': 'نسخه IP'
-			, 'ipLabel': 'آدرس IP (اختیاری)'
-			, 'portLabel': 'آدرس PORT (اختیاری)'
-			, 'autoFillLabel': ' ⁮⁮ پر کردن خودکار ⁮⁮ '
-			, 'warpInWarpLabel': 'قابلیت وارپ در وارپ'
-			, 'generateButton': 'تولید URL'
-			, 'loadingText': 'در حال تولید URL...'
-			, 'generatedUrlTitle': 'URL تولید شده:'
-			, 'copyUrlButton': 'کپی URL'
-			, 'contactTitle': 'ارتباط با من'
-			, 'telegramButton': 'پیام در ربات تلگرام'
-			, 'footerDesigner': 'طراحی شده توسط: Anonymous'
-			, 'footerThanks': 'با تشکر از Yebekhe و IRCF'
-			, 'noisePacketsLabel': 'تعداد بسته‌های نویز'
-			, 'noisePacketSizeLabel': 'اندازه بسته‌های نویز'
-			, 'noisePacketDelayLabel': 'تأخیر ارسال بسته‌های نویز'
-			, 'noiseModeLabel': 'حالت تولید نویز'
-			, 'licenseTooltip': 'در صورت تمایل، می‌توانید با وارد کردن کلید مجوز، به ویژگی‌های خاص و پیشرفته دسترسی پیدا کنید'
-		}
-		, 'en':
-		{
-			'title': 'WARP Generator v2.0'
-			, 'infoBoxText': 'If you are not familiar with how to create and generate a URL, you can use the following subscription link in Hiddify and Karing applications:'
-			, 'copyLinkButton': 'Copy Link'
-			, 'usernameLabel': 'Custom name (optional) only Latin letters and numbers'
-			, 'licenseLabel': 'WARP license code (optional)'
-			, 'typeLabel': 'Configuration core type'
-			, 'ipVersionLabel': 'IP Version'
-			, 'ipLabel': 'IP Address (optional)'
-			, 'portLabel': 'PORT Address (optional)'
-			, 'autoFillLabel': 'Auto Fill'
-			, 'warpInWarpLabel': 'WARP on WARP capability'
-			, 'generateButton': 'Generate URL'
-			, 'loadingText': 'Generating URL...'
-			, 'generatedUrlTitle': 'Generated URL:'
-			, 'copyUrlButton': 'Copy URL'
-			, 'contactTitle': '⁮⁮ ⁮⁮Contact Me'
-			, 'telegramButton': 'Message on Telegram Bot'
-			, 'footerDesigner': 'Designed by: Anonymous'
-			, 'footerThanks': 'Thanks to Yebekhe and IRCF'
-			, 'noisePacketsLabel': 'IFP'
-			, 'noisePacketSizeLabel': 'IFPS'
-			, 'noisePacketDelayLabel': 'IFPD'
-			, 'noiseModeLabel': 'IFPM'
-			, 'licenseTooltip': 'If desired, you can access special and advanced features by entering the license key'
-		}
-	};
-	const currentLang = isEnglish ? 'en' : 'fa';
-	document.querySelector('h2')
-		.textContent = texts[currentLang]['title'];
-	document.querySelector('.info-box p')
-		.textContent = texts[currentLang]['infoBoxText'];
-	document.querySelector('.copy-btn')
-		.textContent = texts[currentLang]['copyLinkButton'];
-	document.querySelector('label[for="username"]')
-		.textContent = texts[currentLang]['usernameLabel'];
-	document.querySelector('label[for="license"]')
-		.textContent = texts[currentLang]['licenseLabel'];
-	document.querySelector('label[for="type"]')
-		.textContent = texts[currentLang]['typeLabel'];
-	document.querySelector('label[for="ipVersion"]')
-		.textContent = texts[currentLang]['ipVersionLabel'];
-	document.querySelector('label[for="ip"]')
-		.textContent = texts[currentLang]['ipLabel'];
-	document.querySelector('label[for="port"]')
-		.textContent = texts[currentLang]['portLabel'];
-	document.querySelector('label[for="autoFillCheckbox"]')
-		.textContent = texts[currentLang]['autoFillLabel'];
-	document.querySelector('label[for="warpInWarpToggle"]')
-		.textContent = texts[currentLang]['warpInWarpLabel'];
-	document.querySelector('.btn[type="submit"]')
-		.innerHTML = `<i class="material-icons">send</i> ${texts[currentLang]['generateButton']}`;
-	document.querySelector('.loading p')
-		.textContent = texts[currentLang]['loadingText'];
-	document.querySelector('#result h5')
-		.textContent = texts[currentLang]['generatedUrlTitle'];
-	document.querySelector('.btn[onclick="copyToClipboard()"]')
-		.innerHTML = `<i class="material-icons">content_copy</i> ${texts[currentLang]['copyUrlButton']}`;
-	document.querySelector('.contact-title')
-		.innerHTML = `<i class="material-icons">contact_mail</i> ${texts[currentLang]['contactTitle']}`;
-	document.querySelector('.contact-btn')
-		.innerHTML = `<i class="material-icons">telegram</i> ${texts[currentLang]['telegramButton']}`;
-	document.querySelector('.footer-info p:first-child')
-		.textContent = texts[currentLang]['footerDesigner'];
-	document.querySelector('.footer-info p:last-child')
-		.textContent = texts[currentLang]['footerThanks'];
-	document.querySelector('label[for="type1"]')
-		.textContent = texts[currentLang]['noisePacketsLabel'];
-	document.querySelector('label[for="type2"]')
-		.textContent = texts[currentLang]['noisePacketSizeLabel'];
-	document.querySelector('label[for="type3"]')
-		.textContent = texts[currentLang]['noisePacketDelayLabel'];
-	document.querySelector('label[for="type4"]')
-		.textContent = texts[currentLang]['noiseModeLabel'];
-	document.querySelector('.tooltip .tooltiptext')
-		.textContent = texts[currentLang]['licenseTooltip'];
-}
-
-function toggleHiddifyOptions()
-{
-	var type = document.getElementById('type')
-		.value;
-	var hiddifyOptions = document.getElementById('hiddifyOptions');
-	var usernameField = document.getElementById('usernameField');
-	var ipVersionField = document.getElementById('ipVersion');
-	var warpInWarpContainer = document.getElementById('warpInWarpContainer');
-	if (type === 'hiddify' || type === 'karing')
-	{
-		hiddifyOptions.style.display = 'block';
-		usernameField.style.display = 'block';
-		ipVersionField.disabled = false;
-		warpInWarpContainer.style.display = 'flex';
-	}
-	else
-	{
-		hiddifyOptions.style.display = 'none';
-		usernameField.style.display = 'none';
-		ipVersionField.value = 'ipv4';
-		ipVersionField.disabled = true;
-		warpInWarpContainer.style.display = 'none';
-	}
-	toggleIPOptions();
-	document.getElementById('autoFillCheckbox')
-		.checked = false;
-}
-
-function toggleIPOptions()
-{
-	var type = document.getElementById('type')
-		.value;
-	var ipVersion = document.getElementById('ipVersion')
-		.value;
-	var ipField = document.getElementById('ip');
-	var portField = document.getElementById('portField');
-	if (type === 'hiddify' && ipVersion === 'ipv6')
-	{
-		ipField.value = '';
-		portField.style.display = 'none';
-	}
-	else
-	{
-		ipField.value = '162.159.192.76';
-		portField.style.display = 'block';
-	}
-	document.getElementById('autoFillCheckbox')
-		.checked = false;
-}
-document.addEventListener('DOMContentLoaded', function()
-{
-	document.getElementById('warpinatorForm')
-		.addEventListener('submit', function(event)
-		{
-			event.preventDefault();
-			document.querySelector('.loading')
-				.style.display = 'block';
-			document.getElementById('result')
-				.style.display = 'none';
-			setTimeout(function()
-			{
-				var type = document.getElementById('type')
-					.value;
-				var url;
-				if (type === 'hiddify' || type === 'karing')
-				{
-					var username = document.getElementById('username')
-						.value || 'Anonymous';
-					var license = document.getElementById('license')
-						.value || '';
-					var type1 = document.getElementById('type1')
-						.value || '40-80';
-					var type2 = document.getElementById('type2')
-						.value || '40-10';
-					var type3 = document.getElementById('type3')
-						.value || '2-4';
-					var type4 = document.getElementById('type4')
-						.value || 'm4';
-					var ip = document.getElementById('ip')
-						.value || '162.159.192.76';
-					var port = document.getElementById('port')
-						.value || '2408';
-					var ipVersion = document.getElementById('ipVersion')
-						.value;
-					var warpInWarp = document.getElementById('warpInWarpToggle')
-						.checked;
-					var auto = document.getElementById('autoFillCheckbox')
-						.checked ? 'true' : 'false';
-					var defaultUsername = 'Anonymous';
-					var customUsername = username !== defaultUsername;
-					if (type === 'karing')
-					{
-						if (ipVersion === 'ipv6')
-						{
-							var baseUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
-						}
-						else
-						{
-							var baseUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
-						}
-						url = baseUrl;
-					}
-					else if (type === 'hiddify')
-					{
-						if (ipVersion === 'ipv6')
-						{
-							var baseUrl = license ? `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
-						}
-						else
-						{
-							var baseUrl = license ? `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}#${username}`;
-						}
-						url = baseUrl;
-					}
-					if (warpInWarp)
-					{
-						if (type === 'karing')
-						{
-							var wowUsername;
-							if (customUsername)
-							{
-								wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6\u{1F1E9}\u{1F1EA}' : 'IPv4\u{1F1E9}\u{1F1EA}'}`;
-							}
-							else
-							{
-								wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6\u{1F1E9}\u{1F1EA}' : 'Anon-WoW-IPv4\u{1F1E9}\u{1F1EA}';
-							}
-							if (ipVersion === 'ipv6')
-							{
-								var wowUrl = license ? `warp://${license}@${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
-							}
-							else
-							{
-								var wowUrl = license ? `warp://${license}@${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
-							}
-							url = wowUrl + `&&detour=${wowUrl}#${wowUsername}`;
-						}
-						else if (type === 'hiddify')
-						{
-							var wowUsername;
-							if (customUsername)
-							{
-								wowUsername = `${username}-WoW-${ipVersion === 'ipv6' ? 'IPv6\u{1F1E9}\u{1F1EA}' : 'IPv4\u{1F1E9}\u{1F1EA}'}`;
-							}
-							else
-							{
-								wowUsername = ipVersion === 'ipv6' ? 'Anon-WoW-IPv6\u{1F1E9}\u{1F1EA}' : 'Anon-WoW-IPv4\u{1F1E9}\u{1F1EA}';
-							}
-							if (ipVersion === 'ipv6')
-							{
-								var wowUrl = license ? `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
-							}
-							else
-							{
-								var wowUrl = license ? `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}` : `warp://${ip}:${port}/?ifp=${type1}&ifps=${type2}&ifpd=${type3}&ifpm=${type4}`;
-							}
-							url = wowUrl + `&&detour=${wowUrl}#${wowUsername}`;
-						}
-					}
-				}
-				else
-				{
-					var license = document.getElementById('license')
-						.value || '';
-					var ip = document.getElementById('ip')
-						.value || '162.159.192.76';
-					var port = document.getElementById('port')
-						.value || '2408';
-					var auto = document.getElementById('autoFillCheckbox')
-						.checked ? 'true' : 'false';
-					url = `https://itshin.serv00.net/api/warpinator?license=${encodeURIComponent(license)}&type=${encodeURIComponent(type)}&auto=${encodeURIComponent(auto)}`;
-					if (!document.getElementById('autoFillCheckbox')
-						.checked)
-					{
-						url += `&ip=${encodeURIComponent(ip)}&port=${encodeURIComponent(port)}`;
-					}
-				}
-				document.getElementById('generatedUrl')
-					.value = url;
-				document.querySelector('.loading')
-					.style.display = 'none';
-				document.getElementById('result')
-					.style.display = 'block';
-				generateQRCode(url);
-			}, 1500);
-		});
-});
-
-function copyToClipboard()
-{
-	var copyText = document.getElementById('generatedUrl');
-	copyText.select();
-	copyText.setSelectionRange(0, 99999);
-	document.execCommand('copy');
-	var btn = document.querySelector('.btn[onclick="copyToClipboard()"]');
-	const copiedMessage = isEnglish ? 'Copied!' : 'کپی شد!';
-	btn.innerHTML = `<i class="material-icons">check</i>${copiedMessage}`;
-	setTimeout(() =>
-	{
-		updateTexts();
-	}, 2000);
-}
-async function fetchRandomIP()
-{
-	var ipVersion = document.getElementById('ipVersion')
-		.value;
-	try
-	{
-		const response = await fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json');
-		const data = await response.json();
-		var ipList = ipVersion === 'ipv6' ? data.ipv6 : data.ipv4;
-		var randomIndex = Math.floor(Math.random() * ipList.length);
-		var randomIP = ipList[randomIndex];
-		if (ipVersion === 'ipv6')
-		{
-			var [ip] = randomIP.split('[]:');
-			document.getElementById('ip')
-				.value = ip;
-			document.getElementById('port')
-				.value = '';
-		}
-		else
-		{
-			var [ip, port] = randomIP.split(':');
-			document.getElementById('ip')
-				.value = ip;
-			document.getElementById('port')
-				.value = port;
-		}
-	}
-	catch (error)
-	{
-		console.error('خطا در دریافت داده IP:', error);
-	}
-}
-
-function generateQRCode(data)
-{
-	var qrCodeContainer = document.getElementById('qrCodeContainer');
-	qrCodeContainer.innerHTML = '';
-	new QRCode(qrCodeContainer
-	, {
-		text: data
-		, width: 200
-		, height: 200
-		, colorDark: isDarkTheme ? "#c9d1d9" : "#000000"
-		, colorLight: isDarkTheme ? "#0d1117" : "#ffffff"
-		, correctLevel: QRCode.CorrectLevel.L
-	});
-}
-async function fetchRandomLicense()
-{
-	try
-	{
-		const response = await fetch('https://raw.githubusercontent.com/ircfspace/warpkey/main/plus/full');
-		const text = await response.text();
-		const licenses = text.trim()
-			.split('\n');
-		if (licenses.length > 0)
-		{
-			const randomIndex = Math.floor(Math.random() * licenses.length);
-			return licenses[randomIndex].trim();
-		}
-		else
-		{
-			return '';
-		}
-	}
-	catch (error)
-	{
-		console.error('خطا در دریافت کد لایسنس:', error);
-		return '';
-	}
-}
-async function toggleAutoFill()
-{
-	var autoFillCheckbox = document.getElementById('autoFillCheckbox');
-	var ipField = document.getElementById('ip');
-	var portField = document.getElementById('port');
-	var licenseField = document.getElementById('license');
-	if (autoFillCheckbox.checked)
-	{
-		ipField.disabled = true;
-		portField.disabled = true;
-		licenseField.disabled = true;
-		ipField.value = '•••';
-		portField.value = '•••';
-		licenseField.value = '•••';
-		await fetchRandomIP();
-		const license = await fetchRandomLicense();
-		licenseField.value = license;
-	}
-	else
-	{
-		ipField.disabled = false;
-		portField.disabled = false;
-		licenseField.disabled = false;
-	}
-}
-
-function copySubscriptionLink()
-{
-	var subscriptionLink = document.getElementById('subscriptionLink');
-	subscriptionLink.select();
-	subscriptionLink.setSelectionRange(0, 99999);
-	document.execCommand('copy');
-	var copyBtn = document.querySelector('.copy-btn');
-	const copiedMessage = isEnglish ? 'Copied!' : 'کپی شد!';
-	copyBtn.textContent = copiedMessage;
-	setTimeout(function()
-	{
-		updateTexts();
-	}, 2000);
-}
-window.addEventListener('load', function()
-{
-	const elements = document.querySelectorAll('.container, .btn, .form-control');
-	elements.forEach((el, index) =>
-	{
-		setTimeout(() =>
-		{
-			el.style.opacity = '1';
-			el.style.transform = 'translateY(0)';
-		}, index * 100);
-	});
-	toggleHiddifyOptions();
-});
-		</script>
+  <div class="container">
+    <div class="header">
+      <button class="language-switch" onclick="toggleLanguage()">EN</button>
+      <button class="toggle-theme" onclick="toggleTheme()">
+        <i class="material-icons">brightness_medium</i>
+      </button>
+      <h2>WARP Generator v2.0</h2>
+    </div>
+    <div class="info-box">
+      <p>اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:</p>
+      <input type="text" id="subscriptionLink" value="https://raw.githubusercontent.com/4n0nymou3/auto-warp-config/refs/heads/main/config.txt#Anonymous" readonly class="form-control">
+      <button class="copy-btn" onclick="copySubscriptionLink()">کپی لینک</button>
+    </div>
+    <div class="cdn-cgi-trace-container">
+      <a href="https://cloudflare.com/cdn-cgi/trace" class="cdn-cgi-trace-button" target="_blank">CDN-CGI Trace</a>
+      <a href="https://4n0nymou3.github.io/Json/Generator" class="cdn-cgi-trace-button" target="_blank">Json Generator</a>
+    </div>
+    <div class="line"><br></div>
+    <form id="warpinatorForm">
+      <div class="input-field" id="usernameField" style="display: none;">
+        <label for="username">نام دلخواه (اختیاری) فقط حروف لاتین و عدد</label>
+        <input id="username" type="text" name="Name Config" class="form-control">
+      </div>
+      <div class="input-field">
+        <label for="license">کد لایسنس WARP (اختیاری)</label>
+        <input id="license" type="text" name="license" class="form-control">
+        <div class="tooltip">
+          <i class="material-icons">info</i>
+          <span class="tooltiptext">در صورت تمایل، می‌توانید با وارد کردن کلید مجوز، به ویژگی‌های خاص و پیشرفته دسترسی پیدا کنید</span>
+        </div>
+      </div>
+      <div class="input-field">
+        <label for="type">نوع هسته پیکربندی</label>
+        <select id="type" name="type" class="form-control" onchange="toggleHiddifyOptions()">
+          <option value="hiddify">Hiddify</option>
+          <option value="karing">Karing</option>
+          <option value="v2rayng">v2rayNG</option>
+          <option value="singbox">Singbox</option>
+          <option value="shadowrocket">Shadowrocket</option>
+          <option value="streisand">Streisand</option>
+          <option value="wireguard">Wireguard</option>
+        </select>
+      </div>
+      <div id="hiddifyOptions" style="display: block;">
+        <div class="input-field">
+          <label for="ipVersion">نسخه IP</label>
+          <select id="ipVersion" name="ipVersion" class="form-control" onchange="toggleIPOptions()">
+            <option value="ipv4">IPv4</option>
+            <option value="ipv6">IPv6</option>
+          </select>
+        </div>
+        <div class="hiddify-options">
+          <div class="select-item">
+            <label for="type1">تعداد بسته‌های نویز</label>
+            <select id="type1" name="ifp" class="form-control">
+              <option value="50-100" selected>50-100</option>
+              <option value="10-20">10-20</option>
+              <option value="20-30">20-30</option>
+              <option value="30-40">30-40</option>
+              <option value="40-50">40-50</option>
+              <option value="50-60">50-60</option>
+              <option value="60-70">60-70</option>
+              <option value="70-80">70-80</option>
+              <option value="80-90">80-90</option>
+              <option value="90-100">90-100</option>
+              <option value="20-40">20-40</option>
+              <option value="30-60">30-60</option>
+              <option value="40-80">40-80</option>
+              <option value="40-100">40-100</option>
+              <option value="50-100">50-100</option>
+              <option value="60-100">60-100</option>
+              <option value="100-150">100-150</option>
+              <option value="120-160">120-160</option>
+              <option value="150-200">150-200</option>
+            </select>
+          </div>
+          <div class="select-item">
+            <label for="type2">اندازه بسته‌های نویز</label>
+            <select id="type2" name="ifps" class="form-control">
+              <option value="50-100" selected>50-100</option>
+              <option value="10-20">10-20</option>
+              <option value="20-30">20-30</option>
+              <option value="30-40">30-40</option>
+              <option value="40-50">40-50</option>
+              <option value="50-60">50-60</option>
+              <option value="60-70">60-70</option>
+              <option value="70-80">70-80</option>
+              <option value="80-90">80-90</option>
+              <option value="90-100">90-100</option>
+              <option value="20-40">20-40</option>
+              <option value="30-60">30-60</option>
+              <option value="40-80">40-80</option>
+              <option value="40-100">40-100</option>
+              <option value="50-100">50-100</option>
+              <option value="60-100">60-100</option>
+              <option value="100-150">100-150</option>
+              <option value="120-160">120-160</option>
+              <option value="150-200">150-200</option>
+            </select>
+          </div>
+          <div class="select-item">
+            <label for="type3">تأخیر ارسال بسته‌های نویز</label>
+            <select id="type3" name="ifpd" class="form-control">
+              <option value="3-6" selected>3-6</option>
+              <option value="1-2">1-2</option>
+              <option value="2-3">2-3</option>
+              <option value="3-4">3-4</option>
+              <option value="4-5">4-5</option>
+              <option value="5-6">5-6</option>
+              <option value="6-7">6-7</option>
+              <option value="7-8">7-8</option>
+              <option value="8-9">8-9</option>
+              <option value="9-10">9-10</option>
+              <option value="2-4">2-4</option>
+              <option value="3-6">3-6</option>
+              <option value="4-8">4-8</option>
+              <option value="4-10">4-10</option>
+              <option value="5-10">5-10</option>
+              <option value="6-10">6-10</option>
+              <option value="1-5">1-5</option>
+              <option value="2-6">2-6</option>
+              <option value="5-7">5-7</option>
+            </select>
+          </div>
+          <div class="select-item">
+            <label for="type4">حالت تولید نویز</label>
+            <select id="type4" name="ifpm" class="form-control">
+              <option value="m4" selected>m4</option>
+              <option value="m1">m1</option>
+              <option value="m2">m2</option>
+              <option value="m3">m3</option>
+              <option value="m4">m4</option>
+              <option value="m5">m5</option>
+              <option value="m6">m6</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="input-field">
+        <label for="ip">آدرس IP (اختیاری)</label>
+        <input id="ip" type="text" name="ip" value="162.159.192.76" class="form-control">
+      </div>
+      <div class="input-field" id="portField">
+        <label for="port">آدرس PORT (اختیاری)</label>
+        <input id="port" type="number" name="port" value="2408" class="form-control">
+      </div>
+      <div id="autoFillContainer">
+        <label for="autoFillCheckbox">⁮⁮ ⁮⁮ پر کردن خودکار ⁮⁮ </label>
+        <input type="checkbox" id="autoFillCheckbox" onchange="toggleAutoFill()">
+      </div>
+      <div id="warpInWarpContainer">
+        <label for="warpInWarpToggle">قابلیت وارپ در وارپ</label>
+        <label class="switch">
+          <input type="checkbox" id="warpInWarpToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="line"><br></div>
+      <button class="btn" type="submit">
+        <i class="material-icons">send</i> تولید URL </button>
+    </form>
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <p>در حال تولید URL...</p>
+    </div>
+    <div class="card-panel" id="result">
+      <div class="qr-code-container" id="qrCodeContainer"></div>
+      <h5>URL تولید شده:</h5>
+      <div class="input-field">
+        <input id="generatedUrl" type="text" readonly class="form-control">
+      </div>
+      <button class="btn" onclick="copyToClipboard()">
+        <i class="material-icons">content_copy</i> کپی URL </button>
+    </div>
+    <div class="contact-section">
+      <h3 class="contact-title">
+        <i class="material-icons">contact_mail</i> ارتباط با من
+      </h3>
+      <a href="https://t.me/BXAMbot" target="_blank" class="contact-btn">
+        <i class="material-icons">telegram</i> پیام در ربات تلگرام </a>
+      <div class="footer-info">
+        <p>طراحی شده توسط: Anonymous</p>
+        <p>با تشکر از Yebekhe و IRCF</p>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
-
 </html>
