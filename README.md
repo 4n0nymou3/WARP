@@ -22,7 +22,7 @@
 
 برای استفاده آنلاین از WARP Generator، به این آدرس مراجعه کنید:
 
-[https://4n0nymou3.github.io/WARP/Generator](https://4n0nymou3.github.io/WARP)
+[https://4n0nymou3.github.io/WARP](https://4n0nymou3.github.io/WARP)
 
 ## راهنمای استفاده
 
