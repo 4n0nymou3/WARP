@@ -89,7 +89,7 @@ IFPM: m4
 اگر با نحوه ساخت و تولید URL آشنایی ندارید، می‌توانید از لینک اشتراک زیر در اپلیکیشن‌های Hiddify و Karing استفاده کنید:
 
 ```
-https://raw.githubusercontent.com/4n0nymou3/WARP/refs/heads/main/Sub
+https://raw.githubusercontent.com/4n0nymou3/auto-warp-config/refs/heads/main/config.txt
 ```
 
 ## مجوز
