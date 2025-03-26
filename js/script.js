@@ -306,7 +306,7 @@ async function fetchRandomIP()
 	var ipVersion = document.getElementById('ipVersion').value;
 	try
 	{
-		const response = await fetch('https://raw.githubusercontent.com/4n0nymou3/cloudflare-clean-ip-scanner/refs/heads/main/data/ips.json');
+		const response = await fetch('https://raw.githubusercontent.com/ircfspace/endpoint/refs/heads/main/ip.json');
 		const data = await response.json();
 		var ipList = ipVersion === 'ipv6' ? data.ipv6 : data.ipv4;
 		var randomIndex = Math.floor(Math.random() * ipList.length);
